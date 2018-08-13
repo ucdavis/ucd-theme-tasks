@@ -25,7 +25,7 @@ module.exports = {
       './node_modules'
     ],
     sassdoc: {
-      enabled: true,
+      enabled: false,
       dest: 'public/sassdoc',
       verbose: false,
       basePath: 'https://bitbucket.org/ietwebdev/article-26-backpack-pattern-lab/src/master/source/sass',
