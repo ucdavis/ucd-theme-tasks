@@ -1,9 +1,7 @@
 'use strict';
 
-const yaml = require('js-yaml');
-const fs = require('fs');
 const _ = require('lodash');
-let defaultConfig = yaml.safeLoad(fs.readFileSync('./gulp-config.yml', 'utf8'));
+const defaultConfig = require('./config.default');
 
 module.exports = (gulpReference, userConfig, userTasks) => {
   const gulp = require('gulp-help')(gulpReference);
