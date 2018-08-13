@@ -3,7 +3,7 @@
 const _ = require('lodash');
 const defaultConfig = require('./config.default');
 
-module.exports = (gulpReference, userConfig, userTasks) => {
+module.exports = (gulpReference, userConfig, userTasks = {}) => {
   const gulp = require('gulp-help')(gulpReference);
 
   const config = _.merge(defaultConfig, userConfig);
