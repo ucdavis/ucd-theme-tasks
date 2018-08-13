@@ -20,9 +20,32 @@ $ cp node_modules/ucd-theme-tasks/config.default.js gulp-config.js
 
 ```js
 'use strict';
-var gulp = require('gulp');
-var config = require('./gulp-config.js');
+const gulp = require('gulp');
+const config = require('./gulp-config.js');
 
 // Load all default tasks.
 require('ucd-theme-tasks')(gulp, config);
+```
+
+4. (Optional) Allow specific local config overrides of config.
+
+```js
+'use strict';
+
+const _ = require('lodash');
+const gulp = require('gulp');
+let config = require('./gulp-config');
+
+// Load in custom config
+try {
+  const customConfig = require('./gulp-config.local');
+  config = _.merge(config, customConfig);
+}
+catch (e) {
+  console.log('Add a gulp-config.local.js file for any custom local configuration.');
+}
+
+// Load all default tasks.
+require('ucd-theme-tasks')(gulp, config);
+
 ```
