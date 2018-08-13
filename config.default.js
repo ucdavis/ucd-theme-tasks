@@ -28,7 +28,7 @@ module.exports = {
       enabled: false,
       dest: 'public/sassdoc',
       verbose: false,
-      basePath: 'https://bitbucket.org/ietwebdev/article-26-backpack-pattern-lab/src/master/source/sass',
+      basePath: '', // Link to git repo sass directory.
       theme: 'default',
       sort: [
         'file',
