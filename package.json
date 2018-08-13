@@ -2,7 +2,6 @@
   "name": "ucd-theme-tasks",
   "version": "0.1.0",
   "description": "Base automation for compiling a UCD frontend.",
-  "dependencies": {},
   "main": "index.js",
   "repository": {
     "type": "git",
@@ -19,7 +18,7 @@
       "email": "ahorn@ucdavis.edu"
     }
   ],
-  "devDependencies": {
+  "dependencies": {
     "autoprefixer": "^9.1.0",
     "breakpoint-sass": "^2.7.1",
     "babel-core": "^6.26.3",
