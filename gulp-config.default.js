@@ -37,8 +37,10 @@ module.exports = {
   js: {
     enabled: true,
     src: [
-      'js/vendor/**/*.js',
       'js/**/*.js'
+    ],
+    vendor: [
+      'js/vendor/**/*.js',
     ],
     dest: 'dist/',
     destName: 'scripts.js',

@@ -9,8 +9,25 @@ const mainBowerFiles = require('main-bower-files');
 
 module.exports = function (gulp, config, tasks) {
 
-  // Compile javascript
-  gulp.task('js', 'Compile javascript (including Bower libraries), concat and uglify into a single ' + config.js.destName + ' file.', function (done) {
+  // Compile custom javascript
+  gulp.task('js', 'Compile custom javascript, concat and uglify into a single ' + config.js.destName + ' file.', function (done) {
+    gulp.src(config.js.src)
+      .pipe(sourcemaps.init())
+      .pipe(gulpif(config.js.babel, babel({
+        presets: ['env']
+      }))) // all babel options handled in `.babelrc`
+      .pipe(concat(config.js.destName))
+      .pipe(gulpif(config.js.uglify, uglify()))
+      .pipe(sourcemaps.write((config.js.sourceMapEmbed) ? null : './'))
+      .pipe(gulp.dest(config.js.dest))
+      .on('end', function () {
+        done();
+      });
+  });
+  tasks.compile.push('js');
+
+  // Vendor and Bower JavaScript compile
+  gulp.task('js:vendor', 'Compile all vendor js (including Bower) into a single vendor.js file', function (done) {
     let sources = [];
 
     // Add Bower files
@@ -23,14 +40,9 @@ module.exports = function (gulp, config, tasks) {
       });
     }
 
-    sources = sources.concat(config.js.src);
-
+    sources = sources.concat(config.js.vendor);
     gulp.src(sources)
-      .pipe(sourcemaps.init())
-      .pipe(gulpif(config.js.babel, babel({
-        presets: ['env']
-      }))) // all babel options handled in `.babelrc`
-      .pipe(concat(config.js.destName))
+      .pipe(concat('vendor.js'))
       .pipe(gulpif(config.js.uglify, uglify(
         gulpif(config.js.preserveLicense, {
           preserveComments: 'license'
@@ -42,7 +54,7 @@ module.exports = function (gulp, config, tasks) {
         done();
       });
   });
-  tasks.compile.push('js');
+  tasks.compile.push('js:vendor');
 
 
   // Validate using ESlint

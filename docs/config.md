@@ -2,7 +2,7 @@
 
 * __enabled__ - (Boolean) value that will enable or disable css related Gulp tasks.
 * __src__ - (Array) The location of all files to compile from SCSS to CSS. Notice the use of asterisks in the source path, `sass/**/*.scss`. This path is using `gulp-sass-glob` to get all files ending in .scss from all folders in source/sass. You can also exclude files by prefixing with `!` such as `!sass/exclude.scss`
-* __vendor__ - (Array) List of vendor CSS files to include in compilation.
+* __vendor__ - (Array) List of vendor CSS files to include in compilation. Compiles to `vendor.css`.
 * __dest__ - The location to place the compiled CSS.
 * __flattenDestOutput__ - (Boolean) value for minification of compiled CSS.
 * __lint__ - Validate code standards with [sass-lint](https://github.com/sasstools/sass-lint).
@@ -25,6 +25,7 @@
 
 * __enabled__ - (Boolean) value enabling or disabling js Gulp tasks
 * __src__ - (Array) A list of locations to find JS files. Notice the use of the file globbing technique here. You can also exclude files by prefixing with `!` such as `!js/exclude.js`
+* __vendor__ - (Array) List of vendor JS files required which will compile to `vendor.js`.
 * __dest__ - The destination for compiled JS file.
 * __destName__ - The file name you would like used for the compiled JS file.
 * __sourceMapEmbed__ - (Boolean) value to enable JS source maps.
