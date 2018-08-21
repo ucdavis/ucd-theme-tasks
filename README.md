@@ -31,9 +31,8 @@ require('ucd-theme-tasks')(gulp, config);
 
 ```js
 'use strict';
-
-const _ = require('lodash');
 const gulp = require('gulp');
+const _ = require('lodash');
 let config = require('./gulp-config');
 
 // Load in custom config

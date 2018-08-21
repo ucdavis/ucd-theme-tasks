@@ -19,11 +19,11 @@
     }
   ],
   "dependencies": {
-    "autoprefixer": "^9.1.0",
-    "breakpoint-sass": "^2.7.1",
+    "autoprefixer": "^9.1.2",
     "babel-core": "^6.26.3",
     "babel-preset-env": "^1.7.0",
     "bower": "^1.8.0",
+    "breakpoint-sass": "^2.7.1",
     "browser-sync": "^2.24.6",
     "gulp": "^3.9.0",
     "gulp-babel": "^7.0.0",
