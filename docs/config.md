@@ -5,7 +5,7 @@
 * __vendor__ - (Array) List of vendor CSS files to include in compilation.
 * __dest__ - The location to place the compiled CSS.
 * __flattenDestOutput__ - (Boolean) value for minification of compiled CSS.
-* __lint__ - Validate code standards with `sass-lint`.
+* __lint__ - Validate code standards with [sass-lint](https://github.com/sasstools/sass-lint).
    * __enabled__ - (Boolean) to turn CSS code validation on or off.
    * __failOnError__ - (Boolean) to stop code from compiling if it does not validate.
    * __extraSrc__ - (Array) Add paths to files that you would like to be included in CSS validation. You may exclude files from this process by placing them here, but prefixing the path with an exclamation point. This is the boolean NOT operator also called negation.
@@ -31,7 +31,7 @@
 * __uglify__ - (Boolean) value to minify destination JS file.
 * __babel__ - (Boolean) enable or disable es6 to es5 compiling with [Babel](https://babeljs.io/)
 * __preserveLicense__ - (Boolean) whether to preserve a license in a vendor package.
-* __eslint__ - Settings related to JS validation.
+* __eslint__ - Settings related to JS validation with [ESLint](https://eslint.org/).
     * __enabled__ - (Boolean) value to enable JS validation.
     * __failAfterError__ - (Boolean) value to allow js to compile if it doesn't validate.
     * __extraSrc__ - (Array) List of files to include or exclude from validation. This is useful for excluding code you didn't write, therefore have no authority to change to meet validation criteria.
