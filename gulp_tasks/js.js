@@ -27,7 +27,9 @@ module.exports = function (gulp, config, tasks) {
 
     gulp.src(sources)
       .pipe(sourcemaps.init())
-      .pipe(gulpif(config.js.babel, babel())) // all babel options handled in `.babelrc`
+      .pipe(gulpif(config.js.babel, babel({
+        presets: ['env']
+      }))) // all babel options handled in `.babelrc`
       .pipe(concat(config.js.destName))
       .pipe(gulpif(config.js.uglify, uglify(
         gulpif(config.js.preserveLicense, {

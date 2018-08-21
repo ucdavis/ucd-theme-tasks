@@ -3,6 +3,7 @@ files:
   include: 'sass/**/*.s+(a|c)ss'
   ignore:
     - 'sass/vendor/**/*.*'
+    - 'sass/1_pattern_lab/**/*.*'
 # Rule Configuration
 rules:
   # Extends
