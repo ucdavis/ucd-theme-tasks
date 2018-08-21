@@ -21,9 +21,6 @@ module.exports = {
       'last 2 versions',
       'IE >= 9'
     ],
-    includePaths: [
-      './node_modules'
-    ],
     sassdoc: {
       enabled: false,
       dest: 'public/sassdoc',
@@ -76,6 +73,7 @@ module.exports = {
     enabled: false,
     port: 3050,
     watchFiles: null,
+    domain: null,
     baseDir: './',
     startPath: '/',
     openBrowserAtStart: true,

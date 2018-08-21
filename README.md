@@ -96,3 +96,8 @@ automatically.
 by older browsers. The [bable-preset-env](https://babeljs.io/docs/en/babel-preset-env/)
 is used by default and can be customized in a `.babelrc` file placed into the
 root of your project.
+
+## Default Configuration
+`gulp-config.default.js` contains all of the default configuration for
+controlling the gulp tasks. This file can be referenced for all possible config
+options. Docs can be found at [https://github.com/ucdavis/ucd-theme-tasks/blob/master/docs/config.md](https://github.com/ucdavis/ucd-theme-tasks/blob/master/docs/config.md)
