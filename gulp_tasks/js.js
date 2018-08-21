@@ -37,7 +37,10 @@ module.exports = function (gulp, config, tasks) {
         }, {})
       )))
       .pipe(sourcemaps.write((config.js.sourceMapEmbed) ? null : './'))
-      .pipe(gulp.dest(config.js.dest));
+      .pipe(gulp.dest(config.js.dest))
+      .on('end', function () {
+        done();
+      });
   });
   tasks.compile.push('js');
 
