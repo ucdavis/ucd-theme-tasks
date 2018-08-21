@@ -39,3 +39,8 @@ gulp-config--custom.yml
 # Ignore the build directory
 dist/
 public/
+
+# Ignore development directories
+sass/
+js/
+images/
