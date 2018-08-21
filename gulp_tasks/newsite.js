@@ -8,7 +8,6 @@ module.exports = function (gulp, config, tasks) {
     const command = [
       'rsync -r --exclude=".DS_Store" starterkit/. ' + config.themeSync.dest,
       'rsync -a --include=".eslintrc.yml" --include=".sass-lint.yml" --include="gulpfile.js" --exclude "*" . ' + config.themeSync.dest,
-      'rsync -r --exclude "newsite.js" --exclude "patternlab.js" gulp_tasks/* ' + config.themeSync.dest + 'gulp_tasks/',
       'mkdir -p ' + config.themeSync.dest + config.themeSync.sassDest,
       'rsync -r --delete ' + config.themeSync.sassSrc + '* ' + config.themeSync.dest + config.themeSync.sassDest,
       'mkdir -p ' + config.themeSync.dest + config.themeSync.jsDest,

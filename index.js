@@ -1,7 +1,7 @@
 'use strict';
 
 const _ = require('lodash');
-const defaultConfig = require('./config.default');
+const defaultConfig = require('./gulp-config.default');
 
 module.exports = (gulpReference, userConfig, userTasks = {}) => {
   const gulp = require('gulp-help')(gulpReference);

@@ -13,7 +13,7 @@ $ npm install ucd-theme-tasks --save-dev
 2. Create a `gulp-config.js` file which will contain any configuration overrides.
 You can copy the default config out of this package to see all default config.
 ```
-$ cp node_modules/ucd-theme-tasks/config.default.js gulp-config.js
+$ cp node_modules/ucd-theme-tasks/gulp-config.default.js gulp-config.js
 ```
 
 3. Create a `gulpfile.js` in the root of your project.
