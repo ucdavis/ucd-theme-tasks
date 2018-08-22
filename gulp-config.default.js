@@ -37,7 +37,8 @@ module.exports = {
   js: {
     enabled: true,
     src: [
-      'js/**/*.js'
+      'js/**/*.js',
+      '!js/vendor/**/*.js', // Ignore vendor files which will compile separately.
     ],
     vendor: [
       'js/vendor/**/*.js',
