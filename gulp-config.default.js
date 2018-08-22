@@ -2,7 +2,8 @@ module.exports = {
   css: {
     enabled: true,
     src: [
-      'sass/**/*.scss'
+      'sass/**/*.scss',
+      '!sass/1_pattern_lab/**/*'
     ],
     vendor: [
       'sass/vendor/**/*.css'
