@@ -1,5 +1,4 @@
 const browserSync = require('browser-sync').create('server');
-const _ = require('lodash');
 
 module.exports = function (gulp, config, tasks) {
 
@@ -32,13 +31,13 @@ module.exports = function (gulp, config, tasks) {
     reloadDebounce: config.browserSync.reloadDebounce
   };
   if (config.browserSync.domain) {
-    _.merge(options, {
+    Object.assign(options, {
       proxy: config.browserSync.domain,
       startPath: config.browserSync.startPath
     });
   }
   else {
-    _.merge(options, {
+    Object.assign(options, {
       server: {
         baseDir: config.browserSync.baseDir
       },

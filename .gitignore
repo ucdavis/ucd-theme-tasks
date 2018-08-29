@@ -34,13 +34,14 @@ jspm_packages/
 *.map
 
 # Custom Local config
-gulp-config--custom.yml
+gulp-config.local.js
 
 # Ignore the build directory
 dist/
 public/
 
-# Ignore development directories
+# Ignore development assets
 sass/
 js/
 images/
+gulpfile.js
