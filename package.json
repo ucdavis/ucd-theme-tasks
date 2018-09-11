@@ -18,9 +18,7 @@
       "email": "ahorn@ucdavis.edu"
     }
   ],
-  "dependencies": {
-    "jquery": "^3.3.1"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@babel/core": "^7.0.0",
     "@babel/preset-env": "^7.0.0",
