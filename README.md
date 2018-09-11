@@ -32,12 +32,13 @@ require('ucd-theme-tasks')(gulp, config);
 ```js
 'use strict';
 const gulp = require('gulp');
+const _ = require('lodash');
 let config = require('./gulp-config');
 
 // Load in custom config
 try {
   const customConfig = require('./gulp-config.local');
-  config = Object.assign(config, customConfig);
+  config = _.merge(config, customConfig);
 }
 catch (e) {
   console.log('Add a gulp-config.local.js file for any custom local configuration.');
