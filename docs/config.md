@@ -35,17 +35,12 @@
     * __failAfterError__ - (Boolean) value to allow js to compile if it doesn't validate.
     * __extraSrc__ - (Array) List of files to include or exclude from validation. This is useful for excluding code you didn't write, therefore have no authority to change to meet validation criteria.
 
+
 ## nodeFiles:
 
 * __enabled__ - (Boolean) value for including NPM files.
 * __dir__ - Path to NPM node modules file directory.
 * __includePaths__ - (Array) List of npm directory paths to look for files such as `node__modules/singularitygs/stylesheets`
-
-
-## bowerFiles:
-
-* __enabled__ - (Boolean) value for compiling Bower files.
-* __dir__ - Path to Bower file directory.
 
 
 ## browserSync:

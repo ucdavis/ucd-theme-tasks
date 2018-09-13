@@ -65,10 +65,6 @@ module.exports = {
       'node_modules/normalize-scss/sass'
     ]
   },
-  bowerFiles: {
-    enabled: false,
-    dir: 'bower_components'
-  },
   browserSync: {
     enabled: false,
     port: 3050,

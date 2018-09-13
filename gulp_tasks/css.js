@@ -12,7 +12,7 @@ const gulpif = require('gulp-if');
 const sassdoc = require('sassdoc');
 const concat = require('gulp-concat');
 const cssnano = require('gulp-cssnano');
-const mainBowerFiles = require('main-bower-files');
+const fs = require('fs');
 
 module.exports = function (gulp, config, tasks) {
 
@@ -54,18 +54,41 @@ module.exports = function (gulp, config, tasks) {
   tasks.compile.push('sass');
 
 
-  // Vendor and Bower compile
-  gulp.task('css:vendor', 'Compile all vendor css (including Bower) into a single vendor.css file', function () {
+  // Vendor and NPM compile
+  gulp.task('css:vendor', 'Compile all vendor css (including NPM Dependencies) into a single vendor.css file', function () {
     let sources = [];
 
-    // Add Bower files
-    if (config.bowerFiles.enabled) {
-      sources = mainBowerFiles({
-        paths: {
-          bowerDirectory: config.bowerFiles.dir
-        },
-        filter: '**/*.css'
-      });
+    // Get CSS files from node_modules that are npm "dependencies". Ignores "devDependencies".
+    const buffer = fs.readFileSync('./package.json');
+    const packageJson = JSON.parse(buffer.toString());
+
+    for (lib in packageJson.dependencies) {
+      let mainFileDir = './' + config.nodeFiles.dir + '/' + lib;
+
+      // Look first for a "dist" directory.
+      if (fs.existsSync(mainFileDir + '/dist')) {
+        mainFileDir = mainFileDir + '/dist';
+      } else {
+        // Parse the main file and get its directory to look for a "dist" directory.
+        var depPackageBuffer = fs.readFileSync('./node_modules/' + lib + '/package.json');
+        var depPackage = JSON.parse(depPackageBuffer.toString());
+
+        if (depPackage.main) {
+          var mainFile = mainFileDir + '/' + depPackage.main;
+          var distDirPos;
+
+          distDirPos = mainFile.lastIndexOf('/dist/');
+
+          if (distDirPos !== -1) {
+            mainFileDir = mainFile.substring(0, distDirPos) + '/dist';
+          }
+        }
+      }
+
+      // Add all CSS files
+      sources.push(mainFileDir + '/**/*.css')
+      // Ignore minified CSS files.
+      sources.push('!' + mainFileDir + '/**/*.min.css')
     }
 
     sources = sources.concat(config.css.vendor);
