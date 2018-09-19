@@ -6,6 +6,9 @@ env:
 
 root: true
 
+parserOptions:
+  sourceType: "module"
+
 globals:
   Drupal: true
   drupalSettings: true
