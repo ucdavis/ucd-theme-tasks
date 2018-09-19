@@ -25,29 +25,22 @@
 
 * __enabled__ - (Boolean) value enabling or disabling js Gulp tasks
 * __src__ - (Array) A list of locations to find JS files. Notice the use of the file globbing technique here. You can also exclude files by prefixing with `!` such as `!js/exclude.js`
-* __vendor__ - (Array) List of vendor JS files required which will compile to `vendor.js`.
+* __externals__ - (Object) List of javascript packages which will be loaded external to Webpack. For example if jQuery is being used and loaded in browser via CDN.
 * __dest__ - The destination for compiled JS file.
 * __destName__ - The file name you would like used for the compiled JS file.
-* __sourceMapEmbed__ - (Boolean) value to enable JS source maps.
 * __uglify__ - (Boolean) value to minify destination JS file.
 * __babel__ - (Boolean) enable or disable es6 to es5 compiling with [Babel](https://babeljs.io/)
-* __preserveLicense__ - (Boolean) whether to preserve a license in a vendor package.
 * __eslint__ - Settings related to JS validation with [ESLint](https://eslint.org/).
     * __enabled__ - (Boolean) value to enable JS validation.
     * __failAfterError__ - (Boolean) value to allow js to compile if it doesn't validate.
     * __extraSrc__ - (Array) List of files to include or exclude from validation. This is useful for excluding code you didn't write, therefore have no authority to change to meet validation criteria.
+
 
 ## nodeFiles:
 
 * __enabled__ - (Boolean) value for including NPM files.
 * __dir__ - Path to NPM node modules file directory.
 * __includePaths__ - (Array) List of npm directory paths to look for files such as `node__modules/singularitygs/stylesheets`
-
-
-## bowerFiles:
-
-* __enabled__ - (Boolean) value for compiling Bower files.
-* __dir__ - Path to Bower file directory.
 
 
 ## browserSync:

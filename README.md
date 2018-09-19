@@ -93,7 +93,7 @@ automatically.
 
 ## Babel Compiling
 [Babel](https://babeljs.io/) is used to transform es6 JavaScript into es5 usable
-by older browsers. The [bable-preset-env](https://babeljs.io/docs/en/babel-preset-env/)
+by older browsers. The [@babel/preset-env](https://babeljs.io/docs/en/babel-preset-env)
 is used by default and can be customized in a `.babelrc` file placed into the
 root of your project.
 

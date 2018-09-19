@@ -38,18 +38,14 @@ module.exports = {
   js: {
     enabled: true,
     src: [
-      'js/**/*.js',
-      '!js/vendor/**/*.js', // Ignore vendor files which will compile separately.
-    ],
-    vendor: [
       'js/vendor/**/*.js',
+      'js/**/*.js',
     ],
+    externals: {}, // https://webpack.js.org/configuration/externals/
     dest: 'dist/',
     destName: 'scripts.js',
-    sourceMapEmbed: false,
     uglify: true,
     babel: true,
-    preserveLicense: false,
     eslint: {
       enabled: false,
       failAfterError: true,
@@ -68,10 +64,6 @@ module.exports = {
       'node_modules/sass-burger',
       'node_modules/normalize-scss/sass'
     ]
-  },
-  bowerFiles: {
-    enabled: false,
-    dir: 'bower_components'
   },
   browserSync: {
     enabled: false,
