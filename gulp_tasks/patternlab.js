@@ -40,6 +40,7 @@ module.exports = function (gulp, config, tasks) {
     return gulp.watch([
       'source/_patterns/**/*.hbs',
       'source/_patterns/**/*.mustache',
+      'source/_patterns/**/*.md',
       'source/_patterns/**/*.json',
       'source/_data/*.json',
       'source/_annotations/*.json',
