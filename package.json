@@ -1,6 +1,6 @@
 {
   "name": "ucd-theme-tasks",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Base automation for compiling a UCD frontend.",
   "main": "index.js",
   "repository": {
