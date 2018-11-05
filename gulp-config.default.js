@@ -87,7 +87,7 @@ module.exports = {
     sassSrc: 'source/sass/',
     sassDest: 'sass/1_pattern_lab/',
     jsSrc: 'source/js/',
-    jsDest: 'js/pattern_lab/',
+    jsDest: 'js/1_pattern_lab/',
     imagesSrc: 'source/images/',
     imagesDest: 'images/'
   },
