@@ -1,34 +1,47 @@
-const exec = require('child_process').exec;
+const copy = require('recursive-copy');
+const del = require('del');
 
 module.exports = function (gulp, config, tasks) {
 
   // Export sass, js, and images to custom site
   gulp.task('themesync', 'Export Patternlab source files to a website theme.', function () {
-    // Setup a list of all commands to be run
-    let command = [];
+    // Default to an Export.
+    let sassSrc = config.themeSync.sassSrc;
+    let sassDest = config.themeSync.dest + config.themeSync.sassDest;
+    let jsSrc = config.themeSync.jsSrc;
+    let jsDest = config.themeSync.dest + config.themeSync.jsDest;
+    let imagesSrc = config.themeSync.imagesSrc;
+    let imagesDest = config.themeSync.dest + config.themeSync.imagesDest;
 
-    // if This is an import
+    // if This is an Import
     if (config.themeSync.src) {
-      command = [
-        'rsync -r --delete ' + config.themeSync.src + config.themeSync.sassSrc + '* ' + config.themeSync.sassDest,
-        'rsync -r --delete ' + config.themeSync.src + config.themeSync.jsSrc + '* ' + config.themeSync.jsDest,
-        'rsync -r --exclude "sample" ' + config.themeSync.src + config.themeSync.imagesSrc + '* ' + config.themeSync.imagesDest
-      ].join('&&');
-    }
-    else {
-      // This is an export
-      command = [
-        'rsync -r --delete ' + config.themeSync.sassSrc + '* ' + config.themeSync.dest + config.themeSync.sassDest,
-        'rsync -r --delete ' + config.themeSync.jsSrc + '* ' + config.themeSync.dest + config.themeSync.jsDest,
-        'rsync -r --exclude "sample" ' + config.themeSync.imagesSrc + '* ' + config.themeSync.dest + config.themeSync.imagesDest
-      ].join('&&');
+      sassSrc = config.themeSync.src + config.themeSync.sassSrc;
+      sassDest = config.themeSync.sassDest;
+      jsSrc = config.themeSync.src + config.themeSync.jsSrc;
+      jsDest = config.themeSync.jsDest;
+      imagesSrc = config.themeSync.src + config.themeSync.imagesSrc;
+      imagesDest = config.themeSync.imagesDest;
     }
 
-    // Execute the commands
-    exec(command, function (err, stdout, stderr) {
-      console.log(stdout);
-      console.log(stderr);
+    // Delete and replace the Sass directory.
+    del(sassDest, {force: true}).then(() => {
+      copy(sassSrc, sassDest, {overwrite: true}).catch(function(error) {
+        console.error('Sass directory Copy failed: ' + error);
+      });
     });
+
+    // Delete and replace the Js directory.
+    del(jsDest, {force: true}).then(() => {
+      copy(jsSrc, jsDest, {overwrite: true}).catch(function(error) {
+        console.error('Sass directory Copy failed: ' + error);
+      });
+    });
+
+    // Copy Images directory (but don't delete the directory first).
+    copy(imagesSrc, imagesDest, {overwrite: true, filter: ['**/*', '!sample/**/*', '!sample' ]}).catch(function(error) {
+      console.error('Images directory Copy failed: ' + error);
+    });
+
   });
 
 };
