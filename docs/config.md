@@ -54,7 +54,7 @@
 * __baseDir__ - Specify the base directory.
 * __startPath__ - The path at which to open the browser. This path gets appended to the "domain".
 * __openBrowserAtStart__ - (Boolean) value to allow browser to be automatically opened when "watch" task is initiated.
-* __browser__ - (Array) List the browser you would like to be used when a browser is opened automatically.
+* __browser__ - (Array) List the browser you would like to be used when a browser is opened automatically. On Windows, try `'chrome'` instead of`'Google Chrome'` if you get an alert saying that Google Chrome can't run.
 * __reloadDelay__ - Time, in milliseconds, to wait before instructing the browser to reload/inject following a file change event
 * __reloadDebounce__ - Wait, in milliseconds, for a specified window of event-silence before sending any reload events.
 
