@@ -94,6 +94,7 @@ module.exports = {
   patternLab: {
     enabled: false,
     imagesSrc: 'source/images/',
-    imagesDest: 'public/images/'
+    imagesDest: 'public/images/',
+    version: 3
   }
 }

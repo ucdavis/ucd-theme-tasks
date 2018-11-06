@@ -82,3 +82,4 @@ This configuration is for integration with the [UC Davis SiteFarm One Pattern La
 * __enabled__ - (Boolean) value to allow Gulp to build the pattern lab.
 * __imagesSrc__ - File path to where to find source images (defaults to `source/images/`).
 * __imagesDest__ - File path to where to place images (defaults to `public/images/`).
+* __version__ - Set an older version of Pattern Lab such as `1` to compile with the old PHP engine.
