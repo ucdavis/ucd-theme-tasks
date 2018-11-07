@@ -2,11 +2,14 @@ const browserSync = require('browser-sync');
 const exec = require('child_process').exec;
 const copy = require('recursive-copy');
 const fs = require('fs');
-const buffer = fs.readFileSync('./patternlab-config.json');
-const plConfig = JSON.parse(buffer.toString());
-const patternlab = require('@pattern-lab/core')(plConfig);
 
 module.exports = function (gulp, config, tasks) {
+
+  if (config.patternLab.version !== 1) {
+    const buffer = fs.readFileSync('./patternlab-config.json');
+    const plConfig = JSON.parse(buffer.toString());
+    const patternlab = require('@pattern-lab/core')(plConfig);
+  }
 
   function reloadBrowser() {
     if (config.browserSync.enabled) {
