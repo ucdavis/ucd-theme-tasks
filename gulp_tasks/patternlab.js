@@ -2,13 +2,14 @@ const browserSync = require('browser-sync');
 const exec = require('child_process').exec;
 const copy = require('recursive-copy');
 const fs = require('fs');
+let plConfig = null;
+let patternlab = null;
 
 module.exports = function (gulp, config, tasks) {
-
   if (config.patternLab.version !== 1) {
     const buffer = fs.readFileSync('./patternlab-config.json');
-    const plConfig = JSON.parse(buffer.toString());
-    const patternlab = require('@pattern-lab/core')(plConfig);
+    plConfig = JSON.parse(buffer.toString());
+    patternlab = require('@pattern-lab/core')(plConfig);
   }
 
   function reloadBrowser() {
@@ -37,7 +38,17 @@ module.exports = function (gulp, config, tasks) {
   gulp.task('patternlab', 'Build Patternlab patterns into html.', function (done) {
 
     // Use the old PHP compiling for version 1 of Pattern Lab.
-    if (config.patternLab.version === 1) {
+    if (patternlab) {
+      // Use the modern Node version.
+      patternlab
+        .build({
+          cleanPublic: true,
+        })
+        .then(() => {
+          done();
+        });
+    }
+    else {
       // Copy Images directory.
       copy(config.patternLab.imagesSrc, config.patternLab.imagesDest, {overwrite: true})
         .catch(function(error) {
@@ -48,26 +59,13 @@ module.exports = function (gulp, config, tasks) {
       phpBuild();
       done();
     }
-    else {
-      // Use the modern Node version.
-      patternlab
-        .build({
-          cleanPublic: true,
-        })
-        .then(() => {
-          done();
-        });
-    }
 
   });
   tasks.compile.push('patternlab');
 
   gulp.task('patternlab:patterns', 'Compile Patternlab patterns into html.', function () {
     // Use the old PHP compiling for version 1 of Pattern Lab.
-    if (config.patternLab.version === 1) {
-      phpBuild(true)
-    }
-    else {
+    if (patternlab) {
       // Use the modern Node version.
       patternlab
         .patternsonly({
@@ -76,6 +74,9 @@ module.exports = function (gulp, config, tasks) {
         .then(() => {
           reloadBrowser();
         });
+    }
+    else {
+      phpBuild(true)
     }
 
   });
