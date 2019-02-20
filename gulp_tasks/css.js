@@ -70,7 +70,7 @@ module.exports = function (gulp, config, tasks) {
         mainFileDir = mainFileDir + '/dist';
       } else {
         // Parse the main file and get its directory to look for a "dist" directory.
-        var depPackageBuffer = fs.readFileSync('./node_modules/' + lib + '/package.json');
+        var depPackageBuffer = fs.readFileSync(mainFileDir + '/package.json');
         var depPackage = JSON.parse(depPackageBuffer.toString());
 
         if (depPackage.main) {
@@ -86,9 +86,11 @@ module.exports = function (gulp, config, tasks) {
       }
 
       // Add all CSS files
-      sources.push(mainFileDir + '/**/*.css')
+      sources.push(mainFileDir + '/**/*.css');
       // Ignore minified CSS files.
-      sources.push('!' + mainFileDir + '/**/*.min.css')
+      sources.push('!' + mainFileDir + '/**/*.min.css');
+      // Ignore CSS files in a /test or /tests directory.
+      sources.push('!' + mainFileDir + '/(test|tests)/**/*');
     }
 
     sources = sources.concat(config.css.vendor);
