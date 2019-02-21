@@ -3,6 +3,7 @@
 * __enabled__ - (Boolean) value that will enable or disable css related Gulp tasks.
 * __src__ - (Array) The location of all files to compile from SCSS to CSS. Notice the use of asterisks in the source path, `sass/**/*.scss`. This path is using `gulp-sass-glob` to get all files ending in .scss from all folders in source/sass. You can also exclude files by prefixing with `!` such as `!sass/exclude.scss`
 * __vendor__ - (Array) List of vendor CSS files to include in compilation. Compiles to `vendor.css`.
+* __autoVendor__ - (Boolean) Set to `true` if you want css files automatically loaded into the `vendor.css` file from each npm package added as a dependency. It will first look for a `dist` folder in each package and then add the css files. If no `dist` folder is found then it will add all css files in the package. You can disable this, but it means that you will have to manually add any css file directly into the `vendor` array. This is useful if you find yourself spending more time excluding files and it would be simpler to explicitly add them manually.
 * __dest__ - The location to place the compiled CSS.
 * __flattenDestOutput__ - (Boolean) value for minification of compiled CSS.
 * __lint__ - Validate code standards with [sass-lint](https://github.com/sasstools/sass-lint).

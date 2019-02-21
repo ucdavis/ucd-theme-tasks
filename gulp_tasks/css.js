@@ -58,39 +58,41 @@ module.exports = function (gulp, config, tasks) {
   gulp.task('css:vendor', 'Compile all vendor css (including NPM Dependencies) into a single vendor.css file', function () {
     let sources = [];
 
-    // Get CSS files from node_modules that are npm "dependencies". Ignores "devDependencies".
-    const buffer = fs.readFileSync('./package.json');
-    const packageJson = JSON.parse(buffer.toString());
+    if (config.css.autoVendor) {
+      // Get CSS files from node_modules that are npm "dependencies". Ignores "devDependencies".
+      const buffer = fs.readFileSync('./package.json');
+      const packageJson = JSON.parse(buffer.toString());
 
-    for (lib in packageJson.dependencies) {
-      let mainFileDir = './' + config.nodeFiles.dir + '/' + lib;
+      for (lib in packageJson.dependencies) {
+        let mainFileDir = './' + config.nodeFiles.dir + '/' + lib;
 
-      // Look first for a "dist" directory.
-      if (fs.existsSync(mainFileDir + '/dist')) {
-        mainFileDir = mainFileDir + '/dist';
-      } else {
-        // Parse the main file and get its directory to look for a "dist" directory.
-        var depPackageBuffer = fs.readFileSync(mainFileDir + '/package.json');
-        var depPackage = JSON.parse(depPackageBuffer.toString());
+        // Look first for a "dist" directory.
+        if (fs.existsSync(mainFileDir + '/dist')) {
+          mainFileDir = mainFileDir + '/dist';
+        } else {
+          // Parse the main file and get its directory to look for a "dist" directory.
+          var depPackageBuffer = fs.readFileSync(mainFileDir + '/package.json');
+          var depPackage = JSON.parse(depPackageBuffer.toString());
 
-        if (depPackage.main) {
-          var mainFile = mainFileDir + '/' + depPackage.main;
-          var distDirPos;
+          if (depPackage.main) {
+            var mainFile = mainFileDir + '/' + depPackage.main;
+            var distDirPos;
 
-          distDirPos = mainFile.lastIndexOf('/dist/');
+            distDirPos = mainFile.lastIndexOf('/dist/');
 
-          if (distDirPos !== -1) {
-            mainFileDir = mainFile.substring(0, distDirPos) + '/dist';
+            if (distDirPos !== -1) {
+              mainFileDir = mainFile.substring(0, distDirPos) + '/dist';
+            }
           }
         }
-      }
 
-      // Add all CSS files
-      sources.push(mainFileDir + '/**/*.css');
-      // Ignore minified CSS files.
-      sources.push('!' + mainFileDir + '/**/*.min.css');
-      // Ignore CSS files in a /test or /tests directory.
-      sources.push('!' + mainFileDir + '/(test|tests)/**/*');
+        // Add all CSS files
+        sources.push(mainFileDir + '/**/*.css');
+        // Ignore minified CSS files.
+        sources.push('!' + mainFileDir + '/**/*.min.css');
+        // Ignore CSS files in a /test or /tests directory.
+        sources.push('!' + mainFileDir + '/(test|tests)/**/*');
+      }
     }
 
     sources = sources.concat(config.css.vendor);

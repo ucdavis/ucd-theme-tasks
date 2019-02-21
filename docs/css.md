@@ -19,7 +19,7 @@ The following Sass libraries have been added for ease in development:
 
 Use `--save` when a package needs to be added as a dependency to the browser.
 
-The CSS in NPM Dependencies *will* automatically be compiled to the `vendor.css` files.
+The CSS in NPM Dependencies *will* automatically be compiled to the `vendor.css` files if the `css:autoVendor` config is set to `true` (which is the default). It will attempt to only load CSS files in each package's `dist` directory, but if one can't be found it will load in all CSS within a package.
 
 If you don't want a file to be used then you can exclude it in the `gulp-config.yml` file.
 
@@ -28,6 +28,9 @@ css:
   vendor:
     - '!node_modules/bootstrap/**/*.css'
 ```
+
+If you prefer not to auto-load every CSS file from a NPM Dependency then set the `css:autoVendor` config to `false`. You will now be required to manually add in each CSS file into the `css:vendor` config array that you want to include in the `vendor.css` file. Manually adding files can be helpful if you prefer to know exactly what is being loaded in.
+
 
 #### Node Include Paths
 

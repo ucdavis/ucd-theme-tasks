@@ -8,6 +8,7 @@ module.exports = {
     vendor: [
       'sass/vendor/**/*.css'
     ],
+    autoVendor: true,
     dest: 'dist/',
     flattenDestOutput: true,
     lint: {
