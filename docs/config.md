@@ -64,14 +64,17 @@
 
 The Theme Sync configuration for migrating source files to another project. Once migrated they need to be compiled into dev or production code for that project.
 
-* __enabled__ - (Boolean) value to turn enable "themesync" Gulp task.
+* __enabled__ - (Boolean) value to enable "themesync" Gulp task.
 * __newsite__ - (Boolean) value to enable a gulp task `gulp newsite` for cloning a starterkit into a new project. Requires a `/starterkit/` directory is available such as [https://bitbucket.org/ietwebdev/sitefarm-pattern-lab-one/src/master/starterkit/](https://bitbucket.org/ietwebdev/sitefarm-pattern-lab-one/src/master/starterkit/)
 * __src__ - (Boolean) False if exporting, or a file path to the source if importing.
 * __dest__ - Path to the theme directory or new site. Make sure the path ends in a /.
+* __sassSync__ - (Boolean) Set to True (default) if the `sass` directories should be synced.
 * __sassSrc__ - Path to find the SASS.
 * __sassDest__ - Path to place the SASS in destination.
+* __jsSync__ - (Boolean) Set to True (default) if the `js` directories should be synced.
 * __jsSrc__ - Path to find the JavaScript.
 * __jsDest__ - Path to place the JavaScript in destination.
+* __imagesSync__ - (Boolean) Set to True (default) if the `images` directories should be synced.
 * __imagesSrc__ - Path to find the images.
 * __imagesDest__ - Path to place the images in destination.
 

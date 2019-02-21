@@ -24,23 +24,32 @@ module.exports = function (gulp, config, tasks) {
     }
 
     // Delete and replace the Sass directory.
-    del(sassDest, {force: true}).then(() => {
-      copy(sassSrc, sassDest, {overwrite: true}).catch(function(error) {
-        console.error('Sass directory Copy failed: ' + error);
+    if (config.themeSync.sassSync) {
+      del(sassDest, {force: true}).then(() => {
+        copy(sassSrc, sassDest, {overwrite: true}).catch(function (error) {
+          console.error('Sass directory Copy failed: ' + error);
+        });
       });
-    });
+    }
 
     // Delete and replace the Js directory.
-    del(jsDest, {force: true}).then(() => {
-      copy(jsSrc, jsDest, {overwrite: true}).catch(function(error) {
-        console.error('Sass directory Copy failed: ' + error);
+    if (config.themeSync.jsSync) {
+      del(jsDest, {force: true}).then(() => {
+        copy(jsSrc, jsDest, {overwrite: true}).catch(function (error) {
+          console.error('Sass directory Copy failed: ' + error);
+        });
       });
-    });
+    }
 
     // Copy Images directory (but don't delete the directory first).
-    copy(imagesSrc, imagesDest, {overwrite: true, filter: ['**/*', '!sample/**/*', '!sample' ]}).catch(function(error) {
-      console.error('Images directory Copy failed: ' + error);
-    });
+    if (config.themeSync.imagesSync) {
+      copy(imagesSrc, imagesDest, {
+        overwrite: true,
+        filter: ['**/*', '!sample/**/*', '!sample'],
+      }).catch(function (error) {
+        console.error('Images directory Copy failed: ' + error);
+      });
+    }
 
   });
 
