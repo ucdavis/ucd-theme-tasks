@@ -103,7 +103,6 @@ controlling the gulp tasks. This file can be referenced for all possible config
 options. Docs can be found at [https://github.com/ucdavis/ucd-theme-tasks/blob/master/docs/config.md](https://github.com/ucdavis/ucd-theme-tasks/blob/master/docs/config.md)
 
 ## Pattern Lab
-If you are using this package within [https://patternlab.io/](Pattern Lab) then
+If you are using this package within [Pattern Lab](https://patternlab.io/) then
 it can build and watch patterns by setting `patternLab.enabled: true`. This will
 work for the Node.js version of Pattern Lab.
- 
