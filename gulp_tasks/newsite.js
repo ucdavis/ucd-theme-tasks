@@ -3,7 +3,7 @@ const copy = require('recursive-copy');
 module.exports = function (gulp, config, tasks) {
 
   // Start a new project with Gulp, sass, js and config ready to go
-  gulp.task('newsite', 'Start a new site with gulp and config wired up.', function () {
+  gulp.task('newsite', () => {
 
     // Copy the starterkit to its new location.
     copy('starterkit', config.themeSync.dest, {dot: true})

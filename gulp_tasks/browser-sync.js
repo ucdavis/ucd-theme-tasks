@@ -45,10 +45,8 @@ module.exports = function (gulp, config, tasks) {
     });
   }
 
-  // Set all the "compile" tasks as dependencies before serving the site.
-  const dependencies = tasks.compile
-
-  gulp.task('serve', 'Create a local server using BrowserSync', dependencies, function () {
+  // Create a local server using BrowserSync.
+  gulp.task('serve', () => {
     return browserSync.init(options);
   });
   tasks.default.push('serve');

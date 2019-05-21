@@ -16,8 +16,8 @@ const fs = require('fs');
 
 module.exports = function (gulp, config, tasks) {
 
-  // Compile Sass
-  gulp.task('sass', 'Compile Sass to CSS using Libsass with Autoprefixer and SourceMaps', function (done) {
+  // Compile Sass to CSS using Libsass with Autoprefixer and SourceMaps.
+  gulp.task('sass', (done) => {
     gulp.src(config.css.src)
       .pipe(sassGlob())
       .pipe(plumber({
@@ -54,8 +54,8 @@ module.exports = function (gulp, config, tasks) {
   tasks.compile.push('sass');
 
 
-  // Vendor and NPM compile
-  gulp.task('css:vendor', 'Compile all vendor css (including NPM Dependencies) into a single vendor.css file', function () {
+  // Compile all vendor css (including NPM Dependencies) into a single vendor.css file
+  gulp.task('css:vendor', () => {
     let sources = [];
 
     if (config.css.autoVendor) {
@@ -105,8 +105,8 @@ module.exports = function (gulp, config, tasks) {
   tasks.compile.push('css:vendor');
 
 
-  // Validate with Lint
-  gulp.task('validate:css', 'Lint Sass files with Sass-lint', function () {
+  // Validate Sass files with Sass-lint
+  gulp.task('validate:css', () => {
     let src = config.css.src;
     if (config.css.lint.extraSrc) {
       src = src.concat(config.css.lint.extraSrc);
@@ -122,8 +122,8 @@ module.exports = function (gulp, config, tasks) {
   }
 
 
-  // Documentation automated by SassDoc
-  gulp.task('docs:css', 'Build CSS docs using SassDoc', function () {
+  // Documentation automated by SassDoc: Build CSS docs
+  gulp.task('docs:css', () => {
     return gulp.src(config.css.src)
       .pipe(sassdoc({
         dest: config.css.sassdoc.dest,
@@ -139,7 +139,7 @@ module.exports = function (gulp, config, tasks) {
   }
 
   // Watch for changes
-  gulp.task('watch:css', function () {
+  gulp.task('watch:css', () => {
     let tasks = ['sass'];
     if (config.css.lint.enabled) {
       tasks.push('validate:css');
@@ -147,7 +147,7 @@ module.exports = function (gulp, config, tasks) {
     if (config.css.sassdoc.enabled) {
       tasks.push('docs:css');
     }
-    return gulp.watch(config.css.src, tasks);
+    return gulp.watch(config.css.src, gulp.parallel(tasks));
   });
   tasks.watch.push('watch:css');
 

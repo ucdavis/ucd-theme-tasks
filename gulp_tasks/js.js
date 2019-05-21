@@ -6,8 +6,8 @@ const webpackStream = require('webpack-stream');
 
 module.exports = function (gulp, config, tasks) {
 
-  // Compile custom javascript
-  gulp.task('js', 'Compile custom javascript, concat and uglify into a single ' + config.js.destName + ' file.', function (done) {
+  // Compile custom javascript, concat and uglify into a single file.
+  gulp.task('js', (done) => {
 
     const webpackConfig = {
       mode: (config.js.uglify) ? 'production' : 'development',
@@ -45,8 +45,8 @@ module.exports = function (gulp, config, tasks) {
   tasks.compile.push('js');
 
 
-  // Validate using ESlint
-  gulp.task('validate:js', 'Lint JS using ESlint', function () {
+  // Validate JS using ESlint
+  gulp.task('validate:js', () => {
     let src = config.js.src;
     if (config.js.eslint.extraSrc) {
       src = src.concat(config.js.eslint.extraSrc);
@@ -61,12 +61,12 @@ module.exports = function (gulp, config, tasks) {
 
 
   // Watch for changes
-  gulp.task('watch:js', function () {
+  gulp.task('watch:js', () => {
     let tasks = ['js'];
     if (config.js.eslint.enabled) {
       tasks.push('validate:js');
     }
-    return gulp.watch(config.js.src, tasks);
+    return gulp.watch(config.js.src, gulp.parallel(tasks));
   });
   tasks.watch.push('watch:js');
 

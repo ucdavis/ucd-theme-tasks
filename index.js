@@ -3,8 +3,7 @@
 const _ = require('lodash');
 const defaultConfig = require('./gulp-config.default');
 
-module.exports = (gulpReference, userConfig, userTasks = {}) => {
-  const gulp = require('gulp-help')(gulpReference);
+module.exports = (gulp, userConfig, userTasks = {}) => {
 
   const config = _.merge(defaultConfig, userConfig);
 
@@ -42,10 +41,15 @@ module.exports = (gulpReference, userConfig, userTasks = {}) => {
     require('./gulp_tasks/browser-sync.js')(gulp, config, tasks);
   }
 
-  gulp.task('compile', 'Generate the entire site', tasks.compile);
+  // Generate the entire site.
+  gulp.task('compile', gulp.series(tasks.compile));
   tasks.default.unshift('compile');
-  gulp.task('validate', 'Validate CSS and JS by linting', tasks.validate);
-  gulp.task('watch', 'Watch for changes to files', tasks.watch);
+  // Validate CSS and JS by linting.
+  gulp.task('validate', gulp.parallel(tasks.validate));
+  // Watch for changes to files.
+  gulp.task('watch', gulp.parallel(tasks.watch));
   tasks.default.push('watch');
-  gulp.task('default', 'Generate the entire theme and start watching for changes', tasks.default);
+  // Generate the entire theme and start watching for changes.
+  gulp.task('default', gulp.parallel(tasks.default));
+  // gulp.task('default', gulp.series(gulp.parallel(tasks.default), 'serve'));
 }

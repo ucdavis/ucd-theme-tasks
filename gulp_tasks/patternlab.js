@@ -34,8 +34,8 @@ module.exports = function (gulp, config, tasks) {
     });
   }
 
-  // Compile Patternlab
-  gulp.task('patternlab', 'Build Patternlab patterns into html.', function (done) {
+  // Compile Patternlab to the public dir.
+  gulp.task('patternlab', (done) => {
 
     // Use the old PHP compiling for version 1 of Pattern Lab.
     if (patternlab) {
@@ -63,7 +63,8 @@ module.exports = function (gulp, config, tasks) {
   });
   tasks.compile.push('patternlab');
 
-  gulp.task('patternlab:patterns', 'Compile Patternlab patterns into html.', function () {
+  // Compile Patternlab patterns into html.
+  gulp.task('patternlab:patterns', () => {
     // Use the old PHP compiling for version 1 of Pattern Lab.
     if (patternlab) {
       // Use the modern Node version.
@@ -83,7 +84,7 @@ module.exports = function (gulp, config, tasks) {
   tasks.compile.push('patternlab:patterns');
 
   // Watch for changes
-  gulp.task('watch:markup', function () {
+  gulp.task('watch:markup', () => {
     let tasks = ['patternlab:patterns'];
 
     return gulp.watch([
