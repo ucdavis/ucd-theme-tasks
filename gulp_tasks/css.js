@@ -139,7 +139,7 @@ module.exports = function (gulp, config, tasks) {
   }
 
   // Watch for changes
-  gulp.task('watch:css', () => {
+  gulp.task('watch:css', (done) => {
     let tasks = ['sass'];
     if (config.css.lint.enabled) {
       tasks.push('validate:css');
@@ -147,7 +147,10 @@ module.exports = function (gulp, config, tasks) {
     if (config.css.sassdoc.enabled) {
       tasks.push('docs:css');
     }
-    return gulp.watch(config.css.src, gulp.parallel(tasks));
+
+    let watcher = gulp.watch(config.css.src);
+    watcher.on('change', gulp.parallel(tasks));
+    done();
   });
   tasks.watch.push('watch:css');
 

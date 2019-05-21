@@ -61,12 +61,15 @@ module.exports = function (gulp, config, tasks) {
 
 
   // Watch for changes
-  gulp.task('watch:js', () => {
+  gulp.task('watch:js', (done) => {
     let tasks = ['js'];
     if (config.js.eslint.enabled) {
       tasks.push('validate:js');
     }
-    return gulp.watch(config.js.src, gulp.parallel(tasks));
+
+    let watcher = gulp.watch(config.js.src);
+    watcher.on('change', gulp.parallel(tasks));
+    done();
   });
   tasks.watch.push('watch:js');
 

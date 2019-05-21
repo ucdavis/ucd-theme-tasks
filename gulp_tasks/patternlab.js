@@ -64,7 +64,7 @@ module.exports = function (gulp, config, tasks) {
   tasks.compile.push('patternlab');
 
   // Compile Patternlab patterns into html.
-  gulp.task('patternlab:patterns', () => {
+  gulp.task('patternlab:patterns', (done) => {
     // Use the old PHP compiling for version 1 of Pattern Lab.
     if (patternlab) {
       // Use the modern Node version.
@@ -74,20 +74,21 @@ module.exports = function (gulp, config, tasks) {
         })
         .then(() => {
           reloadBrowser();
+          done();
         });
     }
     else {
       phpBuild(true)
+      done();
     }
 
   });
-  tasks.compile.push('patternlab:patterns');
 
   // Watch for changes
-  gulp.task('watch:markup', () => {
+  gulp.task('watch:markup', (done) => {
     let tasks = ['patternlab:patterns'];
 
-    return gulp.watch([
+    let watcher = gulp.watch([
       'source/_patterns/**/*.hbs',
       'source/_patterns/**/*.mustache',
       'source/_patterns/**/*.md',
@@ -96,7 +97,9 @@ module.exports = function (gulp, config, tasks) {
       'source/_annotations/*.json',
       'source/_meta/*.json',
       'source/_pl/**/*'
-    ], tasks)
+    ])
+    watcher.on('change', gulp.parallel(tasks))
+    done();
   });
   tasks.watch.push('watch:markup');
 

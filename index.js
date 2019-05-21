@@ -44,12 +44,18 @@ module.exports = (gulp, userConfig, userTasks = {}) => {
   // Generate the entire site.
   gulp.task('compile', gulp.series(tasks.compile));
   tasks.default.unshift('compile');
+
   // Validate CSS and JS by linting.
   gulp.task('validate', gulp.parallel(tasks.validate));
+
   // Watch for changes to files.
   gulp.task('watch', gulp.parallel(tasks.watch));
   tasks.default.push('watch');
+
   // Generate the entire theme and start watching for changes.
-  gulp.task('default', gulp.parallel(tasks.default));
-  // gulp.task('default', gulp.series(gulp.parallel(tasks.default), 'serve'));
+  if (config.browserSync.enabled) {
+    gulp.task('default', gulp.series(gulp.parallel(tasks.default), 'serve'));
+  } else {
+    gulp.task('default', gulp.parallel(tasks.default));
+  }
 }
