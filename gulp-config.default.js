@@ -21,7 +21,7 @@ module.exports = {
     outputStyle: 'compressed',
     autoPrefixerBrowsers: [
       'last 2 versions',
-      'IE >= 9'
+      'IE >= 11'
     ]
   },
   js: {
