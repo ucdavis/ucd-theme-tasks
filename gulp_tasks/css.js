@@ -127,8 +127,8 @@ module.exports = (gulp, config, tasks) => {
       tasks.push('validate:css');
     }
 
-    let watcher = gulp.watch(config.css.src);
-    watcher.on('change', gulp.parallel(tasks));
+    const watcher = gulp.watch(config.css.src);
+    watcher.on('all', gulp.parallel(tasks));
   });
   tasks.watch.push('watch:css');
 

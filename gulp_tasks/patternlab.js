@@ -82,7 +82,7 @@ module.exports = (gulp, config, tasks) => {
   gulp.task('watch:markup', async () => {
     let tasks = ['patternlab:patterns'];
 
-    let watcher = gulp.watch([
+    const watcher = gulp.watch([
       'source/_patterns/**/*.hbs',
       'source/_patterns/**/*.mustache',
       'source/_patterns/**/*.md',
@@ -92,7 +92,13 @@ module.exports = (gulp, config, tasks) => {
       'source/_meta/*.json',
       'source/_pl/**/*'
     ])
-    watcher.on('change', gulp.parallel(tasks))
+    watcher.on('change', gulp.parallel(tasks));
+
+    // Rebuild when adding or deleting a file. This will require a manual page
+    // refresh still.
+    let tasksRebuild = ['patternlab'];
+    watcher.on('add', gulp.parallel(tasksRebuild));
+    watcher.on('unlink', gulp.parallel(tasksRebuild));
   });
   tasks.watch.push('watch:markup');
 

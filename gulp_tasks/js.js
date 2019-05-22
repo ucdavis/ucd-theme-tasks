@@ -69,8 +69,8 @@ module.exports = (gulp, config, tasks) => {
       tasks.push('validate:js');
     }
 
-    let watcher = gulp.watch(config.js.src);
-    watcher.on('change', gulp.parallel(tasks));
+    const watcher = gulp.watch(config.js.src);
+    watcher.on('all', gulp.parallel(tasks));
   });
   tasks.watch.push('watch:js');
 
