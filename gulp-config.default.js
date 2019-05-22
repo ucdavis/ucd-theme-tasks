@@ -22,19 +22,7 @@ module.exports = {
     autoPrefixerBrowsers: [
       'last 2 versions',
       'IE >= 9'
-    ],
-    sassdoc: {
-      enabled: false,
-      dest: 'public/sassdoc',
-      verbose: false,
-      basePath: '', // Link to git repo sass directory.
-      theme: 'default',
-      sort: [
-        'file',
-        'group',
-        'line<'
-      ]
-    }
+    ]
   },
   js: {
     enabled: true,

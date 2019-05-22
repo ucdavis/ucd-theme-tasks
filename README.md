@@ -70,13 +70,6 @@ $ cp node_modules/ucd-theme-tasks/.sass-lint.yml .sass-lint.yml
 ```
 
 ## Gulp Tasks
-### Get Help
-`gulp help` - The quickest way to see what each task does is to run `gulp help`. This will
-list out each of the tasks with a description of what it does.
-
-There are several gulp tasks which can be run individually, however it is often
-easier to run one of the primary tasks which will start smaller tasks
-automatically.
 
 ### Primary Tasks
 1. `gulp` - Generate the production code and start watching for changes.

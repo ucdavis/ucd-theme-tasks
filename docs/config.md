@@ -14,13 +14,7 @@
 * __sourceMapEmbed__ - (Boolean) for adding CSS source maps for in browser SASS debugging.
 * __outputStyle__ - Tell the compiler whether you want `expanded` or `compressed` output code.
 * __autoPrefixerBrowsers__ - (Array) List browsers you would like vendor prefixes generated for. [https://github.com/ai/browserslist#queries](https://github.com/ai/browserslist#queries)
-* __sassdoc__ - Settings for generated SASS documentation. [http://sassdoc.com](http://sassdoc.com)
-    * __enabled__ - (Boolean) to generate SASS Docs.
-    * __dest__ - Destination for SASS Documentation code.
-    * __verbose__ - (Boolean) value to enable or disable verbose mode
-    * __basePath__ - The SASS base path from the public repository. Notice in the config file this has a child element of "exclude" that you can use to exclude files from this base path.
-    * __theme__ - Set the theme to be used to display the SASS Docs. We are using "default".
-    * __sort__ - (Array) Set the sort order of the documentation. [http://sassdoc.com/customising-the-view/#sort](http://sassdoc.com/customising-the-view/#sort)
+
 
 ## js
 

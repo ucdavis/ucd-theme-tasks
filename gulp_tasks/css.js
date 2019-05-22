@@ -9,7 +9,6 @@ const plumber = require('gulp-plumber');
 const notify = require('gulp-notify');
 const flatten = require('gulp-flatten');
 const gulpif = require('gulp-if');
-const sassdoc = require('sassdoc');
 const concat = require('gulp-concat');
 const cssnano = require('gulp-cssnano');
 const fs = require('fs');
@@ -121,31 +120,11 @@ module.exports = (gulp, config, tasks) => {
     tasks.validate.push('validate:css');
   }
 
-
-  // Documentation automated by SassDoc: Build CSS docs
-  gulp.task('docs:css', () => {
-    return gulp.src(config.css.src)
-      .pipe(sassdoc({
-        dest: config.css.sassdoc.dest,
-        verbose: config.css.sassdoc.verbose,
-        basePath: config.css.sassdoc.basePath,
-        exclude: config.css.sassdoc.exclude,
-        theme: config.css.sassdoc.theme,
-        sort: config.css.sassdoc.sort
-      }));
-  });
-  if (config.css.sassdoc.enabled) {
-    tasks.compile.push('docs:css');
-  }
-
   // Watch for changes
   gulp.task('watch:css', async () => {
     let tasks = ['sass'];
     if (config.css.lint.enabled) {
       tasks.push('validate:css');
-    }
-    if (config.css.sassdoc.enabled) {
-      tasks.push('docs:css');
     }
 
     let watcher = gulp.watch(config.css.src);
