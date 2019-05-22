@@ -4,7 +4,7 @@ const del = require('del');
 module.exports = (gulp, config, tasks) => {
 
   // Export Patternlab source sass, js, and images to custom site
-  gulp.task('themesync', () => {
+  gulp.task('themesync', async () => {
     // Default to an Export.
     let sassSrc = config.themeSync.sassSrc;
     let sassDest = config.themeSync.dest + config.themeSync.sassDest;

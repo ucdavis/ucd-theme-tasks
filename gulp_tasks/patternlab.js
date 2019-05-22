@@ -35,17 +35,14 @@ module.exports = (gulp, config, tasks) => {
   }
 
   // Compile Patternlab to the public dir.
-  gulp.task('patternlab', (done) => {
+  gulp.task('patternlab', async () => {
 
     // Use the old PHP compiling for version 1 of Pattern Lab.
     if (patternlab) {
       // Use the modern Node version.
-      patternlab
+      await patternlab
         .build({
           cleanPublic: true,
-        })
-        .then(() => {
-          done();
         });
     }
     else {
@@ -57,35 +54,32 @@ module.exports = (gulp, config, tasks) => {
 
       // Build the patterns with php.
       phpBuild();
-      done();
     }
 
   });
   tasks.compile.push('patternlab');
 
   // Compile Patternlab patterns into html.
-  gulp.task('patternlab:patterns', (done) => {
+  gulp.task('patternlab:patterns', async () => {
     // Use the old PHP compiling for version 1 of Pattern Lab.
     if (patternlab) {
       // Use the modern Node version.
-      patternlab
+      await patternlab
         .patternsonly({
           cleanPublic: plConfig.cleanPublic,
         })
         .then(() => {
           reloadBrowser();
-          done();
         });
     }
     else {
       phpBuild(true)
-      done();
     }
 
   });
 
   // Watch for changes
-  gulp.task('watch:markup', (done) => {
+  gulp.task('watch:markup', async () => {
     let tasks = ['patternlab:patterns'];
 
     let watcher = gulp.watch([
@@ -99,7 +93,6 @@ module.exports = (gulp, config, tasks) => {
       'source/_pl/**/*'
     ])
     watcher.on('change', gulp.parallel(tasks))
-    done();
   });
   tasks.watch.push('watch:markup');
 
