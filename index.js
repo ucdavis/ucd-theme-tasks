@@ -54,6 +54,7 @@ module.exports = (gulp, userConfig, userTasks = {}) => {
 
   // Generate the entire theme and start watching for changes.
   if (config.browserSync.enabled) {
+    // Run the "serve" task after everything else is finished.
     gulp.task('default', gulp.series(gulp.parallel(tasks.default), 'serve'));
   } else {
     gulp.task('default', gulp.parallel(tasks.default));

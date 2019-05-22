@@ -49,5 +49,4 @@ module.exports = (gulp, config, tasks) => {
   gulp.task('serve', () => {
     return browserSync.init(options);
   });
-  tasks.default.push('serve');
 };
