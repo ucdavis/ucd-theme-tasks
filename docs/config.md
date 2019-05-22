@@ -5,7 +5,7 @@
 * __vendor__ - (Array) List of vendor CSS files to include in compilation. Compiles to `vendor.css`.
 * __autoVendor__ - (Boolean) Set to `true` if you want css files automatically loaded into the `vendor.css` file from each npm package added as a dependency. It will first look for a `dist` folder in each package and then add the css files. If no `dist` folder is found then it will add all css files in the package. You can disable this, but it means that you will have to manually add any css file directly into the `vendor` array. This is useful if you find yourself spending more time excluding files and it would be simpler to explicitly add them manually.
 * __dest__ - The location to place the compiled CSS.
-* __flattenDestOutput__ - (Boolean) value for minification of compiled CSS.
+* __flattenDestOutput__ - (Boolean) Defaults to `true` for turning the source directory tree into a single output layer. All files in the destination folder will be siblings on the same level.
 * __lint__ - Validate code standards with [sass-lint](https://github.com/sasstools/sass-lint).
    * __enabled__ - (Boolean) to turn CSS code validation on or off.
    * __failOnError__ - (Boolean) to stop code from compiling if it does not validate.

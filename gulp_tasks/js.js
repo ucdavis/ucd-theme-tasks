@@ -1,6 +1,7 @@
 const cached = require('gulp-cached');
 const eslint = require('gulp-eslint');
 const gulpif = require('gulp-if');
+const plumber = require('gulp-plumber');
 const webpack = require('webpack');
 const webpackStream = require('webpack-stream');
 
@@ -36,6 +37,7 @@ module.exports = (gulp, config, tasks) => {
     }
 
     gulp.src(config.js.src)
+      .pipe(plumber())
       .pipe(webpackStream(webpackConfig, webpack))
       .pipe(gulp.dest(config.js.dest))
       .on('end', () => {
