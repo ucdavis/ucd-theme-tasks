@@ -1,6 +1,6 @@
 const browserSync = require('browser-sync').create('server');
 
-module.exports = function (gulp, config, tasks) {
+module.exports = (gulp, config, tasks) => {
 
   let watchFiles = [];
 
@@ -16,7 +16,7 @@ module.exports = function (gulp, config, tasks) {
 
   // Define specific files to watch
   if (config.browserSync.watchFiles) {
-    config.browserSync.watchFiles.forEach(function (file) {
+    config.browserSync.watchFiles.forEach((file) => {
       watchFiles.push(file);
     });
   }

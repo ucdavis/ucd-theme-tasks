@@ -5,7 +5,7 @@ const fs = require('fs');
 let plConfig = null;
 let patternlab = null;
 
-module.exports = function (gulp, config, tasks) {
+module.exports = (gulp, config, tasks) => {
   if (config.patternLab.version !== 1) {
     const buffer = fs.readFileSync('./patternlab-config.json');
     plConfig = JSON.parse(buffer.toString());
@@ -23,7 +23,7 @@ module.exports = function (gulp, config, tasks) {
 
   function phpBuild(rebuild = false) {
     const command = 'php core/builder.php -gp';
-    exec(command, function (err, stdout, stderr) {
+    exec(command, (err, stdout, stderr) => {
       console.log(stdout);
       console.error(stderr);
 
@@ -51,7 +51,7 @@ module.exports = function (gulp, config, tasks) {
     else {
       // Copy Images directory.
       copy(config.patternLab.imagesSrc, config.patternLab.imagesDest, {overwrite: true})
-        .catch(function(error) {
+        .catch((error) => {
           console.error('Images directory Copy failed: ' + error);
         });
 

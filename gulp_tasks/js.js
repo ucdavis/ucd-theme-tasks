@@ -4,7 +4,7 @@ const gulpif = require('gulp-if');
 const webpack = require('webpack');
 const webpackStream = require('webpack-stream');
 
-module.exports = function (gulp, config, tasks) {
+module.exports = (gulp, config, tasks) => {
 
   // Compile custom javascript, concat and uglify into a single file.
   gulp.task('js', (done) => {
@@ -38,7 +38,7 @@ module.exports = function (gulp, config, tasks) {
     gulp.src(config.js.src)
       .pipe(webpackStream(webpackConfig, webpack))
       .pipe(gulp.dest(config.js.dest))
-      .on('end', function () {
+      .on('end', () => {
         done();
       });
   });

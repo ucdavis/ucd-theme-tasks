@@ -14,14 +14,14 @@ const concat = require('gulp-concat');
 const cssnano = require('gulp-cssnano');
 const fs = require('fs');
 
-module.exports = function (gulp, config, tasks) {
+module.exports = (gulp, config, tasks) => {
 
   // Compile Sass to CSS using Libsass with Autoprefixer and SourceMaps.
   gulp.task('sass', (done) => {
     gulp.src(config.css.src)
       .pipe(sassGlob())
       .pipe(plumber({
-        errorHandler: function (error) {
+        errorHandler: (error) => {
           notify.onError({
             title: 'CSS <%= error.name %> - Line <%= error.line %>',
             message: '<%= error.message %>'
@@ -47,7 +47,7 @@ module.exports = function (gulp, config, tasks) {
       .pipe(sourcemaps.write((config.css.sourceMapEmbed) ? null : './'))
       .pipe(gulpif(config.css.flattenDestOutput, flatten()))
       .pipe(gulp.dest(config.css.dest))
-      .on('end', function () {
+      .on('end', () => {
         done();
       });
   });
