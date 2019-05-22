@@ -47,7 +47,6 @@ module.exports = {
     enabled: true,
     dir: 'node_modules',
     includePaths: [
-      'node_modules/singularitygs/stylesheets',
       'node_modules/breakpoint-sass/stylesheets',
       'node_modules/sass-toolkit/stylesheets',
       'node_modules/sass-burger',

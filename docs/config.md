@@ -35,7 +35,7 @@
 
 * __enabled__ - (Boolean) value for including NPM files.
 * __dir__ - Path to NPM node modules file directory.
-* __includePaths__ - (Array) List of npm directory paths to look for files such as `node__modules/singularitygs/stylesheets`
+* __includePaths__ - (Array) List of npm directory paths to look for files such as `node_modules/breakpoint-sass/stylesheets`
 
 
 ## browserSync:

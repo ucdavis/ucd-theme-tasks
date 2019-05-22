@@ -12,7 +12,6 @@ The following Sass libraries have been added for ease in development:
 * [normalize-scss](https://github.com/JohnAlbin/normalize-scss) - Normalize CSS reset
 * [sass-burger](http://joren.co/sass-burger/) - Hambuger Menu
 * [sass-toolkit](https://github.com/at-import/toolkit) - Various helper mixins
-* [singularitygs](https://github.com/at-import/Singularity) - Grid system (you should actually use [CSS Grid](https://css-tricks.com/snippets/css/complete-guide-grid/) if possible)
 
 
 ### NPM CSS Dependencies (using in the browser)
