@@ -33,7 +33,7 @@ module.exports = (gulp, config, tasks) => {
   if (config.browserSync.domain) {
     Object.assign(options, {
       proxy: config.browserSync.domain,
-      host: config.browserSync.domain,
+      host: config.browserSync.domain.replace(/(^\w+:|^)\/\//, ''),
       startPath: config.browserSync.startPath
     });
 
