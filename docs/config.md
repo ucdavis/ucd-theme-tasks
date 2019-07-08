@@ -45,13 +45,14 @@
 * __enabled__ - (Boolean) value to turn on Browser Sync as part of the "watch" Gulp task.
 * __port__ - The port on which to serve the the site locally.
 * __watchFiles__ - (Array) Define specific files of file types to watch.
-* __domain__ - Specify a domain at which serve the files in the browser.
+* __domain__ - Specify a domain at which to serve the files in the browser.
 * __baseDir__ - Specify the base directory.
 * __startPath__ - The path at which to open the browser. This path gets appended to the "domain".
 * __openBrowserAtStart__ - (Boolean) value to allow browser to be automatically opened when "watch" task is initiated.
 * __browser__ - (Array) List the browser you would like to be used when a browser is opened automatically. On Windows, try `'chrome'` instead of`'Google Chrome'` if you get an alert saying that Google Chrome can't run.
 * __reloadDelay__ - Time, in milliseconds, to wait before instructing the browser to reload/inject following a file change event
 * __reloadDebounce__ - Wait, in milliseconds, for a specified window of event-silence before sending any reload events.
+* __optionOverrides__ - (Object) Override any options for more controle. See [https://www.browsersync.io/docs/options](https://www.browsersync.io/docs/options)
 
 
 ## themeSync:

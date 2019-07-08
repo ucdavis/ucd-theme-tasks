@@ -62,7 +62,8 @@ module.exports = {
       'Google Chrome'
     ],
     reloadDelay: 50,
-    reloadDebounce: 750
+    reloadDebounce: 750,
+    optionOverrides: null
   },
   themeSync: {
     enabled: false,

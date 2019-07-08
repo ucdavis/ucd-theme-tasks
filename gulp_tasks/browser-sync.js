@@ -33,8 +33,15 @@ module.exports = (gulp, config, tasks) => {
   if (config.browserSync.domain) {
     Object.assign(options, {
       proxy: config.browserSync.domain,
+      host: config.browserSync.domain,
       startPath: config.browserSync.startPath
     });
+
+    if (config.browserSync.openBrowserAtStart === true) {
+      Object.assign(options, {
+        open: 'external'
+      });
+    }
   }
   else {
     Object.assign(options, {
@@ -43,6 +50,11 @@ module.exports = (gulp, config, tasks) => {
       },
       startPath: config.browserSync.startPath
     });
+  }
+
+  // Override all options.
+  if (config.browserSync.optionOverrides) {
+    Object.assign(options, config.browserSync.optionOverrides);
   }
 
   // Create a local server using BrowserSync.
