@@ -17,6 +17,14 @@ module.exports = (gulp, config, tasks) => {
 
   // Compile Sass to CSS using Libsass with Autoprefixer and SourceMaps.
   gulp.task('sass', (done) => {
+    // Set up a browserList object.
+    let browserList = {}
+    if (config.css.autoPrefixerBrowsers && config.css.autoPrefixerBrowsers.length > 0) {
+      browserList = {
+        overrideBrowserslist: config.css.autoPrefixerBrowsers
+      }
+    }
+
     gulp.src(config.css.src)
       .pipe(sassGlob())
       .pipe(plumber({
@@ -38,9 +46,7 @@ module.exports = (gulp, config, tasks) => {
       }).on('error', sass.logError))
       .pipe(postcss(
         [
-          autoprefixer({
-            browsers: config.css.autoPrefixerBrowsers
-          })
+          autoprefixer(browserList)
         ]
       ))
       .pipe(sourcemaps.write((config.css.sourceMapEmbed) ? null : './'))

@@ -19,10 +19,7 @@ module.exports = {
     sourceComments: false,
     sourceMapEmbed: false,
     outputStyle: 'compressed',
-    autoPrefixerBrowsers: [
-      'last 2 versions',
-      'IE >= 11'
-    ]
+    autoPrefixerBrowsers: [] // https://github.com/postcss/autoprefixer#browsers
   },
   js: {
     enabled: true,

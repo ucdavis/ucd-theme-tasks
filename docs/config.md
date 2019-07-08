@@ -13,7 +13,7 @@
 * __sourceComments__ - (Boolean) to leave or strip comments from the compiled CSS code.
 * __sourceMapEmbed__ - (Boolean) for adding CSS source maps for in browser SASS debugging.
 * __outputStyle__ - Tell the compiler whether you want `expanded` or `compressed` output code.
-* __autoPrefixerBrowsers__ - (Array) List browsers you would like vendor prefixes generated for. [https://github.com/ai/browserslist#queries](https://github.com/ai/browserslist#queries)
+* __autoPrefixerBrowsers__ - (Array) Override the default browser list you would like vendor prefixes generated for. By default this is empty so that defaults are used because it is recommended to put this array directly into your `package.json` file. [https://github.com/postcss/autoprefixer#browsers](https://github.com/postcss/autoprefixer#browsers)
 
 
 ## js
