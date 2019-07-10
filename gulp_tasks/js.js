@@ -1,13 +1,14 @@
 const cached = require('gulp-cached');
 const eslint = require('gulp-eslint');
 const gulpif = require('gulp-if');
+const plumber = require('gulp-plumber');
 const webpack = require('webpack');
 const webpackStream = require('webpack-stream');
 
-module.exports = function (gulp, config, tasks) {
+module.exports = (gulp, config, tasks) => {
 
-  // Compile custom javascript
-  gulp.task('js', 'Compile custom javascript, concat and uglify into a single ' + config.js.destName + ' file.', function (done) {
+  // Compile custom javascript, concat and uglify into a single file.
+  gulp.task('js', (done) => {
 
     const webpackConfig = {
       mode: (config.js.uglify) ? 'production' : 'development',
@@ -36,17 +37,18 @@ module.exports = function (gulp, config, tasks) {
     }
 
     gulp.src(config.js.src)
+      .pipe(plumber())
       .pipe(webpackStream(webpackConfig, webpack))
       .pipe(gulp.dest(config.js.dest))
-      .on('end', function () {
+      .on('end', () => {
         done();
       });
   });
   tasks.compile.push('js');
 
 
-  // Validate using ESlint
-  gulp.task('validate:js', 'Lint JS using ESlint', function () {
+  // Validate JS using ESlint
+  gulp.task('validate:js', () => {
     let src = config.js.src;
     if (config.js.eslint.extraSrc) {
       src = src.concat(config.js.eslint.extraSrc);
@@ -61,12 +63,14 @@ module.exports = function (gulp, config, tasks) {
 
 
   // Watch for changes
-  gulp.task('watch:js', function () {
+  gulp.task('watch:js', async () => {
     let tasks = ['js'];
     if (config.js.eslint.enabled) {
       tasks.push('validate:js');
     }
-    return gulp.watch(config.js.src, tasks);
+
+    const watcher = gulp.watch(config.js.src);
+    watcher.on('all', gulp.parallel(tasks));
   });
   tasks.watch.push('watch:js');
 

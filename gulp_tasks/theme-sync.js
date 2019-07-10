@@ -1,10 +1,10 @@
 const copy = require('recursive-copy');
 const del = require('del');
 
-module.exports = function (gulp, config, tasks) {
+module.exports = (gulp, config, tasks) => {
 
-  // Export sass, js, and images to custom site
-  gulp.task('themesync', 'Export Patternlab source files to a website theme.', function () {
+  // Export Patternlab source sass, js, and images to custom site
+  gulp.task('themesync', async () => {
     // Default to an Export.
     let sassSrc = config.themeSync.sassSrc;
     let sassDest = config.themeSync.dest + config.themeSync.sassDest;
@@ -26,7 +26,7 @@ module.exports = function (gulp, config, tasks) {
     // Delete and replace the Sass directory.
     if (config.themeSync.sassSync) {
       del(sassDest, {force: true}).then(() => {
-        copy(sassSrc, sassDest, {overwrite: true}).catch(function (error) {
+        copy(sassSrc, sassDest, {overwrite: true}).catch((error) => {
           console.error('Sass directory Copy failed: ' + error);
         });
       });
@@ -35,7 +35,7 @@ module.exports = function (gulp, config, tasks) {
     // Delete and replace the Js directory.
     if (config.themeSync.jsSync) {
       del(jsDest, {force: true}).then(() => {
-        copy(jsSrc, jsDest, {overwrite: true}).catch(function (error) {
+        copy(jsSrc, jsDest, {overwrite: true}).catch((error) => {
           console.error('Sass directory Copy failed: ' + error);
         });
       });
@@ -46,7 +46,7 @@ module.exports = function (gulp, config, tasks) {
       copy(imagesSrc, imagesDest, {
         overwrite: true,
         filter: ['**/*', '!sample/**/*', '!sample'],
-      }).catch(function (error) {
+      }).catch((error) => {
         console.error('Images directory Copy failed: ' + error);
       });
     }

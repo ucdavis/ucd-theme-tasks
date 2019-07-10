@@ -1,6 +1,6 @@
 const browserSync = require('browser-sync').create('server');
 
-module.exports = function (gulp, config, tasks) {
+module.exports = (gulp, config, tasks) => {
 
   let watchFiles = [];
 
@@ -16,7 +16,7 @@ module.exports = function (gulp, config, tasks) {
 
   // Define specific files to watch
   if (config.browserSync.watchFiles) {
-    config.browserSync.watchFiles.forEach(function (file) {
+    config.browserSync.watchFiles.forEach((file) => {
       watchFiles.push(file);
     });
   }
@@ -33,8 +33,15 @@ module.exports = function (gulp, config, tasks) {
   if (config.browserSync.domain) {
     Object.assign(options, {
       proxy: config.browserSync.domain,
+      host: config.browserSync.domain.replace(/(^\w+:|^)\/\//, ''),
       startPath: config.browserSync.startPath
     });
+
+    if (config.browserSync.openBrowserAtStart === true) {
+      Object.assign(options, {
+        open: 'external'
+      });
+    }
   }
   else {
     Object.assign(options, {
@@ -45,11 +52,13 @@ module.exports = function (gulp, config, tasks) {
     });
   }
 
-  // Set all the "compile" tasks as dependencies before serving the site.
-  const dependencies = tasks.compile
+  // Override all options.
+  if (config.browserSync.optionOverrides) {
+    Object.assign(options, config.browserSync.optionOverrides);
+  }
 
-  gulp.task('serve', 'Create a local server using BrowserSync', dependencies, function () {
+  // Create a local server using BrowserSync.
+  gulp.task('serve', () => {
     return browserSync.init(options);
   });
-  tasks.default.push('serve');
 };

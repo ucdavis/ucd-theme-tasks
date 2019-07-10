@@ -9,19 +9,26 @@ const plumber = require('gulp-plumber');
 const notify = require('gulp-notify');
 const flatten = require('gulp-flatten');
 const gulpif = require('gulp-if');
-const sassdoc = require('sassdoc');
 const concat = require('gulp-concat');
 const cssnano = require('gulp-cssnano');
 const fs = require('fs');
 
-module.exports = function (gulp, config, tasks) {
+module.exports = (gulp, config, tasks) => {
 
-  // Compile Sass
-  gulp.task('sass', 'Compile Sass to CSS using Libsass with Autoprefixer and SourceMaps', function (done) {
+  // Compile Sass to CSS using Libsass with Autoprefixer and SourceMaps.
+  gulp.task('sass', (done) => {
+    // Set up a browserList object.
+    let browserList = {}
+    if (config.css.autoPrefixerBrowsers && config.css.autoPrefixerBrowsers.length > 0) {
+      browserList = {
+        overrideBrowserslist: config.css.autoPrefixerBrowsers
+      }
+    }
+
     gulp.src(config.css.src)
       .pipe(sassGlob())
       .pipe(plumber({
-        errorHandler: function (error) {
+        errorHandler: (error) => {
           notify.onError({
             title: 'CSS <%= error.name %> - Line <%= error.line %>',
             message: '<%= error.message %>'
@@ -39,23 +46,21 @@ module.exports = function (gulp, config, tasks) {
       }).on('error', sass.logError))
       .pipe(postcss(
         [
-          autoprefixer({
-            browsers: config.css.autoPrefixerBrowsers
-          })
+          autoprefixer(browserList)
         ]
       ))
       .pipe(sourcemaps.write((config.css.sourceMapEmbed) ? null : './'))
       .pipe(gulpif(config.css.flattenDestOutput, flatten()))
       .pipe(gulp.dest(config.css.dest))
-      .on('end', function () {
+      .on('end', () => {
         done();
       });
   });
   tasks.compile.push('sass');
 
 
-  // Vendor and NPM compile
-  gulp.task('css:vendor', 'Compile all vendor css (including NPM Dependencies) into a single vendor.css file', function () {
+  // Compile all vendor css (including NPM Dependencies) into a single vendor.css file
+  gulp.task('css:vendor', () => {
     let sources = [];
 
     if (config.css.autoVendor) {
@@ -105,8 +110,8 @@ module.exports = function (gulp, config, tasks) {
   tasks.compile.push('css:vendor');
 
 
-  // Validate with Lint
-  gulp.task('validate:css', 'Lint Sass files with Sass-lint', function () {
+  // Validate Sass files with Sass-lint
+  gulp.task('validate:css', () => {
     let src = config.css.src;
     if (config.css.lint.extraSrc) {
       src = src.concat(config.css.lint.extraSrc);
@@ -121,33 +126,15 @@ module.exports = function (gulp, config, tasks) {
     tasks.validate.push('validate:css');
   }
 
-
-  // Documentation automated by SassDoc
-  gulp.task('docs:css', 'Build CSS docs using SassDoc', function () {
-    return gulp.src(config.css.src)
-      .pipe(sassdoc({
-        dest: config.css.sassdoc.dest,
-        verbose: config.css.sassdoc.verbose,
-        basePath: config.css.sassdoc.basePath,
-        exclude: config.css.sassdoc.exclude,
-        theme: config.css.sassdoc.theme,
-        sort: config.css.sassdoc.sort
-      }));
-  });
-  if (config.css.sassdoc.enabled) {
-    tasks.compile.push('docs:css');
-  }
-
   // Watch for changes
-  gulp.task('watch:css', function () {
+  gulp.task('watch:css', async () => {
     let tasks = ['sass'];
     if (config.css.lint.enabled) {
       tasks.push('validate:css');
     }
-    if (config.css.sassdoc.enabled) {
-      tasks.push('docs:css');
-    }
-    return gulp.watch(config.css.src, tasks);
+
+    const watcher = gulp.watch(config.css.src);
+    watcher.on('all', gulp.parallel(tasks));
   });
   tasks.watch.push('watch:css');
 

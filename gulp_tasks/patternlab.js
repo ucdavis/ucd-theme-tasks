@@ -5,7 +5,7 @@ const fs = require('fs');
 let plConfig = null;
 let patternlab = null;
 
-module.exports = function (gulp, config, tasks) {
+module.exports = (gulp, config, tasks) => {
   if (config.patternLab.version !== 1) {
     const buffer = fs.readFileSync('./patternlab-config.json');
     plConfig = JSON.parse(buffer.toString());
@@ -23,7 +23,7 @@ module.exports = function (gulp, config, tasks) {
 
   function phpBuild(rebuild = false) {
     const command = 'php core/builder.php -gp';
-    exec(command, function (err, stdout, stderr) {
+    exec(command, (err, stdout, stderr) => {
       console.log(stdout);
       console.error(stderr);
 
@@ -34,40 +34,37 @@ module.exports = function (gulp, config, tasks) {
     });
   }
 
-  // Compile Patternlab
-  gulp.task('patternlab', 'Build Patternlab patterns into html.', function (done) {
+  // Compile Patternlab to the public dir.
+  gulp.task('patternlab', async () => {
 
     // Use the old PHP compiling for version 1 of Pattern Lab.
     if (patternlab) {
       // Use the modern Node version.
-      patternlab
+      await patternlab
         .build({
           cleanPublic: true,
-        })
-        .then(() => {
-          done();
         });
     }
     else {
       // Copy Images directory.
       copy(config.patternLab.imagesSrc, config.patternLab.imagesDest, {overwrite: true})
-        .catch(function(error) {
+        .catch((error) => {
           console.error('Images directory Copy failed: ' + error);
         });
 
       // Build the patterns with php.
       phpBuild();
-      done();
     }
 
   });
   tasks.compile.push('patternlab');
 
-  gulp.task('patternlab:patterns', 'Compile Patternlab patterns into html.', function () {
+  // Compile Patternlab patterns into html.
+  gulp.task('patternlab:patterns', async () => {
     // Use the old PHP compiling for version 1 of Pattern Lab.
     if (patternlab) {
       // Use the modern Node version.
-      patternlab
+      await patternlab
         .patternsonly({
           cleanPublic: plConfig.cleanPublic,
         })
@@ -80,13 +77,12 @@ module.exports = function (gulp, config, tasks) {
     }
 
   });
-  tasks.compile.push('patternlab:patterns');
 
   // Watch for changes
-  gulp.task('watch:markup', function () {
+  gulp.task('watch:markup', async () => {
     let tasks = ['patternlab:patterns'];
 
-    return gulp.watch([
+    const watcher = gulp.watch([
       'source/_patterns/**/*.hbs',
       'source/_patterns/**/*.mustache',
       'source/_patterns/**/*.md',
@@ -95,7 +91,14 @@ module.exports = function (gulp, config, tasks) {
       'source/_annotations/*.json',
       'source/_meta/*.json',
       'source/_pl/**/*'
-    ], tasks)
+    ])
+    watcher.on('change', gulp.parallel(tasks));
+
+    // Rebuild when adding or deleting a file. This will require a manual page
+    // refresh still.
+    let tasksRebuild = ['patternlab'];
+    watcher.on('add', gulp.parallel(tasksRebuild));
+    watcher.on('unlink', gulp.parallel(tasksRebuild));
   });
   tasks.watch.push('watch:markup');
 

@@ -5,7 +5,7 @@
 * __vendor__ - (Array) List of vendor CSS files to include in compilation. Compiles to `vendor.css`.
 * __autoVendor__ - (Boolean) Set to `true` if you want css files automatically loaded into the `vendor.css` file from each npm package added as a dependency. It will first look for a `dist` folder in each package and then add the css files. If no `dist` folder is found then it will add all css files in the package. You can disable this, but it means that you will have to manually add any css file directly into the `vendor` array. This is useful if you find yourself spending more time excluding files and it would be simpler to explicitly add them manually.
 * __dest__ - The location to place the compiled CSS.
-* __flattenDestOutput__ - (Boolean) value for minification of compiled CSS.
+* __flattenDestOutput__ - (Boolean) Defaults to `true` for turning the source directory tree into a single output layer. All files in the destination folder will be siblings on the same level.
 * __lint__ - Validate code standards with [sass-lint](https://github.com/sasstools/sass-lint).
    * __enabled__ - (Boolean) to turn CSS code validation on or off.
    * __failOnError__ - (Boolean) to stop code from compiling if it does not validate.
@@ -13,14 +13,8 @@
 * __sourceComments__ - (Boolean) to leave or strip comments from the compiled CSS code.
 * __sourceMapEmbed__ - (Boolean) for adding CSS source maps for in browser SASS debugging.
 * __outputStyle__ - Tell the compiler whether you want `expanded` or `compressed` output code.
-* __autoPrefixerBrowsers__ - (Array) List browsers you would like vendor prefixes generated for. [https://github.com/ai/browserslist#queries](https://github.com/ai/browserslist#queries)
-* __sassdoc__ - Settings for generated SASS documentation. [http://sassdoc.com](http://sassdoc.com)
-    * __enabled__ - (Boolean) to generate SASS Docs.
-    * __dest__ - Destination for SASS Documentation code.
-    * __verbose__ - (Boolean) value to enable or disable verbose mode
-    * __basePath__ - The SASS base path from the public repository. Notice in the config file this has a child element of "exclude" that you can use to exclude files from this base path.
-    * __theme__ - Set the theme to be used to display the SASS Docs. We are using "default".
-    * __sort__ - (Array) Set the sort order of the documentation. [http://sassdoc.com/customising-the-view/#sort](http://sassdoc.com/customising-the-view/#sort)
+* __autoPrefixerBrowsers__ - (Array) Override the default browser list you would like vendor prefixes generated for. By default this is empty so that defaults are used because it is recommended to put this array directly into your `package.json` file. [https://github.com/postcss/autoprefixer#browsers](https://github.com/postcss/autoprefixer#browsers)
+
 
 ## js
 
@@ -41,7 +35,7 @@
 
 * __enabled__ - (Boolean) value for including NPM files.
 * __dir__ - Path to NPM node modules file directory.
-* __includePaths__ - (Array) List of npm directory paths to look for files such as `node__modules/singularitygs/stylesheets`
+* __includePaths__ - (Array) List of npm directory paths to look for files such as `node_modules/breakpoint-sass/stylesheets`
 
 
 ## browserSync:
@@ -51,13 +45,14 @@
 * __enabled__ - (Boolean) value to turn on Browser Sync as part of the "watch" Gulp task.
 * __port__ - The port on which to serve the the site locally.
 * __watchFiles__ - (Array) Define specific files of file types to watch.
-* __domain__ - Specify a domain at which serve the files in the browser.
+* __domain__ - Specify a domain at which to serve the files in the browser.
 * __baseDir__ - Specify the base directory.
 * __startPath__ - The path at which to open the browser. This path gets appended to the "domain".
 * __openBrowserAtStart__ - (Boolean) value to allow browser to be automatically opened when "watch" task is initiated.
 * __browser__ - (Array) List the browser you would like to be used when a browser is opened automatically. On Windows, try `'chrome'` instead of`'Google Chrome'` if you get an alert saying that Google Chrome can't run.
 * __reloadDelay__ - Time, in milliseconds, to wait before instructing the browser to reload/inject following a file change event
 * __reloadDebounce__ - Wait, in milliseconds, for a specified window of event-silence before sending any reload events.
+* __optionOverrides__ - (Object) Override any options for more controle. See [https://www.browsersync.io/docs/options](https://www.browsersync.io/docs/options)
 
 
 ## themeSync:

@@ -19,22 +19,7 @@ module.exports = {
     sourceComments: false,
     sourceMapEmbed: false,
     outputStyle: 'compressed',
-    autoPrefixerBrowsers: [
-      'last 2 versions',
-      'IE >= 9'
-    ],
-    sassdoc: {
-      enabled: false,
-      dest: 'public/sassdoc',
-      verbose: false,
-      basePath: '', // Link to git repo sass directory.
-      theme: 'default',
-      sort: [
-        'file',
-        'group',
-        'line<'
-      ]
-    }
+    autoPrefixerBrowsers: [] // https://github.com/postcss/autoprefixer#browsers
   },
   js: {
     enabled: true,
@@ -59,7 +44,6 @@ module.exports = {
     enabled: true,
     dir: 'node_modules',
     includePaths: [
-      'node_modules/singularitygs/stylesheets',
       'node_modules/breakpoint-sass/stylesheets',
       'node_modules/sass-toolkit/stylesheets',
       'node_modules/sass-burger',
@@ -78,7 +62,8 @@ module.exports = {
       'Google Chrome'
     ],
     reloadDelay: 50,
-    reloadDebounce: 750
+    reloadDebounce: 750,
+    optionOverrides: null
   },
   themeSync: {
     enabled: false,
