@@ -44,4 +44,6 @@ public/
 sass/
 js/
 images/
+gulp-config.js
 gulpfile.js
+package-lock.json
