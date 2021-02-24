@@ -18,6 +18,9 @@
       "email": "ahorn@ucdavis.edu"
     }
   ],
+  "bin": {
+    "ucd-theme-tasks": "bin/index.js"
+  },
   "dependencies": {
     "@babel/core": "^7.12.3",
     "@babel/preset-env": "^7.12.1",
@@ -25,6 +28,7 @@
     "babel-loader": "^8.1.0",
     "breakpoint-sass": "^2.7.1",
     "browser-sync": "^2.26.13",
+    "commander": "^7.1.0",
     "del": "^5.1.0",
     "gulp": "^4.0.2",
     "gulp-cached": "^1.1.0",
@@ -49,6 +53,6 @@
     "webpack-stream": "^5.2.1"
   },
   "engines": {
-    "node": ">=8.9.0"
+    "node": ">=14.0.0"
   }
 }
