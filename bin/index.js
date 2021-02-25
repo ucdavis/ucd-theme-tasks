@@ -26,7 +26,7 @@ program
   .description('Compile Pattern Lab')
   .option('-w, --watch', 'Watch for changes and rebuild.')
   .action((options) => {
-    require('../lib/patternlab')(parentPath, options)
+    require('../lib/patternlab')(parentNodePath, options)
   })
 
 program
