@@ -32,10 +32,22 @@ program
 program
   .command('sync')
   .description('Sync asset files like js, css, fonts, and images to a site.')
-  .option('-d, --dest <destPath>', 'Path to the theme directory or new site to export files into.')
-  .option('-s, --src <srcPath>', 'Path to the source from which files will be imported.')
+  .option('-d, --dest <path>', 'Path to the theme directory or new site to export files into.')
+  .option('-s, --src <path>', 'Path to the source from which files will be imported.')
   .action((options) => {
     require('../lib/sync')(config, options)
+  })
+
+program
+  .command('lint')
+  .description('Validate CSS and JS by linting')
+  .option('-f, --fix', 'Fix lint errors.')
+  .option('-c, --css', 'Only lint SASS files.')
+  .option('--cssFiles <glob>', 'SASS glob pattern [file|dir|glob]* to search for files.')
+  .option('-j, --js', 'Only lint Javascript files.')
+  .option('--jsFiles <glob>', 'Javascript glob pattern [file|dir|glob]* to search for files.')
+  .action((options) => {
+    require('../lib/lint')(config, options)
   })
 
 program.parse(process.argv)

@@ -3,6 +3,7 @@ module.exports = {
     enabled: true,
     src: [
       'sass/**/*.scss',
+      'source/sass/**/*.scss',
       '!sass/1_pattern_lab/**/*'
     ],
     vendor: [
