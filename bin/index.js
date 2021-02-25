@@ -50,4 +50,21 @@ program
     require('../lib/lint')(config, options)
   })
 
+program
+  .command('build')
+  .description('Build all assets using Snowpack.')
+  .option('--prefixFiles <glob>', 'CSS glob pattern [file|dir|glob]* to autoprefix css files.')
+  .option('-p, --patternlab', 'Run the pattern lab build step before this build.')
+  .action((options) => {
+    require('../lib/build')(config, options)
+  })
+
+program
+  .command('dev')
+  .description('Development mode to build and watch all assets using Snowpack.')
+  .option('-p, --patternlab', 'Run the pattern lab build step before this build.')
+  .action((options) => {
+    require('../lib/dev')(config, options)
+  })
+
 program.parse(process.argv)
