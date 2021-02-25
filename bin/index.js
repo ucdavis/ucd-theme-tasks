@@ -20,23 +20,26 @@ program
   .version(`ucd-theme-tasks ${require('../package').version}`)
   .usage('<command> [options]')
 
+// Build.
 program
-  .command('patternlab')
-  .description('Compile Pattern Lab')
-  .option('-w, --watch', 'Watch for changes and rebuild.')
+  .command('build')
+  .description('Build all assets using Snowpack.')
+  .option('--prefixFiles <glob>', 'CSS glob pattern [file|dir|glob]* to autoprefix css files.')
+  .option('-p, --patternlab', 'Run the pattern lab build step before this build.')
   .action((options) => {
-    require('../lib/patternlab')(parentNodePath, options)
+    require('../lib/build')(config, options)
   })
 
+// Dev.
 program
-  .command('sync')
-  .description('Sync asset files like js, css, fonts, and images to a site.')
-  .option('-d, --dest <path>', 'Path to the theme directory or new site to export files into.')
-  .option('-s, --src <path>', 'Path to the source from which files will be imported.')
+  .command('dev')
+  .description('Development mode to build and watch all assets using Snowpack.')
+  .option('-p, --patternlab', 'Run the pattern lab build step before this build.')
   .action((options) => {
-    require('../lib/sync')(config, options)
+    require('../lib/dev')(config, options)
   })
 
+// Lint.
 program
   .command('lint')
   .description('Validate CSS and JS by linting')
@@ -49,21 +52,30 @@ program
     require('../lib/lint')(config, options)
   })
 
+// Pattern Lab.
 program
-  .command('build')
-  .description('Build all assets using Snowpack.')
-  .option('--prefixFiles <glob>', 'CSS glob pattern [file|dir|glob]* to autoprefix css files.')
-  .option('-p, --patternlab', 'Run the pattern lab build step before this build.')
+  .command('patternlab')
+  .description('Compile Pattern Lab')
+  .option('-w, --watch', 'Watch for changes and rebuild.')
   .action((options) => {
-    require('../lib/build')(config, options)
+    require('../lib/patternlab')(parentNodePath, options)
   })
 
+// Theme Sync.
 program
-  .command('dev')
-  .description('Development mode to build and watch all assets using Snowpack.')
-  .option('-p, --patternlab', 'Run the pattern lab build step before this build.')
+  .command('sync')
+  .description('Sync asset files like js, css, fonts, and images to a site.')
+  .option('-d, --dest <path>', 'Path to the theme directory or new site to export files into.')
+  .option('-s, --src <path>', 'Path to the source from which files will be imported.')
   .action((options) => {
-    require('../lib/dev')(config, options)
+    require('../lib/sync')(config, options)
   })
+
+// Add some useful info on help.
+program.on('--help', () => {
+  console.log()
+  console.log('Run "ucd-theme-tasks <command> --help" for detailed usage of given command.')
+  console.log()
+})
 
 program.parse(process.argv)
