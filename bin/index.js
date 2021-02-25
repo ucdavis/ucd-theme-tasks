@@ -1,15 +1,21 @@
 #!/usr/bin/env node
 const _ = require('lodash');
 const program = require('commander')
-const defaultConfig = require('../gulp-config.default');
+const defaultConfig = require('../tasks-config.default');
+let config = defaultConfig;
 
+// Get the path or the project using this command.
+const parentNodePath = process.argv[1].replace('.bin/ucd-theme-tasks', '')
+const parentPath = parentNodePath.replace('/node_modules', '')
 
-// console.log("Hello, here is my first CLI tool")
-
-// get args
-// console.log(process.argv);
-
-// console.log(defaultConfig)
+// Load in Pattern Lab config.
+try {
+  const userConfig = require(`${parentPath}tasks-config`);
+  config = _.merge(defaultConfig, userConfig);
+}
+catch (e) {
+  console.log('Add a tasks-config.js file for any project specific configuration.');
+}
 
 program
   .version(`ucd-theme-tasks ${require('../package').version}`)
@@ -18,10 +24,18 @@ program
 program
   .command('patternlab')
   .description('Compile Pattern Lab')
-  .option('-w, --watch', 'watch for changes and rebuild')
-  .allowUnknownOption()
+  .option('-w, --watch', 'Watch for changes and rebuild.')
   .action((options) => {
-    require('../lib/patternlab')(process.argv[1], options)
+    require('../lib/patternlab')(parentPath, options)
+  })
+
+program
+  .command('sync')
+  .description('Sync asset files like js, css, fonts, and images to a site.')
+  .option('-d, --dest <destPath>', 'Path to the theme directory or new site to export files into.')
+  .option('-s, --src <srcPath>', 'Path to the source from which files will be imported.')
+  .action((options) => {
+    require('../lib/sync')(config, options)
   })
 
 program.parse(process.argv)
