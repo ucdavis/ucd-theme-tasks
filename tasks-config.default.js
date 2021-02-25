@@ -4,10 +4,10 @@ module.exports = {
     src: [
       'sass/**/*.scss',
       'source/sass/**/*.scss',
-      '!sass/1_pattern_lab/**/*'
+      '!sass/1_pattern_lab/**/*',
     ],
     vendor: [
-      'sass/vendor/**/*.css'
+      'sass/vendor/**/*.css',
     ],
     autoVendor: true,
     dest: 'dist/',
@@ -15,12 +15,12 @@ module.exports = {
     lint: {
       enabled: true,
       failOnError: true,
-      extraSrc: null
+      extraSrc: null,
     },
     sourceComments: false,
     sourceMapEmbed: false,
     outputStyle: 'compressed',
-    autoPrefixerBrowsers: [] // https://github.com/postcss/autoprefixer#browsers
+    autoPrefixerBrowsers: [], // https://github.com/postcss/autoprefixer#browsers
   },
   js: {
     enabled: true,
@@ -37,9 +37,9 @@ module.exports = {
       enabled: false,
       failAfterError: true,
       extraSrc: [
-        '!js/vendor/**/*.js'
-      ]
-    }
+        '!js/vendor/**/*.js',
+      ],
+    },
   },
   nodeFiles: {
     enabled: true,
@@ -48,8 +48,8 @@ module.exports = {
       'node_modules/breakpoint-sass/stylesheets',
       'node_modules/sass-toolkit/stylesheets',
       'node_modules/sass-burger',
-      'node_modules/normalize-scss/sass'
-    ]
+      'node_modules/normalize-scss/sass',
+    ],
   },
   browserSync: {
     enabled: false,
@@ -60,11 +60,11 @@ module.exports = {
     startPath: '/',
     openBrowserAtStart: true,
     browser: [
-      'Google Chrome'
+      'Google Chrome',
     ],
     reloadDelay: 50,
     reloadDebounce: 750,
-    optionOverrides: null
+    optionOverrides: null,
   },
   themeSync: {
     enabled: false,
@@ -82,12 +82,12 @@ module.exports = {
     imagesDest: 'images/',
     fontSync: true,
     fontSrc: 'source/fonts/',
-    fontDest: 'fonts/'
+    fontDest: 'fonts/',
   },
   patternLab: {
     enabled: false,
     imagesSrc: 'source/images/',
     imagesDest: 'public/images/',
-    version: 3
-  }
+    version: 3,
+  },
 }

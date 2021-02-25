@@ -1,8 +1,8 @@
 #!/usr/bin/env node
-const _ = require('lodash');
+const _ = require('lodash')
 const program = require('commander')
-const defaultConfig = require('../tasks-config.default');
-let config = defaultConfig;
+const defaultConfig = require('../tasks-config.default')
+let config = defaultConfig
 
 // Get the path or the project using this command.
 const parentNodePath = process.argv[1].replace('.bin/ucd-theme-tasks', '')
@@ -10,11 +10,10 @@ const parentPath = parentNodePath.replace('/node_modules', '')
 
 // Load in Pattern Lab config.
 try {
-  const userConfig = require(`${parentPath}tasks-config`);
-  config = _.merge(defaultConfig, userConfig);
-}
-catch (e) {
-  console.log('Add a tasks-config.js file for any project specific configuration.');
+  const userConfig = require(`${parentPath}tasks-config`)
+  config = _.merge(defaultConfig, userConfig)
+} catch (e) {
+  console.log('Add a tasks-config.js file for any project specific configuration.')
 }
 
 program

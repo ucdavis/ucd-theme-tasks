@@ -6,14 +6,14 @@ module.exports = {
   exclude: [
     '**/node_modules/**/*',
     '**/sass/1_pattern_lab/**/*',
-    '**/README.md'
+    '**/README.md',
   ],
 
   plugins: [
-    '@snowpack/plugin-sass'
+    '@snowpack/plugin-sass',
   ],
 
   devOptions: {
-    hmr: true
-  }
-};
+    hmr: true,
+  },
+}
