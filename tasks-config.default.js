@@ -78,7 +78,10 @@ module.exports = {
     jsDest: 'js/1_pattern_lab/',
     imagesSync: true,
     imagesSrc: 'source/images/',
-    imagesDest: 'images/'
+    imagesDest: 'images/',
+    fontSync: true,
+    fontSrc: 'source/fonts/',
+    fontDest: 'fonts/'
   },
   patternLab: {
     enabled: false,
