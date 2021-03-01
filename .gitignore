@@ -7,13 +7,10 @@ yarn-error.log*
 
 # IDE config
 .idea
-
-# Bower dependency directory (https://bower.io/)
-bower_components
+.vscode
 
 # Dependency directories
 node_modules/
-jspm_packages/
 
 # Optional npm cache directory
 .npm
@@ -24,9 +21,6 @@ jspm_packages/
 # Output of 'npm pack'
 *.tgz
 
-# Yarn Integrity file
-.yarn-integrity
-
 # dotenv environment variables file
 .env
 
@@ -34,7 +28,7 @@ jspm_packages/
 *.map
 
 # Custom Local config
-gulp-config.local.js
+tasks-config.local.js
 
 # Ignore the build directory
 dist/

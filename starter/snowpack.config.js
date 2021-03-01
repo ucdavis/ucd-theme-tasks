@@ -5,13 +5,10 @@
 module.exports = {
   extends: 'ucd-theme-tasks',
 
+  // This
   mount: {
     js: '/',
     sass: '/',
-  },
-
-  alias: {
-    'jquery': './js/jquery.module.js',
   },
 
   buildOptions: {

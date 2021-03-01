@@ -3,22 +3,47 @@ const _ = require('lodash')
 const program = require('commander')
 const defaultConfig = require('../tasks-config.default')
 let config = defaultConfig
+let projectConfig = false
 
 // Get the path or the project using this command.
 const parentNodePath = process.argv[1].replace('.bin/ucd-theme-tasks', '')
 const parentPath = parentNodePath.replace('/node_modules', '')
 
-// Load in Pattern Lab config.
+// Load in Project specific config.
 try {
-  const userConfig = require(`${parentPath}tasks-config`)
-  config = _.merge(defaultConfig, userConfig)
+  projectConfig = require(`${parentPath}tasks-config`)
+  config = _.merge(config, projectConfig)
 } catch (e) {
   console.log('Add a tasks-config.js file for any project specific configuration.')
+}
+
+// Load in custom local config.
+try {
+  const customConfig = require(`${parentPath}tasks-config.local`)
+  config = _.merge(config, customConfig);
+}
+catch (e) {
+  // Only add the option for a local config if a project config is already used.
+  if (projectConfig) {
+    console.log('Add a tasks-config.local.js file for any custom local configuration.');
+  }
 }
 
 program
   .version(`ucd-theme-tasks ${require('../package').version}`)
   .usage('<command> [options]')
+
+// Init.
+program
+  .command('init')
+  .description('Copy starter files to a theme or custom site.')
+  .option('-d, --dest <path>', 'Path to the theme directory or new site to export files into.')
+  .option('-p, --patternlab', 'Use this inside Pattern Lab.')
+  .option('-t, --themesync', 'Allow syncing with Pattern Lab.')
+  .option('-f, --force', 'Force overwrite of existing files in theme.')
+  .action((options) => {
+    require('../lib/init')(parentPath, options)
+  })
 
 // Build.
 program
