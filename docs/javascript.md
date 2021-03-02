@@ -59,7 +59,7 @@ alias: {
 ```
 ```js
 // jquery.module.js
-export default window.jQuery.noConflict(true);
+export default window.jQuery.noConflict();
 ```
 
 ## Preloading Dependencies
