@@ -5,5 +5,5 @@ module.exports = {
     jsSync: true,
     imagesSync: true,
     fontSync: true,
-  }
+  },
 }

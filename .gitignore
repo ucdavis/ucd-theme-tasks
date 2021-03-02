@@ -21,6 +21,9 @@ node_modules/
 # Output of 'npm pack'
 *.tgz
 
+# Yarn Integrity file
+.yarn-integrity
+
 # dotenv environment variables file
 .env
 
@@ -35,9 +38,5 @@ dist/
 public/
 
 # Ignore development assets
-sass/
-js/
-images/
-gulp-config.js
-gulpfile.js
+dev/
 package-lock.json
