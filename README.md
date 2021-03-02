@@ -38,12 +38,12 @@ Commands:
   init [options]        Copy starter files to a theme or custom site.
   build [options]       Build all assets using Snowpack.
   dev [options]         Development mode to build and watch all assets using Snowpack.
-  lint [options]        Validate CSS and JS by linting
-  patternlab [options]  Compile Pattern Lab
+  lint [options]        Validate CSS and JS by linting.
+  patternlab [options]  Compile Pattern Lab.
   sync [options]        Sync asset files like js, css, fonts, and images to a site.
   newsite [options]     Wire up a new site to allow syncing files from an existing project using its starterkit. This assumes the command
-                        is being run within a project that has a "starterkit" directory
-  help [command]        display help for command
+                        is being run within a project that has a "starterkit" directory.
+  help [command]        display help for command.
 
 Run "ucd-theme-tasks <command> --help" for detailed usage of given command.
 ```
@@ -69,9 +69,9 @@ Usage: build [options]
 Build all assets using Snowpack.
 
 Options:
-  --prefixFiles <glob>  CSS glob pattern [file|dir|glob]* to autoprefix css files.
-  -p, --patternlab      Run the pattern lab build step before this build.
-  -h, --help            display help for command
+  -a, --prefix-files <glob>  CSS glob pattern [file|dir|glob]* to autoprefix css files.
+  -p, --patternlab           Run the pattern lab build step before this build.
+  -h, --help                 display help for command
 ```
 
 #### Development mode to serve and watch files with Snowpack.
@@ -82,6 +82,8 @@ Development mode to build and watch all assets using Snowpack.
 
 Options:
   -p, --patternlab  Run the pattern lab build step before this build.
+  -S, --no-serve    Do not serve the files at a localhost domain. This is useful for when compiling inside a traditional CMS or site
+                    already using Docker to serve files.
   -h, --help        display help for command
 ```
 
@@ -89,22 +91,22 @@ Options:
 ```
 Usage: lint [options]
 
-Validate CSS and JS by linting
+Validate CSS and JS by linting.
 
 Options:
-  -f, --fix          Fix lint errors.
-  -c, --css          Only lint SASS files.
-  --cssFiles <glob>  SASS glob pattern [file|dir|glob]* to search for files.
-  -j, --js           Only lint Javascript files.
-  --jsFiles <glob>   Javascript glob pattern [file|dir|glob]* to search for files.
-  -h, --help         display help for command
+  -f, --fix               Fix lint errors.
+  -c, --css               Only lint SASS files.
+  -C, --css-files <glob>  SASS glob pattern [file|dir|glob]* to search for files.
+  -j, --js                Only lint Javascript files.
+  -J, --js-files <glob>   Javascript glob pattern [file|dir|glob]* to search for files.
+  -h, --help              display help for command
 ```
 
 #### Pattern Lab integration.
 ```
 Usage: patternlab [options]
 
-Compile Pattern Lab
+Compile Pattern Lab.
 
 Options:
   -w, --watch  Watch for changes and rebuild.
@@ -131,7 +133,7 @@ Usage: newsite [options]
 
 Wire up a new site to allow syncing files from an existing project using its
 starterkit. This assumes the command is being run within a project that has a
-"starterkit" directory
+"starterkit" directory.
 
 Options:
   -d, --dest <path>  Path to the theme directory or new site to export files into.

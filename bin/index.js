@@ -50,7 +50,7 @@ program
 program
   .command('build')
   .description('Build all assets using Snowpack.')
-  .option('--prefixFiles <glob>', 'CSS glob pattern [file|dir|glob]* to autoprefix css files.')
+  .option('-a, --prefix-files <glob>', 'CSS glob pattern [file|dir|glob]* to autoprefix css files.')
   .option('-p, --patternlab', 'Run the pattern lab build step before this build.')
   .action((options) => {
     require('../lib/build')(options)
@@ -61,6 +61,7 @@ program
   .command('dev')
   .description('Development mode to build and watch all assets using Snowpack.')
   .option('-p, --patternlab', 'Run the pattern lab build step before this build.')
+  .option('-S, --no-serve', 'Do not serve the files at a localhost domain. This is useful for when compiling inside a traditional CMS or site already using Docker to serve files.')
   .action((options) => {
     require('../lib/dev')(options)
   })
@@ -68,12 +69,12 @@ program
 // Lint.
 program
   .command('lint')
-  .description('Validate CSS and JS by linting')
+  .description('Validate CSS and JS by linting.')
   .option('-f, --fix', 'Fix lint errors.')
   .option('-c, --css', 'Only lint SASS files.')
-  .option('--cssFiles <glob>', 'SASS glob pattern [file|dir|glob]* to search for files.')
+  .option('-C, --css-files <glob>', 'SASS glob pattern [file|dir|glob]* to search for files.')
   .option('-j, --js', 'Only lint Javascript files.')
-  .option('--jsFiles <glob>', 'Javascript glob pattern [file|dir|glob]* to search for files.')
+  .option('-J, --js-files <glob>', 'Javascript glob pattern [file|dir|glob]* to search for files.')
   .action((options) => {
     require('../lib/lint')(options)
   })
@@ -81,7 +82,7 @@ program
 // Pattern Lab.
 program
   .command('patternlab')
-  .description('Compile Pattern Lab')
+  .description('Compile Pattern Lab.')
   .option('-w, --watch', 'Watch for changes and rebuild.')
   .action((options) => {
     require('../lib/patternlab')(parentNodePath, options)
@@ -100,7 +101,7 @@ program
 // Init.
 program
   .command('newsite')
-  .description('Wire up a new site to allow syncing files from an existing project using its starterkit. This assumes the command is being run within a project that has a "starterkit" directory')
+  .description('Wire up a new site to allow syncing files from an existing project using its starterkit. This assumes the command is being run within a project that has a "starterkit" directory.')
   .option('-d, --dest <path>', 'Path to the theme directory or new site to export files into.')
   .option('-f, --force', 'Force overwrite of existing files in theme.')
   .action((options) => {
