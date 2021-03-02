@@ -6,21 +6,7 @@ module.exports = {
       'source/sass/**/*.scss',
       '!sass/1_pattern_lab/**/*',
     ],
-    vendor: [
-      'sass/vendor/**/*.css',
-    ],
-    autoVendor: true,
     dest: 'dist/',
-    flattenDestOutput: true,
-    lint: {
-      enabled: true,
-      failOnError: true,
-      extraSrc: null,
-    },
-    sourceComments: false,
-    sourceMapEmbed: false,
-    outputStyle: 'compressed',
-    autoPrefixerBrowsers: [], // https://github.com/postcss/autoprefixer#browsers
   },
   js: {
     enabled: true,
@@ -28,18 +14,7 @@ module.exports = {
       'js/vendor/**/*.js',
       'js/**/*.js',
     ],
-    externals: {}, // https://webpack.js.org/configuration/externals/
     dest: 'dist/',
-    destName: 'scripts.js',
-    uglify: true,
-    babel: true,
-    eslint: {
-      enabled: false,
-      failAfterError: true,
-      extraSrc: [
-        '!js/vendor/**/*.js',
-      ],
-    },
   },
   nodeFiles: {
     enabled: true,
@@ -51,24 +26,7 @@ module.exports = {
       'node_modules/normalize-scss/sass',
     ],
   },
-  browserSync: {
-    enabled: false,
-    port: 3050,
-    watchFiles: null,
-    domain: null,
-    baseDir: './',
-    startPath: '/',
-    openBrowserAtStart: true,
-    browser: [
-      'Google Chrome',
-    ],
-    reloadDelay: 50,
-    reloadDebounce: 750,
-    optionOverrides: null,
-  },
   themeSync: {
-    enabled: false,
-    newsite: false,
     src: false,
     dest: '../theme/',
     sassSync: true,
@@ -85,9 +43,8 @@ module.exports = {
     fontDest: 'fonts/',
   },
   patternLab: {
-    enabled: false,
     imagesSrc: 'source/images/',
     imagesDest: 'public/images/',
-    version: 3,
+    version: 5,
   },
 }
