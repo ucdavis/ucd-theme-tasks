@@ -4,6 +4,7 @@ const program = require('commander')
 const defaultConfig = require('../tasks-config.default')
 let config = defaultConfig
 let projectConfig = false
+let configMessage = ''
 
 // Get the path or the project using this command.
 const parentNodePath = process.argv[1].replace('.bin/ucd-theme-tasks', '')
@@ -14,7 +15,7 @@ try {
   projectConfig = require(`${parentPath}tasks-config`)
   config = _.merge(config, projectConfig)
 } catch (e) {
-  console.log('Add a tasks-config.js file for any project specific configuration.')
+  configMessage = 'Add a tasks-config.js file for any project specific configuration.'
 }
 
 // Load in custom local config.
@@ -25,7 +26,7 @@ try {
 catch (e) {
   // Only add the option for a local config if a project config is already used.
   if (projectConfig) {
-    console.log('Add a tasks-config.local.js file for any custom local configuration.');
+    configMessage = 'Add a tasks-config.local.js file for any custom local configuration.'
   }
 }
 
@@ -96,11 +97,22 @@ program
     require('../lib/sync')(config, options)
   })
 
+// Init.
+program
+  .command('newsite')
+  .description('Wire up a new site to allow syncing files from an existing project using its starterkit. This assumes the command is being run within a project that has a "starterkit" directory')
+  .option('-d, --dest <path>', 'Path to the theme directory or new site to export files into.')
+  .option('-f, --force', 'Force overwrite of existing files in theme.')
+  .action((options) => {
+    require('../lib/newsite')(config, options)
+  })
+
 // Add some useful info on help.
 program.on('--help', () => {
   console.log()
   console.log('Run "ucd-theme-tasks <command> --help" for detailed usage of given command.')
   console.log()
+  console.log(configMessage)
 })
 
 program.parse(process.argv)
