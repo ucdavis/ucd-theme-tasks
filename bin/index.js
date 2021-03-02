@@ -53,7 +53,7 @@ program
   .option('--prefixFiles <glob>', 'CSS glob pattern [file|dir|glob]* to autoprefix css files.')
   .option('-p, --patternlab', 'Run the pattern lab build step before this build.')
   .action((options) => {
-    require('../lib/build')(config, options)
+    require('../lib/build')(options)
   })
 
 // Dev.
@@ -62,7 +62,7 @@ program
   .description('Development mode to build and watch all assets using Snowpack.')
   .option('-p, --patternlab', 'Run the pattern lab build step before this build.')
   .action((options) => {
-    require('../lib/dev')(config, options)
+    require('../lib/dev')(options)
   })
 
 // Lint.
@@ -75,7 +75,7 @@ program
   .option('-j, --js', 'Only lint Javascript files.')
   .option('--jsFiles <glob>', 'Javascript glob pattern [file|dir|glob]* to search for files.')
   .action((options) => {
-    require('../lib/lint')(config, options)
+    require('../lib/lint')(options)
   })
 
 // Pattern Lab.
