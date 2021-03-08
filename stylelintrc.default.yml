@@ -6,6 +6,7 @@ rules:
     -
       ignore:
         - blockless-at-rules
+  number-leading-zero: never
   rule-empty-line-before: null
   scss/at-mixin-pattern:
     - "^[a-z]+(([a-z0-9-]|__)+[a-z0-9]+)?$"
