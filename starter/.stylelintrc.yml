@@ -1,1 +1,1 @@
-extends: ucd-theme-tasks/stylelint.default.yml
+extends: ucd-theme-tasks/.stylelint.default.yml

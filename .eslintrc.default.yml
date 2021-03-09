@@ -1,0 +1,22 @@
+extends: drupal
+
+parser: "@babel/eslint-parser"
+
+root: true
+
+parserOptions:
+  requireConfigFile: false
+
+rules:
+  func-names: 0
+  import/extensions:
+    - 2
+    - always
+    -
+      ignorePackages: true
+  no-new: 0
+  no-use-before-define:
+    - 2
+    -
+      functions: false
+  prettier/prettier: 0
