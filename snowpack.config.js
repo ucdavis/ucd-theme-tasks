@@ -10,7 +10,15 @@ module.exports = {
   ],
 
   plugins: [
-    '@snowpack/plugin-sass',
+    ['@snowpack/plugin-sass', {
+      compilerOptions: {
+        loadPath: [
+          'node_modules',
+          'node_modules/breakpoint-sass/stylesheets',
+          'node_modules/sass-toolkit/stylesheets',
+        ],
+      },
+    }],
   ],
 
   devOptions: {
