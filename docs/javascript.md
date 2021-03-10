@@ -69,5 +69,5 @@ via `<link>` tags in the `<head>`. This speeds up page loading by eliminating
 round trip network calls.
 
 ```html
-<link rel="modulepreload" href="/_snowpack/pkg/superfish.js">
+<link rel="modulepreload" href="/dist/_snowpack/pkg/superfish.js">
 ```

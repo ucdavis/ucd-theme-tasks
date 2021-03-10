@@ -1,4 +1,11 @@
+## Snowpack
+[Snowpack](https://www.snowpack.dev/) is used to compile all code and can be
+configured with the `snowpack.config.js` file.
+https://www.snowpack.dev/reference/configuration
+
 ## themeSync:
+
+`tasks-config.js`
 
 The Theme Sync configuration for migrating source files to another project. Once
 migrated they need to be compiled into dev or production code for that project.

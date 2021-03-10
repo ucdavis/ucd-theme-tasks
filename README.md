@@ -15,6 +15,29 @@ $ npm install ucd-theme-tasks --save-dev
 $ npx ucd-theme-tasks init
 ```
 
+### Assumed File Structure
+The default file structure assumes that this will be used in a tradition server
+rendered website such as a CMS like Drupal or Wordpress.
+
+```
+|-- dist/ (js and sass compiles here)
+|-- js/
+|   |-- main.js
+|-- sass/
+|   |-- style.scss
+|-- package.json
+|-- snowpack.config.js
+```
+
+It is also assumed that the site is already served in local development by a
+tool such as Docker or MAMP. Thus, doing `ucd-theme-tasks dev --no-serve` will
+not try to spin up its own server.
+
+If doing a Single Page App (SPA) with a Javascript framework like Vue.js or
+React then the `snowpack.config.js` can have its `mount` changed to whatever
+suits it best. For reference in configuring a SPA see one of Snowpack's
+templates https://github.com/snowpackjs/snowpack/tree/main/create-snowpack-app.
+
 ## CLI Commands
 
 It is recommended to use the locally installed CLI via `npx`.

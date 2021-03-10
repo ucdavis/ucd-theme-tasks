@@ -18,4 +18,5 @@ The following Sass libraries have been added for ease in development:
 
 Use `--save` when a package needs to be added as a dependency to the browser.
 
-Import that package's css file using `@use` in a sass file.
+Import that package's css file using [@use](https://sass-lang.com/documentation/at-rules/use)
+in a sass file.
