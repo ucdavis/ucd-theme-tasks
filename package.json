@@ -7,7 +7,12 @@
     "type": "git",
     "url": "https://github.com/ucdavis/ucd-theme-tasks"
   },
-  "license": "GPL-2.0-or-later",
+  "license": "MIT",
+  "author": {
+    "name": "Regents of the University of California",
+    "email": "copyright@ucdavis.edu",
+    "url": "https://www.ucdavis.edu"
+  },
   "contributors": [
     {
       "name": "Mark Miller",
@@ -17,6 +22,13 @@
       "name": "Anthony Horn",
       "email": "ahorn@ucdavis.edu"
     }
+  ],
+  "keywords": [
+    "snowpack",
+    "build tool",
+    "sass",
+    "esm",
+    "frontend"
   ],
   "bin": {
     "ucd-theme-tasks": "bin/index.js"
