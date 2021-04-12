@@ -18,6 +18,22 @@ rules:
   selector-max-compound-selectors: null
   selector-pseudo-element-colon-notation: null
   string-quotes: double
+  order/order:
+    -
+      - dollar-variables
+      -
+        type: at-rule
+        name: extend
+      -
+        type: at-rule
+        name: include
+        hasBlock: false
+      - declarations
+      -
+        type: at-rule
+        name: include
+        hasBlock: true
+      - rules
   order/properties-alphabetical-order: null
   order/properties-order:
     -
