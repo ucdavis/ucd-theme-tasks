@@ -2,7 +2,7 @@ extends: stylelint-config-sass-guidelines
 
 rules:
   max-nesting-depth:
-    - 4
+    - 5
     -
       ignore:
         - blockless-at-rules
