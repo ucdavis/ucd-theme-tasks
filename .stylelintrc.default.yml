@@ -45,12 +45,12 @@ rules:
       - "bottom"
       - "left"
 
+      - "display"
       - "align-content"
       - "align-items"
       - "align-self"
       - "clear"
       - "clip"
-      - "display"
       - "float"
 
       - "flex"
