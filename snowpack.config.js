@@ -15,7 +15,6 @@ module.exports = {
         loadPath: [
           'node_modules',
           'node_modules/breakpoint-sass/stylesheets',
-          'node_modules/sass-toolkit/stylesheets',
         ],
       },
     }],
