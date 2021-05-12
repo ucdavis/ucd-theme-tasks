@@ -28,7 +28,7 @@ module.exports = (gulp, config, tasks) => {
     gulp.src(config.css.src)
       .pipe(sassGlob())
       .pipe(plumber({
-        errorHandler: (error) => {
+        errorHandler: function (error) {
           notify.onError({
             title: 'CSS <%= error.name %> - Line <%= error.line %>',
             message: '<%= error.message %>'
