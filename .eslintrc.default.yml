@@ -19,6 +19,11 @@ rules:
     - always
     -
       ignorePackages: true
+  # Allow imports via external links like https://cdn.skypack.dev/.
+  import/no-unresolved:
+    - 2
+    - ignore:
+        - "^https"
   no-new: 0
   no-use-before-define:
     - 2
