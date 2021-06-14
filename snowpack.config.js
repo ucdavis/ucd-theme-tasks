@@ -16,6 +16,8 @@ module.exports = {
           'node_modules',
           'node_modules/breakpoint-sass/stylesheets',
         ],
+        // Suppress warnings.
+        quiet: true,
       },
     }],
   ],
