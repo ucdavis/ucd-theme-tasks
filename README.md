@@ -4,6 +4,9 @@ CLI tool for base automation when compiling a UCD frontend.
 This package contains all the CLI tasks needed by UCD frontend projects and
 themes. It is heavily dependent on [Snowpack](https://www.snowpack.dev/).
 
+## Extra Documentation
+[https://github.com/ucdavis/ucd-theme-tasks/tree/master/docs](https://github.com/ucdavis/ucd-theme-tasks/tree/master/docs)
+
 ## Installation
 1. Require the ucd-theme-tasks package with node.js.
 ```
@@ -14,6 +17,9 @@ $ npm install ucd-theme-tasks --save-dev
 ```
 $ npx ucd-theme-tasks init
 ```
+
+### Upgrading from v3
+[https://github.com/ucdavis/ucd-theme-tasks/blob/master/docs/upgrade.md](https://github.com/ucdavis/ucd-theme-tasks/blob/master/docs/upgrade.md)
 
 ### Assumed File Structure
 The default file structure assumes that this will be used in a tradition server
