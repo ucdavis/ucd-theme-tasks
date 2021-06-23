@@ -1,6 +1,6 @@
 {
   "name": "ucd-theme-tasks",
-  "version": "3.0.3",
+  "version": "4.0.0-beta.1",
   "description": "Base automation for compiling a UCD frontend.",
   "main": "snowpack.config.js",
   "repository": {
