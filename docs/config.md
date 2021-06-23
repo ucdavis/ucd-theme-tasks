@@ -1,4 +1,36 @@
-## css
+## Snowpack
+[Snowpack](https://www.snowpack.dev/) is used to compile all code and can be
+configured with the `snowpack.config.js` file.
+https://www.snowpack.dev/reference/configuration
+
+## themeSync:
+
+`tasks-config.js`
+
+The Theme Sync configuration for migrating source files to another project. Once
+migrated they need to be compiled into dev or production code for that project.
+
+* __src__ - (Boolean) False if exporting, or a file path to the source if importing.
+* __dest__ - Path to the theme directory or new site. Make sure the path ends in a /.
+* __sassSync__ - (Boolean) Set to True (default) if the `sass` directories should be synced.
+* __sassSrc__ - Path to find the SASS.
+* __sassDest__ - Path to place the SASS in destination.
+* __jsSync__ - (Boolean) Set to True (default) if the `js` directories should be synced.
+* __jsSrc__ - Path to find the JavaScript.
+* __jsDest__ - Path to place the JavaScript in destination.
+* __imagesSync__ - (Boolean) Set to True (default) if the `images` directories should be synced.
+* __imagesSrc__ - Path to find the images.
+* __imagesDest__ - Path to place the images in destination.
+* __fontSync__ - (Boolean) Set to True (default) if the `fonts` directories should be synced.
+* __fontSrc__ - Path to find the fonts.
+* __fontDest__ - Path to place the fonts in destination.
+
+
+## Removed in v4
+All of the below config was removed in version 4 and is now controlled by the
+`snowpack.config.js` file.
+
+### css
 
 * __enabled__ - (Boolean) value that will enable or disable css related Gulp tasks.
 * __src__ - (Array) The location of all files to compile from SCSS to CSS. Notice the use of asterisks in the source path, `sass/**/*.scss`. This path is using `gulp-sass-glob` to get all files ending in .scss from all folders in source/sass. You can also exclude files by prefixing with `!` such as `!sass/exclude.scss`
@@ -16,7 +48,7 @@
 * __autoPrefixerBrowsers__ - (Array) Override the default browser list you would like vendor prefixes generated for. By default this is empty so that defaults are used because it is recommended to put this array directly into your `package.json` file. [https://github.com/postcss/autoprefixer#browsers](https://github.com/postcss/autoprefixer#browsers)
 
 
-## js
+### js
 
 * __enabled__ - (Boolean) value enabling or disabling js Gulp tasks
 * __src__ - (Array) A list of locations to find JS files. Notice the use of the file globbing technique here. You can also exclude files by prefixing with `!` such as `!js/exclude.js`
@@ -31,14 +63,14 @@
     * __extraSrc__ - (Array) List of files to include or exclude from validation. This is useful for excluding code you didn't write, therefore have no authority to change to meet validation criteria.
 
 
-## nodeFiles:
+### nodeFiles:
 
 * __enabled__ - (Boolean) value for including NPM files.
 * __dir__ - Path to NPM node modules file directory.
 * __includePaths__ - (Array) List of npm directory paths to look for files such as `node_modules/breakpoint-sass/stylesheets`
 
 
-## browserSync:
+### browserSync:
 
 [Browser Sync](https://browsersync.io/) allows you to watch your changes happen in the browser as you develop. It also allows you to share your browser with others via a network.
 
@@ -55,26 +87,15 @@
 * __optionOverrides__ - (Object) Override any options for more controle. See [https://www.browsersync.io/docs/options](https://www.browsersync.io/docs/options)
 
 
-## themeSync:
+### themeSync:
 
 The Theme Sync configuration for migrating source files to another project. Once migrated they need to be compiled into dev or production code for that project.
 
 * __enabled__ - (Boolean) value to enable "themesync" Gulp task.
 * __newsite__ - (Boolean) value to enable a gulp task `gulp newsite` for cloning a starterkit into a new project. Requires a `/starterkit/` directory is available such as [https://bitbucket.org/ietwebdev/sitefarm-pattern-lab-one/src/master/starterkit/](https://bitbucket.org/ietwebdev/sitefarm-pattern-lab-one/src/master/starterkit/)
-* __src__ - (Boolean) False if exporting, or a file path to the source if importing.
-* __dest__ - Path to the theme directory or new site. Make sure the path ends in a /.
-* __sassSync__ - (Boolean) Set to True (default) if the `sass` directories should be synced.
-* __sassSrc__ - Path to find the SASS.
-* __sassDest__ - Path to place the SASS in destination.
-* __jsSync__ - (Boolean) Set to True (default) if the `js` directories should be synced.
-* __jsSrc__ - Path to find the JavaScript.
-* __jsDest__ - Path to place the JavaScript in destination.
-* __imagesSync__ - (Boolean) Set to True (default) if the `images` directories should be synced.
-* __imagesSrc__ - Path to find the images.
-* __imagesDest__ - Path to place the images in destination.
 
 
-## patternLab:
+### patternLab:
 
 This configuration is for integration with the [UC Davis SiteFarm One Pattern Lab](https://bitbucket.org/ietwebdev/sitefarm-pattern-lab-one). It allows Gulp to build the public pattern lab files from source.
 

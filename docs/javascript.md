@@ -1,43 +1,73 @@
 # Using this package to compile JavaScript
 
+[Snowpack](https://www.snowpack.dev/) is used to compile all code and can be
+configured with the `snowpack.config.js` file.
+https://www.snowpack.dev/reference/configuration
+
+It is assumed that a `main.js` file will be created as the entry point for
+Javascript on the site. When including this script in HTML, be sure to set it as
+a `type="module"`
+
+```html
+<script src="/dist/main.js" type="module"></script>
+```
+
 ## NPM Javascript Dependencies
 
-The JS in NPM Dependencies *will not* automatically be compiled and added to production javascript.
+The JS in NPM Dependencies can be imported and used via standard imports.
+Snowpack will convert any packages to be usable in the browser.
 
-[Webpack](https://webpack.js.org/) is used to compile all Javascript. Adding a Javascript package into your code is as easy as using a `require()` or `import`.
-
-```js
-// ES5
-var jQuery = require('jquery');
-```
-
-```js
-// ES6
-import jQuery from 'jquery';
-```
-
-If for some reason a file needs a package loaded to the `window` object in order to function, it is best to use `require()` so that Webpack doesn't move it before other code.
+[Snowpack](https://www.snowpack.dev/) is used to compile all Javascript as
+standard [ESM](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import)
+files. Adding a Javascript package into your code is as easy as using an
+`import`.
 
 ```js
-import jQuery from 'jquery';
-window.jQuery = jQuery;
-require('superfish');
+import $ from 'jquery';
 ```
 
+If for some reason a file needs a package loaded to the `window` object in order
+to function, it is best to use a dynamic import `import()` so that file will be
+loaded after setting a window object parameter.
+
+```js
+import $ from 'jquery';
+window.jQuery = window.jQuery || $;
+
+export default async function myFunction() {
+  // If dynamic imports are not supported by the browser then it should
+  // gracefully fail.
+  try {
+    await import('superfish');
+  } catch (e) {
+    console.log('Superfish could not be imported.')
+  }
+}
+```
 
 ## Externally loaded Javascript Dependencies
 
-If a Javascript package will be loaded externally (perhaps by a CDN) then you can specify this in config so that Webpack will not add the package into the compiled Javascript file.
+If a traditional Javascript package will be loaded externally (perhaps by a CDN)
+then you can create an alias as a passthrough package into the compiled
+Javascript file.
 
-```yaml
-js:
-  externals:
-    jquery: 'jQuery'
+```js
+// snowpack.config.js
+alias: {
+  'jquery': './js/jquery.module.js'
+}
+```
+```js
+// jquery.module.js
+export default window.jQuery.noConflict();
 ```
 
+## Preloading Dependencies
 
-## Compiling of ES6 to ES5 Javascript
+Dependencies can be preloaded using [modulepreload](https://developer.mozilla.org/en-US/docs/Web/HTML/Link_types/modulepreload)
+via `<link>` tags in the `<head>`. This speeds up page loading by eliminating
+round trip network calls.
 
-By default, all Javascript code will be compiled to ES5 with [Babel](https://babeljs.io/) so that it is safe for Browsers. This means that you can write modern Javascript and take advantage of modern practices. Babel is optional and can be disabled via config.
-
-The [@babel/preset-env](https://babeljs.io/docs/en/babel-preset-env) is used by default and can be customized in a `.babelrc` file placed into the root of your project.
+```html
+<link rel="modulepreload" href="/dist/_snowpack/pkg/superfish.js">
+```

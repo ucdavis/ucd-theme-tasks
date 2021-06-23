@@ -1,8 +1,8 @@
 # ucd-theme-tasks
-Base automation for compiling a UCD frontend.
+CLI tool for base automation when compiling a UCD frontend.
 
-This package contains all of the gulp tasks needed by UCD frontend projects and
-themes.
+This package contains all the CLI tasks needed by UCD frontend projects and
+themes. It is heavily dependent on [Snowpack](https://www.snowpack.dev/).
 
 ## Installation
 1. Require the ucd-theme-tasks package with node.js.
@@ -10,92 +10,192 @@ themes.
 $ npm install ucd-theme-tasks --save-dev
 ```
 
-2. Create a `gulp-config.js` file which will contain any configuration overrides.
-You can copy the default config out of this package to see all default config.
+2. Setup configuration files using the `init` command.
 ```
-$ cp node_modules/ucd-theme-tasks/gulp-config.default.js gulp-config.js
-```
-
-3. Create a `gulpfile.js` in the root of your project.
-
-```js
-'use strict';
-const gulp = require('gulp');
-const config = require('./gulp-config.js');
-
-// Load all default tasks.
-require('ucd-theme-tasks')(gulp, config);
+$ npx ucd-theme-tasks init
 ```
 
-4. (Optional) Allow specific local config overrides of config.
+### Assumed File Structure
+The default file structure assumes that this will be used in a tradition server
+rendered website such as a CMS like Drupal or Wordpress.
 
-```js
-'use strict';
-const gulp = require('gulp');
-const _ = require('lodash');
-let config = require('./gulp-config');
+```
+|-- dist/ (js and sass compiles here)
+|-- js/
+|   |-- main.js
+|-- sass/
+|   |-- style.scss
+|-- package.json
+|-- snowpack.config.js
+```
 
-// Load in custom config
-try {
-  const customConfig = require('./gulp-config.local');
-  config = _.merge(config, customConfig);
-}
-catch (e) {
-  console.log('Add a gulp-config.local.js file for any custom local configuration.');
-}
+It is also assumed that the site is already served in local development by a
+tool such as Docker or MAMP. Thus, doing `ucd-theme-tasks dev --no-serve` will
+not try to spin up its own server.
 
-// Load all default tasks.
-require('ucd-theme-tasks')(gulp, config);
+If doing a Single Page App (SPA) with a Javascript framework like Vue.js or
+React then the `snowpack.config.js` can have its `mount` changed to whatever
+suits it best. For reference in configuring a SPA see one of Snowpack's
+templates https://github.com/snowpackjs/snowpack/tree/main/create-snowpack-app.
 
+## CLI Commands
+
+It is recommended to use the locally installed CLI via `npx`.
+
+View a list of all CLI commands and options with:
+
+```
+npx ucd-theme-tasks help
+```
+
+### API & Usage
+#### General usage
+```
+Usage: ucd-theme-tasks <command> [options]
+
+Options:
+  -V, --version         output the version number
+  -h, --help            display help for command
+
+Commands:
+  init [options]        Copy starter files to a theme or custom site.
+  build [options]       Build all assets using Snowpack.
+  dev [options]         Development mode to build and watch all assets using Snowpack.
+  lint [options]        Validate CSS and JS by linting.
+  patternlab [options]  Compile Pattern Lab.
+  sync [options]        Sync asset files like js, css, fonts, and images to a site.
+  newsite [options]     Wire up a new site to allow syncing files from an existing project using its starterkit. This assumes the command
+                        is being run within a project that has a "starterkit" directory.
+  help [command]        display help for command.
+
+Run "ucd-theme-tasks <command> --help" for detailed usage of given command.
+```
+
+#### Initialize a project and copy starter files.
+```
+Usage: init [options]
+
+Copy starter files to a theme or custom site.
+
+Options:
+  -d, --dest <path>  Path to the theme directory or new site to export files into.
+  -p, --patternlab   Use this inside Pattern Lab.
+  -t, --themesync    Allow syncing with Pattern Lab.
+  -f, --force        Force overwrite of existing files in theme.
+  -h, --help         display help for command
+```
+
+#### Build production assets and files with Snowpack.
+```
+Usage: build [options]
+
+Build all assets using Snowpack.
+
+Options:
+  -a, --prefix-files <glob>  CSS glob pattern [file|dir|glob]* to autoprefix css files.
+  -p, --patternlab           Run the pattern lab build step before this build.
+  -h, --help                 display help for command
+```
+
+#### Development mode to serve and watch files with Snowpack.
+```
+Usage: dev [options]
+
+Development mode to build and watch all assets using Snowpack.
+
+Options:
+  -p, --patternlab  Run the pattern lab build step before this build.
+  -S, --no-serve    Do not serve the files at a localhost domain. This is useful for when compiling inside a traditional CMS or site
+                    already using Docker to serve files.
+  -h, --help        display help for command
+```
+
+#### Validate CSS and JS by linting.
+```
+Usage: lint [options]
+
+Validate CSS and JS by linting.
+
+Options:
+  -f, --fix               Fix lint errors.
+  -c, --css               Only lint SASS files.
+  -C, --css-files <glob>  SASS glob pattern [file|dir|glob]* to search for files.
+  -j, --js                Only lint Javascript files.
+  -J, --js-files <glob>   Javascript glob pattern [file|dir|glob]* to search for files.
+  -h, --help              display help for command
+```
+
+#### Pattern Lab integration.
+```
+Usage: patternlab [options]
+
+Compile Pattern Lab.
+
+Options:
+  -w, --watch  Watch for changes and rebuild.
+  -h, --help   display help for command
+```
+
+#### Sync assets/files between sites.
+```
+Usage: sync [options]
+
+Sync asset files like js, css, fonts, and images to a site.
+
+Options:
+  -d, --dest <path>  Path to the theme directory or new site to export files into.
+  -s, --src <path>   Path to the source from which files will be imported.
+  -h, --help         display help for command
+```
+
+#### Create a new site from an existing site's "starterkit".
+**Notice:** This is only useful in an existing project that has already set up a
+`starterkit` directory.
+```
+Usage: newsite [options]
+
+Wire up a new site to allow syncing files from an existing project using its
+starterkit. This assumes the command is being run within a project that has a
+"starterkit" directory.
+
+Options:
+  -d, --dest <path>  Path to the theme directory or new site to export files into.
+  -f, --force        Force overwrite of existing files in theme.
+  -h, --help         display help for command
 ```
 
 ## Validation and Linting
-### JavaScript Linting
-Linting of JavaScript is done via [EsLint](https://eslint.org/). Place a
-`.eslintrc.yml` configuration file into the root of your project to set up the
-linting rules. A starting file can be copied from this project.
+Lint all scss/js files using `npx ucd-theme-tasks lint`. Optionally pass the
+`--fix` flag to attempt to automatically fix as many errors a possible.
 
-```
-$ cp node_modules/ucd-theme-tasks/.eslintrc.yml .eslintrc.yml
-```
+### JavaScript Linting
+Linting of JavaScript is done via [EsLint](https://eslint.org/).
+
+A `.eslintrc.yml` configuration file will be copied to the root of your project
+automatically when running the `ucd-theme-tasks init` command.
 
 ### Sass/Scss Linting
-Linting of Sass/Scss files is done via
-[Sass Lint](https://github.com/sasstools/sass-lint) Place a
-`.sass-lint.yml` configuration file into the root of your project to set up the
-linting rules. A starting file can be copied from this project.
+Linting of Sass/Scss files is done via [StyleLint](https://stylelint.io/).
 
-```
-$ cp node_modules/ucd-theme-tasks/.sass-lint.yml .sass-lint.yml
-```
+A `.stylelintrc.yml` configuration file will be copied to the root of your
+project automatically when running the `ucd-theme-tasks init` command.
 
-## Gulp Tasks
+## Configuration
 
-### Primary Tasks
-1. `gulp` - Generate the production code and start watching for changes.
+### Snowpack
+[Snowpack](https://www.snowpack.dev/) is used to compile all code and can be
+configured with the `snowpack.config.js` file.
+https://www.snowpack.dev/reference/configuration
 
-2. `gulp compile` - Generate all production-ready code.
-
-3. `gulp validate` - Validate CSS and JS by linting (don't forget to set up
-`.eslintrc.yml` and `.sass-lint.yml` files).
-
-### Site Building Tasks
-1. `gulp newsite` - Start a new site from a starterkit (used with Pattern Lab).
-
-2. `gulp themesync` - Export/Import Pattern Lab source files to a website theme.
-
-## Babel Compiling
-[Babel](https://babeljs.io/) is used to transform es6 JavaScript into es5 usable
-by older browsers. The [@babel/preset-env](https://babeljs.io/docs/en/babel-preset-env)
-is used by default and can be customized in a `.babelrc` file placed into the
-root of your project.
-
-## Default Configuration
-`gulp-config.default.js` contains all of the default configuration for
-controlling the gulp tasks. This file can be referenced for all possible config
+### Default Tasks
+`tasks-config.default.js` contains all of the default configuration for
+controlling the tasks. This file can be referenced for all possible config
 options. Docs can be found at [https://github.com/ucdavis/ucd-theme-tasks/blob/master/docs/config.md](https://github.com/ucdavis/ucd-theme-tasks/blob/master/docs/config.md)
+
+> **Version 4** removed many of the old configuration options since Snowpack handles
+them. Most of the configuration is now about path locations for syncing files
+across projects.
 
 ## Pattern Lab
 If you are using this package within [Pattern Lab](https://patternlab.io/) then
-it can build and watch patterns by setting `patternLab.enabled: true`. This will
-work for the Node.js version of Pattern Lab.
+it can build and watch patterns using `ucd-theme-tasks patternLab`.

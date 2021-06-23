@@ -1,0 +1,32 @@
+extends: drupal
+
+parser: "@babel/eslint-parser"
+
+root: true
+
+parserOptions:
+  requireConfigFile: false
+
+globals:
+  Drupal: true
+  drupalSettings: true
+  drupalTranslations: true
+
+rules:
+  func-names: 0
+  import/extensions:
+    - 2
+    - always
+    -
+      ignorePackages: true
+  # Allow imports via external links like https://cdn.skypack.dev/.
+  import/no-unresolved:
+    - 2
+    - ignore:
+        - "^https"
+  no-new: 0
+  no-use-before-define:
+    - 2
+    -
+      functions: false
+  prettier/prettier: 0
