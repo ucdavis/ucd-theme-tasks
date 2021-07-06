@@ -6,7 +6,12 @@ engine. This provides better standards and less custom code.
 
 ## Update to the latest UCD Theme Tasks version.
 ```
-npm install ucd-theme-tasks@latest
+$ npm install ucd-theme-tasks@latest
+```
+
+You can try to automatically add all of the new files via command line with:
+```
+$ npx ucd-theme-tasks init --force
 ```
 
 ### Replaced/Renamed files
@@ -42,6 +47,10 @@ explicitly import them.
 Examples:
 * Via Sass: `@use "slim-select/dist/slimselect.css";`
 * Vis JS: `import 'slim-select/dist/slimselect.css';`
+
+### Sass Globbing
+Globbing (`@import "components/**/*`) is no longer allowed. Each Sass partial
+needs to be added to the main stylesheet individually.
 
 ### Sass version and syntax
 [Node Sass](https://www.npmjs.com/package/node-sass) has been replaced by
