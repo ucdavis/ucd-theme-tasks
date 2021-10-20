@@ -1,8 +1,8 @@
 # Using this package to compile JavaScript
 
-[Snowpack](https://www.snowpack.dev/) is used to compile all code and can be
-configured with the `snowpack.config.js` file.
-https://www.snowpack.dev/reference/configuration
+[Vite](https://vitejs.dev/) is used to compile all code and can be
+configured with the `vite.config.js` file.
+https://vitejs.dev/config/
 
 It is assumed that a `main.js` file will be created as the entry point for
 Javascript on the site. When including this script in HTML, be sure to set it as
@@ -15,9 +15,9 @@ a `type="module"`
 ## NPM Javascript Dependencies
 
 The JS in NPM Dependencies can be imported and used via standard imports.
-Snowpack will convert any packages to be usable in the browser.
+Vite will convert any packages to be usable in the browser.
 
-[Snowpack](https://www.snowpack.dev/) is used to compile all Javascript as
+[Vite](https://vitejs.dev/) is used to compile all Javascript as
 standard [ESM](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import)
 files. Adding a Javascript package into your code is as easy as using an
 `import`.
@@ -52,15 +52,19 @@ then you can create an alias as a passthrough package into the compiled
 Javascript file.
 
 ```js
-// snowpack.config.js
-alias: {
-  'jquery': './js/jquery.module.js'
+// vite.config.js
+resolve: {
+  alias: {
+    'jquery': '/js/jquery.module.js'
+  }
 }
 ```
 ```js
 // jquery.module.js
 export default window.jQuery.noConflict();
 ```
+
+Alternatively, there is a plugin that can do this https://www.npmjs.com/package/vite-plugin-external
 
 ## Preloading Dependencies
 
@@ -69,5 +73,5 @@ via `<link>` tags in the `<head>`. This speeds up page loading by eliminating
 round trip network calls.
 
 ```html
-<link rel="modulepreload" href="/dist/_snowpack/pkg/superfish.js">
+<link rel="modulepreload" href="/my-esm-file.js">
 ```
