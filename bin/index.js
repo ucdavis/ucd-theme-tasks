@@ -49,7 +49,7 @@ program
 // Build.
 program
   .command('build')
-  .description('Build all assets using Snowpack.')
+  .description('Build all assets using Vite.')
   .option('-a, --prefix-files <glob>', 'CSS glob pattern [file|dir|glob]* to autoprefix css files.')
   .option('-p, --patternlab', 'Run the pattern lab build step before this build.')
   .action((options) => {
@@ -59,11 +59,11 @@ program
 // Dev.
 program
   .command('dev')
-  .description('Development mode to build and watch all assets using Snowpack.')
+  .description('Development mode to build and watch all assets using Vite.')
   .option('-p, --patternlab', 'Run the pattern lab build step before this build.')
   .option('-S, --no-serve', 'Do not serve the files at a localhost domain. This is useful for when compiling inside a traditional CMS or site already using Docker to serve files.')
   .action((options) => {
-    require('../lib/dev')(options)
+    require('../lib/dev')(parentPath, options)
   })
 
 // Lint.
@@ -84,6 +84,7 @@ program
   .command('patternlab')
   .description('Compile Pattern Lab.')
   .option('-w, --watch', 'Watch for changes and rebuild.')
+  .option('-p, --prod', 'Create a production build.')
   .action((options) => {
     require('../lib/patternlab')(parentNodePath, options)
   })

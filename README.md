@@ -139,6 +139,7 @@ Compile Pattern Lab.
 
 Options:
   -w, --watch  Watch for changes and rebuild.
+  -p, --prod   Create a production build.
   -h, --help   display help for command
 ```
 
