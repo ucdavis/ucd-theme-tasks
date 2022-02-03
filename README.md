@@ -40,7 +40,7 @@ tool such as Docker or MAMP. Thus, doing `ucd-theme-tasks dev --no-serve` will
 not try to spin up its own server.
 
 If doing a Single Page App (SPA) with a Javascript framework like Vue.js or
-React then the `vite.config.js` can have its `mount` changed to whatever
+React then the `vite.config.js` can have its `root` changed to whatever
 suits it best. For reference in configuring a SPA see one of Vite's online
 demos https://vitejs.dev/guide/#trying-vite-online.
 
