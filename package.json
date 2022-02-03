@@ -34,6 +34,7 @@
     "ucd-theme-tasks": "bin/index.js"
   },
   "dependencies": {
+    "@babel/core": "^7.17.0",
     "@babel/eslint-parser": "^7.16.5",
     "@snowpack/plugin-run-script": "^2.3.0",
     "@snowpack/plugin-sass": "^1.4.0",
