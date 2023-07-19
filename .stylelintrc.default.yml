@@ -1,5 +1,8 @@
 extends: stylelint-config-sass-guidelines
 
+plugins:
+  stylelint-order
+
 rules:
   max-nesting-depth:
     - 5

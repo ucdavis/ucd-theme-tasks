@@ -12,6 +12,11 @@ globals:
   drupalSettings: true
   drupalTranslations: true
 
+# Overriding the React settings from https://github.com/theodoreb/eslint-config-drupal/pull/5 since we don't use react.
+settings:
+  react:
+    version: detect
+
 rules:
   func-names: 0
   import/extensions:
