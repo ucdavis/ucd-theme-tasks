@@ -1,6 +1,6 @@
 {
   "name": "ucd-theme-tasks",
-  "version": "4.0.0-beta.1",
+  "version": "4.0.3",
   "description": "Base automation for compiling a UCD frontend.",
   "main": "vite.config.js",
   "repository": {
@@ -34,22 +34,22 @@
     "ucd-theme-tasks": "bin/index.js"
   },
   "dependencies": {
-    "@babel/eslint-parser": "^7.13.4",
-    "autoprefixer": "^10.2.5",
-    "breakpoint-sass": "^2.7.1",
+    "@babel/eslint-parser": "^7.22.9",
+    "autoprefixer": "^10.4.14",
+    "breakpoint-sass": "^3.0.0",
     "commander": "^7.1.0",
     "del": "^6.0.0",
-    "eslint": "^7.20.0",
+    "eslint": "^8.45.0",
     "eslint-config-drupal": "^5.0.2",
     "lodash": "^4.17.21",
     "normalize-scss": "^7.0.1",
-    "postcss": "^8.2.15",
-    "postcss-cli": "^8.3.1",
-    "recursive-copy": "^2.0.11",
-    "sass": "^1.34.1",
+    "postcss": "^8.4.26",
+    "postcss-cli": "^10.1.0",
+    "recursive-copy": "^2.0.14",
+    "sass": "^1.63.6",
     "sass-burger": "^1.3.1",
-    "stylelint": "^13.11.0",
-    "stylelint-config-sass-guidelines": "^8.0.0",
+    "stylelint": "^15.10.1",
+    "stylelint-config-sass-guidelines": "^10.0.0",
     "vite": "^2.6.10"
   },
   "engines": {
