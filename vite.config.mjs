@@ -1,4 +1,5 @@
 import FastGlob from 'fast-glob';
+import FullReload from 'vite-plugin-full-reload'
 import { resolve } from 'node:path';
 
 // Create an array of all the top level JS and SCSS files in the js and sass
@@ -16,6 +17,11 @@ const inputFiles = FastGlob.sync('(js|sass)/*.(scss|js)', {
 })
 
 export default {
+  plugins: [
+    // Watch the PHP files for changes and reload the browser.
+    FullReload(process.cwd() + '/**/*.(php|inc|theme|twig)')
+  ],
+
   build: {
     // generate manifest.json in outDir
     manifest: true,
