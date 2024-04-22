@@ -32,12 +32,8 @@ rendered website such as a CMS like Drupal or Wordpress.
 |-- sass/
 |   |-- style.scss
 |-- package.json
-|-- vite.config.js
+|-- vite.config.mjs
 ```
-
-It is also assumed that the site is already served in local development by a
-tool such as Docker or MAMP. Thus, doing `ucd-theme-tasks dev --no-serve` will
-not try to spin up its own server.
 
 If doing a Single Page App (SPA) with a Javascript framework like Vue.js or
 React then the `vite.config.js` can have its `root` changed to whatever
@@ -191,7 +187,7 @@ project automatically when running the `ucd-theme-tasks init` command.
 
 ### Vite
 [Vite](https://vitejs.dev/) is used to compile all code and can be
-configured with the `vite.config.js` file.
+configured with the `vite.config.mjs` file.
 https://vitejs.dev/config/
 
 ### Default Tasks

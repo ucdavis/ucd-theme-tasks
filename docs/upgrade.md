@@ -2,8 +2,13 @@
 
 Version 4 is similar but used [Snowpack](https://www.snowpack.dev/)
 instead of [Vite](https://vitejs.dev/). Moving from 4 to 5 most likely only
-requires adding a `vite.config.js` file and configuring it for you needs
+requires adding a `vite.config.mjs` file and configuring it for you needs
 https://vitejs.dev/config/.
+
+You can extend the default config provided by this module by using:
+```js
+export { default } from 'ucd-theme-tasks/vite.config.mjs'
+```
 
 # Upgrading from v3
 

@@ -55,7 +55,7 @@ Javascript file.
 // vite.config.js
 resolve: {
   alias: {
-    'jquery': '/js/jquery.module.js'
+    jquery: path.resolve(__dirname, 'js/jquery.module.js')
   }
 }
 ```
