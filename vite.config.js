@@ -1,103 +1,41 @@
-// import liveReload from 'vite-plugin-live-reload'
-// import vue from '@vitejs/plugin-vue'
-// import {resolve} from 'path';
+import FastGlob from 'fast-glob';
+import { resolve } from 'node:path';
 
-
-// // vite.config.js
-// const middleware = () => {
-//   return {
-//     name: "middleware",
-//     apply: "serve",
-//     configureServer(viteDevServer) {
-//       return () => {
-//         viteDevServer.middlewares.use(async (req, res, next) => {
-//           if (req.url === '/index.html') {
-//             console.log('test')
-//             req.url = `/public/${req.url}`;
-//           }
-
-//           next();
-//         });
-//       };
-//     },
-//   };
-// };
+// Create an array of all the top level JS and SCSS files in the js and sass
+// directories.
+const inputFiles = FastGlob.sync('(js|sass)/*.(scss|js)', {
+  // Ignore Sass partials and the jQuery module.
+  ignore: [
+    'sass/_*.scss',
+    'js/jquery.module.js',
+  ]
+}).map(file => {
+  // This expands the relative paths to absolute paths, so e.g.
+  // src/nested/foo becomes /project/src/nested/foo.js
+  return resolve(process.cwd(), file)
+})
 
 export default {
-  // plugins: [middleware()],
-  // root: 'source',
-  // // publicDir: '../public',
-  // resolve: {
-  //   alias: { '/my-index': resolve(process.cwd(), 'public') }
-  // },
-
-  // plugins: [
-  //   vue(),
-  //   liveReload(__dirname+'/**/*.(php|inc|theme|twig)')
-  // ],
-
-  // root: 'source',
-  // root: './',
-  // base: '/public/',
-
-  // publicDir: 'public',
-  // root: 'public',
-
-  // optimizeDeps: {
-  //   entries: [
-  //     // 'public/index.html',
-  //     './source/sass/style.scss',
-  //     './source/sass/vendor.scss',
-  //     './source/sass/print.scss',
-  //     './source/js/main.js',
-  //   ]
-  // },
-
   build: {
-    outDir: 'build',
     // generate manifest.json in outDir
     manifest: true,
+    // minify: false,
     rollupOptions: {
       // overwrite default .html entry
-      input: [
-        // './index.html',
-        './source/sass/style.scss',
-        './source/sass/vendor.scss',
-        './source/sass/print.scss',
-        './source/js/main.js',
-      ],
+      input: inputFiles,
       // Remove the [hash] since Drupal will take care of that.
       output: {
-        entryFileNames: `assets/[name].js`,
-        chunkFileNames: `assets/chunks/[name].[hash].js`,
-        assetFileNames: `assets/[name].[ext]`
+        entryFileNames: `[name].js`,
+        chunkFileNames: `chunks/[name].[hash].js`,
+        assetFileNames: `[name].[ext]`,
       }
     }
   },
 
-  // server: {
-  //   watch: [
-  //     '../source/sass/style.scss'
-  //   ]
-  // },
-
-  // server: {
-  //   // required to load scripts from custom host
-  //   cors: true,
-
-  //   // we need a strict port to match on PHP side
-  //   // change freely, but update on PHP to match the same port
-  //   strictPort: true,
-  //   port: 12321,
-
-  //   hmr: {
-  //     host: 'localhost',
-  //   }
-  // },
-
-  // resolve: {
-  //   alias: {
-  //     'jquery': '/js/jquery.module.js'
-  //   },
-  // },
+  // Swap any npm jQuery import for the custom local module.
+  resolve: {
+    alias: {
+      jquery: resolve(process.cwd(), 'js/jquery.module.js'),
+    },
+  },
 }
