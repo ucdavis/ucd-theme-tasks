@@ -30,6 +30,8 @@ catch (e) {
   }
 }
 
+program.enablePositionalOptions();
+
 program
   .version(`ucd-theme-tasks ${require('../package').version}`)
   .usage('<command> [options]')
@@ -52,8 +54,10 @@ program
   .description('Build all assets using Vite.')
   .option('-a, --prefix-files <glob>', 'CSS glob pattern [file|dir|glob]* to autoprefix css files.')
   .option('-p, --patternlab', 'Run the pattern lab build step before this build.')
-  .action((options) => {
-    require('../lib/build')(options)
+  .passThroughOptions()
+  .allowUnknownOption()
+  .action((options, extraOptions) => {
+    require('../lib/build')(options, extraOptions)
   })
 
 // Dev.
@@ -62,8 +66,10 @@ program
   .description('Development mode to build and watch all assets using Vite.')
   .option('-p, --patternlab', 'Run the pattern lab build step before this build.')
   .option('-S, --no-serve', 'Do not serve the files at a localhost domain. This is useful for when compiling inside a traditional CMS or site already using Docker to serve files.')
-  .action((options) => {
-    require('../lib/dev')(parentPath, options)
+  .passThroughOptions()
+  .allowUnknownOption()
+  .action((options, extraOptions) => {
+    require('../lib/dev')(parentPath, options, extraOptions)
   })
 
 // Lint.
