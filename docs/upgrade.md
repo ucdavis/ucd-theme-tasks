@@ -10,6 +10,24 @@ You can extend the default config provided by this module by using:
 export { default } from 'ucd-theme-tasks/vite.config.mjs'
 ```
 
+If you need to override some config you can use:
+```js
+/**
+ * Example of how to extend the default configuration.
+ */
+import defaultConfig from 'ucd-theme-tasks/vite.config.mjs'
+import { defineConfig, mergeConfig } from 'vite'
+
+export default defineConfig(() =>
+  mergeConfig(defaultConfig, {
+    // Change the server host url.
+    server: {
+      host: '0.0.0.0',
+    },
+  }),
+)
+```
+
 # Upgrading from v3
 
 Version 4/5 is a complete rewrite away from using Gulp/Webpack for compiling
