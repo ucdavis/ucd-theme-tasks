@@ -2,7 +2,7 @@
 CLI tool for base automation when compiling a UCD frontend.
 
 This package contains all the CLI tasks needed by UCD frontend projects and
-themes. It is heavily dependent on [Snowpack](https://www.snowpack.dev/).
+themes. It is heavily dependent on [Vite](https://vitejs.dev/).
 
 ## Extra Documentation
 [https://github.com/ucdavis/ucd-theme-tasks/tree/master/docs](https://github.com/ucdavis/ucd-theme-tasks/tree/master/docs)
@@ -32,17 +32,13 @@ rendered website such as a CMS like Drupal or Wordpress.
 |-- sass/
 |   |-- style.scss
 |-- package.json
-|-- snowpack.config.js
+|-- vite.config.mjs
 ```
 
-It is also assumed that the site is already served in local development by a
-tool such as Docker or MAMP. Thus, doing `ucd-theme-tasks dev --no-serve` will
-not try to spin up its own server.
-
 If doing a Single Page App (SPA) with a Javascript framework like Vue.js or
-React then the `snowpack.config.js` can have its `mount` changed to whatever
-suits it best. For reference in configuring a SPA see one of Snowpack's
-templates https://github.com/snowpackjs/snowpack/tree/main/create-snowpack-app.
+React then the `vite.config.js` can have its `root` changed to whatever
+suits it best. For reference in configuring a SPA see one of Vite's online
+demos https://vitejs.dev/guide/#trying-vite-online.
 
 ## CLI Commands
 
@@ -65,8 +61,8 @@ Options:
 
 Commands:
   init [options]        Copy starter files to a theme or custom site.
-  build [options]       Build all assets using Snowpack.
-  dev [options]         Development mode to build and watch all assets using Snowpack.
+  build [options]       Build all assets using Vite.
+  dev [options]         Development mode to build and watch all assets using Vite.
   lint [options]        Validate CSS and JS by linting.
   patternlab [options]  Compile Pattern Lab.
   sync [options]        Sync asset files like js, css, fonts, and images to a site.
@@ -91,11 +87,11 @@ Options:
   -h, --help         display help for command
 ```
 
-#### Build production assets and files with Snowpack.
+#### Build production assets and files with Vite.
 ```
 Usage: build [options]
 
-Build all assets using Snowpack.
+Build all assets using Vite.
 
 Options:
   -a, --prefix-files <glob>  CSS glob pattern [file|dir|glob]* to autoprefix css files.
@@ -103,11 +99,11 @@ Options:
   -h, --help                 display help for command
 ```
 
-#### Development mode to serve and watch files with Snowpack.
+#### Development mode to serve and watch files with Vite.
 ```
 Usage: dev [options]
 
-Development mode to build and watch all assets using Snowpack.
+Development mode to build and watch all assets using Vite.
 
 Options:
   -p, --patternlab  Run the pattern lab build step before this build.
@@ -139,6 +135,7 @@ Compile Pattern Lab.
 
 Options:
   -w, --watch  Watch for changes and rebuild.
+  -p, --prod   Create a production build.
   -h, --help   display help for command
 ```
 
@@ -188,17 +185,17 @@ project automatically when running the `ucd-theme-tasks init` command.
 
 ## Configuration
 
-### Snowpack
-[Snowpack](https://www.snowpack.dev/) is used to compile all code and can be
-configured with the `snowpack.config.js` file.
-https://www.snowpack.dev/reference/configuration
+### Vite
+[Vite](https://vitejs.dev/) is used to compile all code and can be
+configured with the `vite.config.mjs` file.
+https://vitejs.dev/config/
 
 ### Default Tasks
 `tasks-config.default.js` contains all of the default configuration for
 controlling the tasks. This file can be referenced for all possible config
 options. Docs can be found at [https://github.com/ucdavis/ucd-theme-tasks/blob/master/docs/config.md](https://github.com/ucdavis/ucd-theme-tasks/blob/master/docs/config.md)
 
-> **Version 4** removed many of the old configuration options since Snowpack handles
+> **Version 4** removed many of the old configuration options since Vite handles
 them. Most of the configuration is now about path locations for syncing files
 across projects.
 

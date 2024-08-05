@@ -28,7 +28,7 @@ Examples:
 @use "normalize-scss/sass/normalize/import-now";
 
 // Import breakpoint mixins without namespacing.
-@use "breakpoint" as *;
+@use "breakpoint-sass" as *;
 ```
 
 #### Import CSS package via JavaScript
