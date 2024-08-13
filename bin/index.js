@@ -13,7 +13,8 @@ const parentPath = parentNodePath.replace('/node_modules', '')
 
 // Load in Project specific config.
 try {
-  projectConfig = await import(`${parentPath}tasks-config`)
+  const { default: taskConfig } = await import(`${parentPath}tasks-config.js`)
+  projectConfig = taskConfig
   config = _.merge(config, projectConfig)
 } catch (e) {
   configMessage = 'Add a tasks-config.js file for any project specific configuration.'
@@ -21,7 +22,7 @@ try {
 
 // Load in custom local config.
 try {
-  const customConfig = await import(`${parentPath}tasks-config.local`)
+  const { default: customConfig } = await import(`${parentPath}tasks-config.local.js`)
   config = _.merge(config, customConfig)
 }
 catch (e) {
