@@ -2,18 +2,10 @@
 import _ from 'lodash'
 import { program } from 'commander'
 import defaultConfig from '../tasks-config.default.js'
-import init from '../lib/init.js'
-import build from '../lib/build.js'
-import dev from '../lib/dev.js'
-import lint from '../lib/lint.js'
-import patternlab from '../lib/patternlab.js'
-import sync from '../lib/sync.js'
-import newsite from '../lib/newsite.js'
-import settings from '../package.json' assert { type: 'json' };
+import { packageInfo } from '../lib/helpers.js'
 let config = defaultConfig
 let projectConfig = false
 let configMessage = ''
-const version = settings.version
 
 // Get the path or the project using this command.
 const parentNodePath = process.argv[1].replace('.bin/ucd-theme-tasks', '')
@@ -42,7 +34,7 @@ catch (e) {
 program.enablePositionalOptions()
 
 program
-  .version(`ucd-theme-tasks ${version}`)
+  .version(`ucd-theme-tasks ${packageInfo().version}`)
   .usage('<command> [options]')
 
 // Init.
@@ -53,7 +45,8 @@ program
   .option('-p, --patternlab', 'Use this inside Pattern Lab.')
   .option('-t, --themesync', 'Allow syncing with Pattern Lab.')
   .option('-f, --force', 'Force overwrite of existing files in theme.')
-  .action((options) => {
+  .action(async (options) => {
+    const { default: init } = await import('../lib/init.js')
     init(parentPath, options)
   })
 
@@ -65,7 +58,8 @@ program
   .option('-p, --patternlab', 'Run the pattern lab build step before this build.')
   .passThroughOptions()
   .allowUnknownOption()
-  .action((options, extraOptions) => {
+  .action(async (options, extraOptions) => {
+    const { default: build } = await import('../lib/build.js')
     build(options, extraOptions)
   })
 
@@ -77,7 +71,8 @@ program
   .option('-S, --no-serve', 'Do not serve the files at a localhost domain. This is useful for when compiling inside a traditional CMS or site already using Docker to serve files.')
   .passThroughOptions()
   .allowUnknownOption()
-  .action((options, extraOptions) => {
+  .action(async (options, extraOptions) => {
+    const { default: dev } = await import('../lib/dev.js')
     dev(parentPath, options, extraOptions)
   })
 
@@ -90,7 +85,8 @@ program
   .option('-C, --css-files <glob>', 'SASS glob pattern [file|dir|glob]* to search for files.')
   .option('-j, --js', 'Only lint Javascript files.')
   .option('-J, --js-files <glob>', 'Javascript glob pattern [file|dir|glob]* to search for files.')
-  .action((options) => {
+  .action(async (options) => {
+    const { default: lint } = await import('../lib/lint.js')
     lint(options)
   })
 
@@ -100,7 +96,8 @@ program
   .description('Compile Pattern Lab.')
   .option('-w, --watch', 'Watch for changes and rebuild.')
   .option('-p, --prod', 'Create a production build.')
-  .action((options) => {
+  .action(async (options) => {
+    const { default: patternlab } = await import('../lib/patternlab.js')
     patternlab(parentNodePath, options)
   })
 
@@ -110,7 +107,8 @@ program
   .description('Sync asset files like js, css, fonts, and images to a site.')
   .option('-d, --dest <path>', 'Path to the theme directory or new site to export files into.')
   .option('-s, --src <path>', 'Path to the source from which files will be imported.')
-  .action((options) => {
+  .action(async (options) => {
+    const { default: sync } = await import('../lib/sync.js')
     sync(config, options)
   })
 
@@ -120,7 +118,8 @@ program
   .description('Wire up a new site to allow syncing files from an existing project using its starterkit. This assumes the command is being run within a project that has a "starterkit" directory.')
   .option('-d, --dest <path>', 'Path to the theme directory or new site to export files into.')
   .option('-f, --force', 'Force overwrite of existing files in theme.')
-  .action((options) => {
+  .action(async (options) => {
+    const { default: newsite } = await import('../lib/newsite.js')
     newsite(config, options)
   })
 
