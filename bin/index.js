@@ -1,18 +1,19 @@
 #!/usr/bin/env node
 import _ from 'lodash'
 import { program } from 'commander'
-import defaultConfig from '../tasks-config.default'
-import init from '../lib/init'
-import build from '../lib/build'
-import dev from '../lib/dev'
-import lint from '../lib/lint'
-import patternlab from '../lib/patternlab'
-import sync from '../lib/sync'
-import newsite from '../lib/newsite'
-import { version } from '../package'
+import defaultConfig from '../tasks-config.default.js'
+import init from '../lib/init.js'
+import build from '../lib/build.js'
+import dev from '../lib/dev.js'
+import lint from '../lib/lint.js'
+import patternlab from '../lib/patternlab.js'
+import sync from '../lib/sync.js'
+import newsite from '../lib/newsite.js'
+import settings from '../package.json' assert { type: 'json' };
 let config = defaultConfig
 let projectConfig = false
 let configMessage = ''
+const version = settings.version
 
 // Get the path or the project using this command.
 const parentNodePath = process.argv[1].replace('.bin/ucd-theme-tasks', '')
