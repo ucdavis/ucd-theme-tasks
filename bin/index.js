@@ -74,7 +74,7 @@ program
   .allowUnknownOption()
   .action(async (options, extraOptions) => {
     const { default: dev } = await import('../lib/dev.js')
-    dev(parentPath, options, extraOptions)
+    dev(options, extraOptions)
   })
 
 // Lint.
@@ -99,7 +99,7 @@ program
   .option('-p, --prod', 'Create a production build.')
   .action(async (options) => {
     const { default: patternlab } = await import('../lib/patternlab.js')
-    patternlab(parentNodePath, options)
+    patternlab(options)
   })
 
 // Theme Sync.
