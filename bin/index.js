@@ -1,7 +1,15 @@
 #!/usr/bin/env node
-const _ = require('lodash')
-const program = require('commander')
-const defaultConfig = require('../tasks-config.default')
+import _ from 'lodash'
+import { program } from 'commander'
+import defaultConfig from '../tasks-config.default'
+import init from '../lib/init'
+import build from '../lib/build'
+import dev from '../lib/dev'
+import lint from '../lib/lint'
+import patternlab from '../lib/patternlab'
+import sync from '../lib/sync'
+import newsite from '../lib/newsite'
+import { version } from '../package'
 let config = defaultConfig
 let projectConfig = false
 let configMessage = ''
@@ -12,7 +20,7 @@ const parentPath = parentNodePath.replace('/node_modules', '')
 
 // Load in Project specific config.
 try {
-  projectConfig = require(`${parentPath}tasks-config`)
+  projectConfig = await import(`${parentPath}tasks-config`)
   config = _.merge(config, projectConfig)
 } catch (e) {
   configMessage = 'Add a tasks-config.js file for any project specific configuration.'
@@ -20,8 +28,8 @@ try {
 
 // Load in custom local config.
 try {
-  const customConfig = require(`${parentPath}tasks-config.local`)
-  config = _.merge(config, customConfig);
+  const customConfig = await import(`${parentPath}tasks-config.local`)
+  config = _.merge(config, customConfig)
 }
 catch (e) {
   // Only add the option for a local config if a project config is already used.
@@ -30,10 +38,10 @@ catch (e) {
   }
 }
 
-program.enablePositionalOptions();
+program.enablePositionalOptions()
 
 program
-  .version(`ucd-theme-tasks ${require('../package').version}`)
+  .version(`ucd-theme-tasks ${version}`)
   .usage('<command> [options]')
 
 // Init.
@@ -45,7 +53,7 @@ program
   .option('-t, --themesync', 'Allow syncing with Pattern Lab.')
   .option('-f, --force', 'Force overwrite of existing files in theme.')
   .action((options) => {
-    require('../lib/init')(parentPath, options)
+    init(parentPath, options)
   })
 
 // Build.
@@ -57,7 +65,7 @@ program
   .passThroughOptions()
   .allowUnknownOption()
   .action((options, extraOptions) => {
-    require('../lib/build')(options, extraOptions)
+    build(options, extraOptions)
   })
 
 // Dev.
@@ -69,7 +77,7 @@ program
   .passThroughOptions()
   .allowUnknownOption()
   .action((options, extraOptions) => {
-    require('../lib/dev')(parentPath, options, extraOptions)
+    dev(parentPath, options, extraOptions)
   })
 
 // Lint.
@@ -82,7 +90,7 @@ program
   .option('-j, --js', 'Only lint Javascript files.')
   .option('-J, --js-files <glob>', 'Javascript glob pattern [file|dir|glob]* to search for files.')
   .action((options) => {
-    require('../lib/lint')(options)
+    lint(options)
   })
 
 // Pattern Lab.
@@ -92,7 +100,7 @@ program
   .option('-w, --watch', 'Watch for changes and rebuild.')
   .option('-p, --prod', 'Create a production build.')
   .action((options) => {
-    require('../lib/patternlab')(parentNodePath, options)
+    patternlab(parentNodePath, options)
   })
 
 // Theme Sync.
@@ -102,7 +110,7 @@ program
   .option('-d, --dest <path>', 'Path to the theme directory or new site to export files into.')
   .option('-s, --src <path>', 'Path to the source from which files will be imported.')
   .action((options) => {
-    require('../lib/sync')(config, options)
+    sync(config, options)
   })
 
 // Init.
@@ -112,7 +120,7 @@ program
   .option('-d, --dest <path>', 'Path to the theme directory or new site to export files into.')
   .option('-f, --force', 'Force overwrite of existing files in theme.')
   .action((options) => {
-    require('../lib/newsite')(config, options)
+    newsite(config, options)
   })
 
 // Add some useful info on help.

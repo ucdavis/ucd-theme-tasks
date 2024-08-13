@@ -3,6 +3,7 @@
   "version": "5.0.0",
   "description": "Base automation for compiling a UCD frontend.",
   "main": "vite.config.js",
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "https://github.com/ucdavis/ucd-theme-tasks"
