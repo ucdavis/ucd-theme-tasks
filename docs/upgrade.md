@@ -28,6 +28,19 @@ export default defineConfig(() =>
 )
 ```
 
+If you are using a `tasks-config.js` file, you need to update is to use ESM.
+```js
+module.exports = {
+  ...
+}
+```
+will become:
+```js
+export default {
+  ...
+}
+```
+
 # Upgrading from v3
 
 Version 4/5 is a complete rewrite away from using Gulp/Webpack for compiling

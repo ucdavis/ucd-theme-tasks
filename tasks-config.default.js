@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   themeSync: {
     src: false,
     dest: '../theme/',
