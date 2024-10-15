@@ -22,6 +22,15 @@ export default {
     FullReload(process.cwd() + '/**/*.(php|inc|theme|twig)')
   ],
 
+  css: {
+    preprocessorOptions: {
+      scss: {
+        // Use the modern SCSS compiler.
+        api: 'modern',
+      },
+    },
+  },
+
   build: {
     // generate manifest.json in outDir
     manifest: true,
