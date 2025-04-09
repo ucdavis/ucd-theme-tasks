@@ -31,6 +31,13 @@ export default {
     },
   },
 
+  server: {
+    // Allow cross-origin requests.
+    cors: true,
+    // Force the dev server to use localhost path for the asset URLs.
+    origin: 'http://localhost:5173',
+  },
+
   build: {
     // generate manifest.json in outDir
     manifest: true,
