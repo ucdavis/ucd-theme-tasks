@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import _ from 'lodash'
 import { program } from 'commander'
-import defaultConfig from '../tasks-config.default.js'
+import defaultConfig from '../tasks-config.default.mjs'
 import { packageInfo } from '../lib/helpers.js'
 let config = defaultConfig
 let projectConfig = false

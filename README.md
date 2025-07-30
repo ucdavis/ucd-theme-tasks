@@ -191,7 +191,7 @@ configured with the `vite.config.mjs` file.
 https://vitejs.dev/config/
 
 ### Default Tasks
-`tasks-config.default.js` contains all of the default configuration for
+`tasks-config.default.mjs` contains all of the default configuration for
 controlling the tasks. This file can be referenced for all possible config
 options. Docs can be found at [https://github.com/ucdavis/ucd-theme-tasks/blob/master/docs/config.md](https://github.com/ucdavis/ucd-theme-tasks/blob/master/docs/config.md)
 
