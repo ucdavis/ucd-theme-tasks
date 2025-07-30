@@ -27,16 +27,19 @@
     "esm",
     "frontend"
   ],
+  "files": [
+    "eslint.config.mjs"
+  ],
   "bin": {
     "ucd-theme-tasks": "bin/index.js"
   },
   "dependencies": {
-    "@babel/eslint-parser": "^7.28.0",
+    "@eslint/js": "^9.32.0",
+    "eslint": "^9.32.0",
     "autoprefixer": "^10.4.21",
     "breakpoint-sass": "^3.0.0",
     "commander": "^14.0.0",
     "del": "^8.0.0",
-    "eslint-plugin-drupal-contrib": "^2.1.0",
     "lodash": "^4.17.21",
     "normalize-scss": "^8.0.0",
     "postcss": "^8.5.6",
@@ -47,9 +50,6 @@
     "stylelint-config-sass-guidelines": "^12.1.0",
     "stylelint-order": "^7.0.0",
     "vite-plugin-full-reload": "^1.2.0"
-  },
-  "overrides": {
-    "eslint": "9.30.1"
   },
   "peerDependencies": {
     "vite": "^6.3.5"
