@@ -27,12 +27,6 @@
     "esm",
     "frontend"
   ],
-  "files": [
-    ".stylelintrc.default.yml",
-    "eslint.config.default.mjs",
-    "tasks-config.default.mjs",
-    "vite.config.mjs"
-  ],
   "bin": {
     "ucd-theme-tasks": "bin/index.js"
   },
