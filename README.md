@@ -172,10 +172,12 @@ Lint all scss/js files using `npx ucd-theme-tasks lint`. Optionally pass the
 `--fix` flag to attempt to automatically fix as many errors a possible.
 
 ### JavaScript Linting
-Linting of JavaScript is done via [EsLint](https://eslint.org/).
+Linting of JavaScript is done via [EsLint](https://eslint.org/) and
+[Prettier](https://prettier.io/).
 
-A `.eslintrc.yml` configuration file will be copied to the root of your project
-automatically when running the `ucd-theme-tasks init` command.
+`.eslint.config.mjs` and `prettier.config.mjs` configuration files will be
+copied to the root of your project automatically when running the
+`ucd-theme-tasks init` command.
 
 ### Sass/Scss Linting
 Linting of Sass/Scss files is done via [StyleLint](https://stylelint.io/).
