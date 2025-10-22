@@ -22,6 +22,11 @@ export default {
     FullReload(process.cwd() + '/**/*.(php|inc|theme|twig)')
   ],
 
+  // Force relative paths to prevent issues with it rewriting images and other
+  // assets assuming they are in the root of the project when often they are
+  // deep inside of a drupal theme.
+  base: './',
+
   css: {
     preprocessorOptions: {
       scss: {
