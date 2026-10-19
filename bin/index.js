@@ -1,36 +1,13 @@
 #!/usr/bin/env node
-import _ from 'lodash'
 import { program } from 'commander'
-import defaultConfig from '../tasks-config.default.mjs'
+import { loadConfig } from '../lib/config.js'
 import { packageInfo } from '../lib/helpers.js'
-let config = defaultConfig
-let projectConfig = false
-let configMessage = ''
 
 // Get the path or the project using this command.
 const parentNodePath = process.argv[1].replace('.bin/ucd-theme-tasks', '')
 const parentPath = parentNodePath.replace('/node_modules', '')
 
-// Load in Project specific config.
-try {
-  const { default: taskConfig } = await import(`${parentPath}tasks-config.js`)
-  projectConfig = taskConfig
-  config = _.merge(config, projectConfig)
-} catch (e) {
-  configMessage = 'Add a tasks-config.js file for any project specific configuration.'
-}
-
-// Load in custom local config.
-try {
-  const { default: customConfig } = await import(`${parentPath}tasks-config.local.js`)
-  config = _.merge(config, customConfig)
-}
-catch (e) {
-  // Only add the option for a local config if a project config is already used.
-  if (projectConfig) {
-    configMessage = 'Add a tasks-config.local.js file for any custom local configuration.'
-  }
-}
+const { config, configMessage } = await loadConfig(parentPath)
 
 program.enablePositionalOptions()
 
@@ -59,6 +36,7 @@ program
   .option('-p, --patternlab', 'Run the pattern lab build step before this build.')
   .passThroughOptions()
   .allowUnknownOption()
+  .allowExcessArguments()
   .action(async (options, extraOptions) => {
     const { default: build } = await import('../lib/build.js')
     build(options, extraOptions)
@@ -72,6 +50,7 @@ program
   .option('-S, --no-serve', 'Do not serve the files at a localhost domain. This is useful for when compiling inside a traditional CMS or site already using Docker to serve files.')
   .passThroughOptions()
   .allowUnknownOption()
+  .allowExcessArguments()
   .action(async (options, extraOptions) => {
     const { default: dev } = await import('../lib/dev.js')
     dev(options, extraOptions)

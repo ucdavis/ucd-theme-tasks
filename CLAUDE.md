@@ -13,10 +13,11 @@ does not assume Vite's default file layout: it must work in Pattern Lab and
 with the Drupal Vite module, where assets live deep inside a theme directory
 and Drupal (not Vite) serves the pages.
 
-The package ships as plain ESM with no build step and no test suite. There are
-no npm scripts in package.json. To try changes, run the CLI from inside a
-consuming project (e.g. via `npm link` or a local install); `node bin/index.js`
-run directly from this repo will not resolve undeclared imports (see below).
+The package ships as plain ESM with no build step. Tests use Node's built-in
+`node:test` runner (`npm test`, files in `test/`) with zero test-framework
+dependencies. To try changes end-to-end, run the CLI from inside a consuming
+project (e.g. via `npm link` or a local install); `node bin/index.js` run
+directly from this repo will not resolve undeclared imports (see below).
 
 Requires Node >= 22.17.0 (`.nvmrc`). `"type": "module"` — everything is ESM.
 
