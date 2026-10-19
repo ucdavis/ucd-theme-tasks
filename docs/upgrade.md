@@ -1,3 +1,16 @@
+# Upgrading from v5
+
+The following Sass libraries are no longer bundled with this package. If your
+Sass still uses any of them, install them in your own project:
+
+```sh
+npm install --save-dev breakpoint-sass normalize-scss sass-burger
+```
+
+* [breakpoint-sass](https://www.npmjs.com/package/breakpoint-sass)
+* [normalize-scss](https://www.npmjs.com/package/normalize-scss)
+* [sass-burger](https://www.npmjs.com/package/sass-burger)
+
 # Upgrading from v4
 
 Version 4 is similar but used [Snowpack](https://www.snowpack.dev/)

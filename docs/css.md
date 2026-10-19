@@ -5,12 +5,6 @@
 Install any [NPM](https://www.npmjs.com/) component with the `--save-dev` flag. This is helpful for Sass packages.
 
     $ npm install {thing} --save-dev
-    
-The following Sass libraries have been added for ease in development:
-
-* [breakpoint-sass](http://breakpoint-sass.com/) - Media Query helper
-* [normalize-scss](https://github.com/JohnAlbin/normalize-scss) - Normalize CSS reset
-* [sass-burger](http://joren.co/sass-burger/) - Hambuger Menu
 
 ### NPM CSS Dependencies (using in the browser)
 
@@ -22,13 +16,9 @@ in a sass file.
 All packages in `node_modules` are already mapped so the package can be used
 directly.
 
-Examples:
+Example:
 ```scss
-// Normalize to "reset" browser defaults.
-@use "normalize-scss/sass/normalize/import-now";
-
-// Import breakpoint mixins without namespacing.
-@use "breakpoint-sass" as *;
+@use "slim-select/dist/slimselect.css";
 ```
 
 #### Import CSS package via JavaScript
