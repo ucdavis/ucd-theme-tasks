@@ -21,6 +21,8 @@ rules:
     -
       message: "Selector should be written in lowercase with BEM or hyphens (selector-class-pattern)"
   selector-max-compound-selectors: null
+  # Incompatible with Sass `&` suffix nesting in stylelint 17: https://github.com/stylelint/stylelint/issues/8978
+  selector-no-qualifying-type: null
   selector-pseudo-element-colon-notation: null
   order/order:
     -
