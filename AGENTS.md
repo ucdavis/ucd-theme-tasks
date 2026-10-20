@@ -14,12 +14,17 @@ with the Drupal Vite module, where assets live deep inside a theme directory
 and Drupal (not Vite) serves the pages.
 
 The package ships as plain ESM with no build step. Tests use Node's built-in
-`node:test` runner (`npm test`, files in `test/`) with zero test-framework
-dependencies. To try changes end-to-end, run the CLI from inside a consuming
-project (e.g. via `npm link` or a local install); `node bin/index.js` run
-directly from this repo will not resolve undeclared imports (see below).
+`node:test` runner (`npm test` runs `test/*.test.js`; everything under
+`test/fixtures/` is data, not tests) with zero test-framework dependencies.
+Several tests run the real tools (vite, stylelint, prettier, eslint) against
+temp projects, so `npm install` must have been run. CI runs `npm test` on Node
+22.17.0 and 24.x (`.github/workflows/test.yml`). To try changes end-to-end,
+run the CLI from inside a consuming project (e.g. `npm pack` and install the
+tarball, or `npm link`).
 
-Requires Node >= 22.17.0 (`.nvmrc`). `"type": "module"` — everything is ESM.
+Requires Node >= 22.17.0 (`engines`, the minimum subthemes must support);
+`.nvmrc` pins the newer version used for development. `"type": "module"` —
+everything is ESM.
 
 ## Architecture
 
@@ -30,6 +35,9 @@ stripping `node_modules/.bin/ucd-theme-tasks` off `process.argv[1]`, then
 merges config in three layers with lodash `merge`:
 `tasks-config.default.mjs` (this package) ← the project's `tasks-config.mjs` ←
 the project's `tasks-config.local.mjs` (legacy `.js` names are the fallback).
+Project config files are optional; a missing file is skipped, but one that
+exists and fails to load throws rather than silently falling back to the
+defaults (a wrong `dest` would make `sync` replace the wrong directories).
 
 **Tasks shell out, they don't use APIs**: `lib/build.js` and `lib/dev.js`
 spawn the `vite` and `postcss` CLI binaries rather than calling Vite's JS API.
@@ -39,6 +47,8 @@ over `{build,dist}/**/*.css` afterward. `dev --no-serve` switches to
 `vite build --watch` for CMS/Docker setups where Drupal serves the files.
 `lib/lint.js` shells out to `stylelint` (scss) and `prettier --check` +
 `eslint` (js), with `--fix` rewriting the prettier command to `--write`.
+Prettier and eslint run sequentially so fixes never race on the same file; any
+linter failure sets exit code 2.
 
 **Shared Vite config (`vite.config.mjs` at package root)**: consumers
 re-export it (`export { default } from 'ucd-theme-tasks/vite.config.mjs'`, see
@@ -57,6 +67,10 @@ choices exist for the Drupal/CMS use case — change them carefully:
   reload the browser.
 - Dev server pins `origin: 'http://localhost:5173'` and enables CORS so a
   CMS page on another domain can load assets from the Vite server.
+- A custom Sass `importer` (`findFileUrl`) loads relative `@use`/`@import`
+  itself so `url()` in nested partials stays relative to the entry stylesheet.
+  Vite 7+ otherwise rebases them per partial (vitejs/vite#20067), which breaks
+  existing themes. Guarded by `test/vite-config.test.js`.
 
 **Dependency resolution is unusual**: `vite` is a peerDependency, and
 `lib/patternlab.js` imports `@pattern-lab/core`, which this repo deliberately
@@ -65,7 +79,10 @@ node_modules (the import is lazy, so only the `patternlab` command needs it).
 Adding an import to `lib/` may need a corresponding dependency decision.
 
 **Starter files (`starter/`)**: copied into a consuming project by
-`init` (and `newsite`). The `*.default.*` files at the repo root
+`init` (and `newsite`). `starter/tasks-config.mjs` is only copied with
+`--themesync`/`--patternlab` (always by `newsite`), and never next to an
+existing legacy `tasks-config.js`, which it would shadow. The `*.default.*`
+files at the repo root
 (`.stylelintrc.default.yml`, `eslint.config.default.mjs`,
 `prettier.config.default.mjs`, `tasks-config.default.mjs`) are the shared
 configs that the starter copies extend/re-export — keep the pairs in sync.
@@ -93,7 +110,10 @@ directories, which lint deliberately ignores.
 
 ## History / version context
 
-v3 and earlier were Gulp-based, v4 was Snowpack, v5 is Vite. `docs/upgrade.md`
-covers migrations; `docs/config.md` documents current `themeSync` options plus
-the removed legacy options. The `dev/` directory is a leftover gulp-era
-fixture, not part of the published package.
+v3 and earlier were Gulp-based, v4 was Snowpack, v5 is Vite. v6 (in progress)
+requires Vite 8 and Node 22.17, drops the bundled Sass libraries
+(breakpoint-sass, normalize-scss, sass-burger), and replaces `fs-extra`/`del`
+with native `fs/promises`. `docs/upgrade.md` covers migrations;
+`docs/config.md` documents current `themeSync` options plus the removed legacy
+options. A local `dev/` directory, if present, is a gitignored gulp-era
+leftover and not part of the repo or the published package.
