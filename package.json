@@ -5,7 +5,7 @@
   "main": "vite.config.mjs",
   "type": "module",
   "scripts": {
-    "test": "node --test"
+    "test": "node --test 'test/*.test.js'"
   },
   "repository": {
     "type": "git",

@@ -48,6 +48,10 @@ test('tasks-config.mjs and tasks-config.local.mjs are loaded', async () => {
   assert.equal(configMessage, '')
 })
 
+test('a config file that fails to load is reported instead of falling back to defaults', async () => {
+  await assert.rejects(loadConfig(fixture('broken')), /Failed to load .*broken\/tasks-config\.mjs/)
+})
+
 test('loading a project config does not mutate the shared defaults', async () => {
   await loadConfig(fixture('project'))
   const { config } = await loadConfig(fixture('empty'))
