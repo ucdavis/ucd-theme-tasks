@@ -32,6 +32,7 @@ node_modules/
 
 # Custom Local config
 tasks-config.local.js
+!test/fixtures/**/tasks-config.local.js
 
 # Local notes
 TODO.md
