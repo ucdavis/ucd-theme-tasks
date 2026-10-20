@@ -8,7 +8,8 @@ import init from '../lib/init.js'
 
 let dest
 
-beforeEach(async () => {
+beforeEach(async (t) => {
+  t.mock.method(console, 'log', () => {})
   dest = await mkdtemp(join(tmpdir(), 'ucd-init-'))
 })
 

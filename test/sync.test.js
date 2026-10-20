@@ -90,14 +90,16 @@ test('sync exports assets and is fully finished when it resolves', async () => {
 })
 
 test('sync imports assets into the current project when src is set', async () => {
-  process.chdir(join(root, 'theme'))
+  // A fresh project, so files left by the export test can't make this pass.
+  const project = join(root, 'importer')
+  await mkdir(project)
+  process.chdir(project)
 
   await sync(config(), { src: '../pl/' })
 
-  const theme = join(root, 'theme')
-  assert.ok(existsSync(join(theme, 'sass/1_pattern_lab/style.scss')))
-  assert.ok(existsSync(join(theme, 'js/1_pattern_lab/app.js')))
-  assert.ok(existsSync(join(theme, 'images/logo.png')))
-  assert.ok(!existsSync(join(theme, 'images/sample')))
-  assert.ok(existsSync(join(theme, 'fonts/font.woff')))
+  assert.ok(existsSync(join(project, 'sass/1_pattern_lab/style.scss')))
+  assert.ok(existsSync(join(project, 'js/1_pattern_lab/app.js')))
+  assert.ok(existsSync(join(project, 'images/logo.png')))
+  assert.ok(!existsSync(join(project, 'images/sample')))
+  assert.ok(existsSync(join(project, 'fonts/font.woff')))
 })
