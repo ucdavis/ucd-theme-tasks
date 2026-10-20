@@ -36,9 +36,12 @@
   "dependencies": {
     "@eslint/js": "^10.0.1",
     "autoprefixer": "^10.6.1",
+    "chokidar": "^5.0.0",
     "commander": "^15.0.0",
     "del": "^9.0.1",
     "eslint": "^10.13.0",
+    "fast-glob": "^3.3.3",
+    "fs-extra": "^11.4.1",
     "globals": "^17.13.0",
     "lodash": "^4.18.1",
     "postcss": "^8.5.31",
@@ -52,9 +55,6 @@
   },
   "peerDependencies": {
     "vite": "^8.3.4"
-  },
-  "devDependencies": {
-    "fs-extra": "^11.4.1"
   },
   "engines": {
     "node": ">=22.17.0"
