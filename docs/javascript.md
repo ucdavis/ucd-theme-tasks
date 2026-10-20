@@ -1,7 +1,7 @@
 # Using this package to compile JavaScript
 
 [Vite](https://vitejs.dev/) is used to compile all code and can be
-configured with the `vite.config.js` file.
+configured with the `vite.config.mjs` file.
 https://vitejs.dev/config/
 
 It is assumed that a `main.js` file will be created as the entry point for
@@ -52,10 +52,10 @@ then you can create an alias as a passthrough package into the compiled
 Javascript file.
 
 ```js
-// vite.config.js
+// vite.config.mjs
 resolve: {
   alias: {
-    jquery: path.resolve(__dirname, 'js/jquery.module.js')
+    jquery: path.resolve(import.meta.dirname, 'js/jquery.module.js')
   }
 }
 ```

@@ -1,6 +1,6 @@
 ## Vite
 [Vite](https://vitejs.dev/) is used to compile all code and can be
-configured with the `vite.config.js` file.
+configured with the `vite.config.mjs` file.
 https://vitejs.dev/config/
 
 ## themeSync:
@@ -28,7 +28,7 @@ migrated they need to be compiled into dev or production code for that project.
 
 ## Removed in v4
 All of the below config was removed in version 4 and is now controlled by the
-`vite.config.js` file.
+`vite.config.mjs` file.
 
 ### css
 

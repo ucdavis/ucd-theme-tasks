@@ -36,7 +36,7 @@ rendered website such as a CMS like Drupal or Wordpress.
 ```
 
 If doing a Single Page App (SPA) with a Javascript framework like Vue.js or
-React then the `vite.config.js` can have its `root` changed to whatever
+React then the `vite.config.mjs` can have its `root` changed to whatever
 suits it best. For reference in configuring a SPA see one of Vite's online
 demos https://vitejs.dev/guide/#trying-vite-online.
 
@@ -175,7 +175,7 @@ Lint all scss/js files using `npx ucd-theme-tasks lint`. Optionally pass the
 Linting of JavaScript is done via [EsLint](https://eslint.org/) and
 [Prettier](https://prettier.io/).
 
-`.eslint.config.mjs` and `prettier.config.mjs` configuration files will be
+`eslint.config.mjs` and `prettier.config.mjs` configuration files will be
 copied to the root of your project automatically when running the
 `ucd-theme-tasks init` command.
 
