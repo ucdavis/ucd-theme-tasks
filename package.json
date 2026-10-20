@@ -51,7 +51,7 @@
     "vite-plugin-full-reload": "^1.2.0"
   },
   "peerDependencies": {
-    "vite": "^6.4.4"
+    "vite": "^8.3.4"
   },
   "devDependencies": {
     "fs-extra": "^11.4.1"

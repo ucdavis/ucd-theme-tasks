@@ -11,6 +11,29 @@ npm install --save-dev breakpoint-sass normalize-scss sass-burger
 * [normalize-scss](https://www.npmjs.com/package/normalize-scss)
 * [sass-burger](https://www.npmjs.com/package/sass-burger)
 
+## Vite 8
+
+This version requires Vite 8 and Node 22.17 or newer. If your project pins
+`vite` in `devDependencies` or `overrides`, update or remove it. Most builds
+produce the same output, but check for the following:
+
+* CSS is now minified with [Lightning CSS](https://lightningcss.dev/) instead
+  of esbuild.
+* The build fails when a pseudo-element is followed by a combinator or another
+  selector, e.g. `::details-content > x` or `::details-content::before`.
+* `scale`, `rotate`, and `translate` are silently dropped when they are in the
+  same rule as `transform`. Fold them into `transform` instead:
+  ```scss
+  // Before
+  transform: translateY(-50%);
+  rotate: 45deg;
+
+  // After
+  transform: translateY(-50%) rotate(45deg);
+  ```
+* If your `vite.config.js` sets `css.preprocessorOptions.scss.api`, remove it.
+  Vite 7 removed the option.
+
 # Upgrading from v4
 
 Version 4 is similar but used [Snowpack](https://www.snowpack.dev/)

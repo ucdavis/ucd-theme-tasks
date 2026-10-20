@@ -30,8 +30,13 @@ export default {
   css: {
     preprocessorOptions: {
       scss: {
-        // Use the modern SCSS compiler.
-        api: 'modern',
+        // Vite 7+ rewrites url() in each partial relative to that partial (vitejs/vite#20067).
+        // Loading relative @use/@import ourselves keeps url() relative to the entry stylesheet, as in Vite 6.
+        importer: {
+          findFileUrl(url, { containingUrl }) {
+            return containingUrl ? new URL(url, containingUrl) : null;
+          },
+        },
       },
     },
   },
@@ -47,7 +52,7 @@ export default {
     // generate manifest.json in outDir
     manifest: true,
     // minify: false,
-    rollupOptions: {
+    rolldownOptions: {
       // overwrite default .html entry
       input: inputFiles,
       // Remove the [hash] since Drupal will take care of that.
