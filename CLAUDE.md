@@ -58,13 +58,11 @@ choices exist for the Drupal/CMS use case — change them carefully:
 - Dev server pins `origin: 'http://localhost:5173'` and enables CORS so a
   CMS page on another domain can load assets from the Vite server.
 
-**Dependency resolution is unusual**: `vite` is a peerDependency, and several
-modules import packages this repo does not declare at all — `fast-glob`
-(vite.config.mjs), `fs-extra` (`lib/init.js`, `lib/newsite.js`), `chokidar`
-and `@pattern-lab/core` (`lib/patternlab.js`). These resolve from the
-consuming project's node_modules (Pattern Lab projects provide the latter
-two). This is why the package only works installed inside a host project, and
-why adding an import to `lib/` may need a corresponding dependency decision.
+**Dependency resolution is unusual**: `vite` is a peerDependency, and
+`lib/patternlab.js` imports `@pattern-lab/core`, which this repo deliberately
+does not declare. It resolves from the consuming Pattern Lab project's
+node_modules (the import is lazy, so only the `patternlab` command needs it).
+Adding an import to `lib/` may need a corresponding dependency decision.
 
 **Starter files (`starter/`)**: copied into a consuming project by
 `init` (and `newsite`). The `*.default.*` files at the repo root
