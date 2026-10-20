@@ -16,26 +16,34 @@ afterEach(async () => {
   await rm(dest, { recursive: true, force: true })
 })
 
-test('init copies the starter files but not tasks-config.js', async () => {
+test('init copies the starter files but not tasks-config.mjs', async () => {
   await init(dest, { dest })
 
   assert.ok(existsSync(join(dest, 'vite.config.mjs')))
   assert.ok(existsSync(join(dest, '.stylelintrc.yml')))
   assert.ok(existsSync(join(dest, 'eslint.config.mjs')))
   assert.ok(existsSync(join(dest, 'prettier.config.mjs')))
-  assert.ok(!existsSync(join(dest, 'tasks-config.js')), 'tasks-config.js is only for themesync/patternlab setups')
+  assert.ok(!existsSync(join(dest, 'tasks-config.mjs')), 'tasks-config.mjs is only for themesync/patternlab setups')
 })
 
-test('init includes tasks-config.js with the --themesync flag', async () => {
+test('init includes tasks-config.mjs with the --themesync flag', async () => {
   await init(dest, { dest, themesync: true })
 
-  assert.ok(existsSync(join(dest, 'tasks-config.js')))
+  assert.ok(existsSync(join(dest, 'tasks-config.mjs')))
 })
 
-test('init includes tasks-config.js with the --patternlab flag', async () => {
+test('init includes tasks-config.mjs with the --patternlab flag', async () => {
   await init(dest, { dest, patternlab: true })
 
-  assert.ok(existsSync(join(dest, 'tasks-config.js')))
+  assert.ok(existsSync(join(dest, 'tasks-config.mjs')))
+})
+
+test('init does not add tasks-config.mjs next to a legacy tasks-config.js', async () => {
+  await writeFile(join(dest, 'tasks-config.js'), 'export default {}')
+
+  await init(dest, { dest, themesync: true, force: true })
+
+  assert.ok(!existsSync(join(dest, 'tasks-config.mjs')), 'tasks-config.mjs would shadow the existing tasks-config.js')
 })
 
 test('init keeps existing files unless --force is used', async () => {

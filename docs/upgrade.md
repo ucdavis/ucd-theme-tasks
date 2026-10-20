@@ -34,6 +34,16 @@ produce the same output, but check for the following:
 * If your `vite.config.js` sets `css.preprocessorOptions.scss.api`, remove it.
   Vite 7 removed the option.
 
+## tasks-config.mjs
+
+The starter config is now `tasks-config.mjs` (and `tasks-config.local.mjs`).
+Existing `tasks-config.js` and `tasks-config.local.js` files still work, so no
+change is required. If you rename them:
+
+* Rename both files. When both names exist, the `.mjs` file wins and the `.js`
+  file is ignored.
+* Add `tasks-config.local.mjs` to your project's `.gitignore`.
+
 # Upgrading from v4
 
 Version 4 is similar but used [Snowpack](https://www.snowpack.dev/)

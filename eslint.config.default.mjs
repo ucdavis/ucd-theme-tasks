@@ -7,7 +7,7 @@ export default defineConfig([
 
   {
     languageOptions: {
-      ecmaVersion: 2022,
+      ecmaVersion: "latest",
       sourceType: "module",
       globals: {
         ...globals.browser,

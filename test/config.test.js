@@ -10,7 +10,7 @@ test('defaults are used when no project config exists', async () => {
 
   assert.deepEqual(config, defaultConfig)
   assert.equal(projectConfig, false)
-  assert.equal(configMessage, 'Add a tasks-config.js file for any project specific configuration.')
+  assert.equal(configMessage, 'Add a tasks-config.mjs file for any project specific configuration.')
 })
 
 test('project tasks-config.js deep-merges over the defaults', async () => {
@@ -23,7 +23,7 @@ test('project tasks-config.js deep-merges over the defaults', async () => {
   assert.equal(config.themeSync.jsSync, true)
   assert.equal(config.themeSync.sassSrc, 'source/sass/')
   assert.notEqual(projectConfig, false)
-  assert.equal(configMessage, 'Add a tasks-config.local.js file for any custom local configuration.')
+  assert.equal(configMessage, 'Add a tasks-config.local.mjs file for any custom local configuration.')
 })
 
 test('tasks-config.local.js wins over the project config', async () => {
@@ -36,6 +36,15 @@ test('tasks-config.local.js wins over the project config', async () => {
   // Defaults still present.
   assert.equal(config.themeSync.sassSync, true)
   // Both configs exist so no suggestion is needed.
+  assert.equal(configMessage, '')
+})
+
+test('tasks-config.mjs and tasks-config.local.mjs are loaded', async () => {
+  const { config, configMessage } = await loadConfig(fixture('project-mjs'))
+
+  assert.equal(config.themeSync.dest, '../mjs-local-theme/')
+  assert.equal(config.themeSync.fontSync, false)
+  assert.equal(config.themeSync.sassSync, true)
   assert.equal(configMessage, '')
 })
 

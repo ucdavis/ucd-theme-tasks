@@ -5,7 +5,7 @@ https://vitejs.dev/config/
 
 ## themeSync:
 
-`tasks-config.js`
+`tasks-config.mjs` (the older `tasks-config.js` name still works)
 
 The Theme Sync configuration for migrating source files to another project. Once
 migrated they need to be compiled into dev or production code for that project.
