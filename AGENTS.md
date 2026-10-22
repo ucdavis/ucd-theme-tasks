@@ -65,7 +65,8 @@ choices exist for the Drupal/CMS use case — change them carefully:
 - `jquery` is aliased to the project's local `js/jquery.module.js`.
 - `vite-plugin-full-reload` watches `*.php|inc|theme|twig` so template edits
   reload the browser.
-- Dev server pins `origin: 'http://localhost:5173'` and enables CORS so a
+- Dev server pins `origin` (`http://localhost:5173`, or
+  `$DDEV_PRIMARY_URL:$VITE_PORT` inside DDEV) and enables CORS so a
   CMS page on another domain can load assets from the Vite server.
 - A custom Sass `importer` (`findFileUrl`) loads relative `@use`/`@import`
   itself so `url()` in nested partials stays relative to the entry stylesheet.
