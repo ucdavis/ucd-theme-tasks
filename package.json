@@ -1,6 +1,6 @@
 {
   "name": "ucd-theme-tasks",
-  "version": "5.2.1",
+  "version": "6.0.0",
   "description": "Base automation for compiling a UCD frontend.",
   "main": "vite.config.mjs",
   "type": "module",
