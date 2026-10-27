@@ -1,11 +1,11 @@
 ## Vite
 [Vite](https://vitejs.dev/) is used to compile all code and can be
-configured with the `vite.config.js` file.
+configured with the `vite.config.mjs` file.
 https://vitejs.dev/config/
 
 ## themeSync:
 
-`tasks-config.js`
+`tasks-config.mjs` (the older `tasks-config.js` name still works)
 
 The Theme Sync configuration for migrating source files to another project. Once
 migrated they need to be compiled into dev or production code for that project.
@@ -28,7 +28,7 @@ migrated they need to be compiled into dev or production code for that project.
 
 ## Removed in v4
 All of the below config was removed in version 4 and is now controlled by the
-`vite.config.js` file.
+`vite.config.mjs` file.
 
 ### css
 
@@ -57,7 +57,7 @@ All of the below config was removed in version 4 and is now controlled by the
 * __destName__ - The file name you would like used for the compiled JS file.
 * __uglify__ - (Boolean) value to minify destination JS file.
 * __babel__ - (Boolean) enable or disable es6 to es5 compiling with [Babel](https://babeljs.io/)
-* __eslint__ - Settings related to JS validation with [ESLint](https://eslint.org/).
+* __eslint__ - Settings related to JS validation with [ESLint](https://eslint.org/) and [Prettier](https://prettier.io/).
     * __enabled__ - (Boolean) value to enable JS validation.
     * __failAfterError__ - (Boolean) value to allow js to compile if it doesn't validate.
     * __extraSrc__ - (Array) List of files to include or exclude from validation. This is useful for excluding code you didn't write, therefore have no authority to change to meet validation criteria.

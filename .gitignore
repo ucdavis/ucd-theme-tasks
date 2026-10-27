@@ -32,6 +32,13 @@ node_modules/
 
 # Custom Local config
 tasks-config.local.js
+tasks-config.local.mjs
+!test/fixtures/**/tasks-config.local.js
+!test/fixtures/**/tasks-config.local.mjs
+
+# Local files
+*.local.md
+TODO.md
 
 # Ignore the build directory
 dist/
