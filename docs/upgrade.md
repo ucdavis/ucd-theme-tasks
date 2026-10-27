@@ -34,6 +34,20 @@ produce the same output, but check for the following:
 * If your `vite.config.js` sets `css.preprocessorOptions.scss.api`, remove it.
   Vite 7 removed the option.
 
+## Autoprefixer removed
+
+The `build` command no longer runs autoprefixer after Vite. Vite's CSS
+minifier ([Lightning CSS](https://lightningcss.dev/)) adds and removes vendor
+prefixes for the browsers in
+[`build.cssTarget`](https://vite.dev/config/build-options#build-csstarget).
+
+* The `--prefix-files` option is removed.
+* `browserslist` settings (`.browserslistrc` or `package.json`) are ignored. To
+  support older browsers, set `build.cssTarget` in your `vite.config.mjs`,
+  e.g. `cssTarget: ['safari14', 'chrome90']`.
+* Prefixes are only added when CSS is minified. `build.minify: false` or
+  `build.cssMinify: false` outputs unprefixed CSS.
+
 ## tasks-config.mjs
 
 The starter config is now `tasks-config.mjs` (and `tasks-config.local.mjs`).

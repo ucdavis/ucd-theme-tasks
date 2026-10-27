@@ -40,10 +40,11 @@ exists and fails to load throws rather than silently falling back to the
 defaults (a wrong `dest` would make `sync` replace the wrong directories).
 
 **Tasks shell out, they don't use APIs**: `lib/build.js` and `lib/dev.js`
-spawn the `vite` and `postcss` CLI binaries rather than calling Vite's JS API.
+spawn the `vite` CLI binary rather than calling Vite's JS API.
 Both commands use Commander's `passThroughOptions()`/`allowUnknownOption()` so
-unrecognized flags are forwarded to Vite verbatim. `build` runs autoprefixer
-over `{build,dist}/**/*.css` afterward. `dev --no-serve` switches to
+unrecognized flags are forwarded to Vite verbatim. Vendor prefixes come from
+Vite's Lightning CSS minifier (`build.cssTarget`), not autoprefixer; there is
+no PostCSS step. `dev --no-serve` switches to
 `vite build --watch` for CMS/Docker setups where Drupal serves the files.
 `lib/lint.js` shells out to `stylelint` (scss) and `prettier --check` +
 `eslint` (js), with `--fix` rewriting the prettier command to `--write`.

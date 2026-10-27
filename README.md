@@ -94,9 +94,8 @@ Usage: build [options]
 Build all assets using Vite.
 
 Options:
-  -a, --prefix-files <glob>  CSS glob pattern [file|dir|glob]* to autoprefix css files.
-  -p, --patternlab           Run the pattern lab build step before this build.
-  -h, --help                 display help for command
+  -p, --patternlab  Run the pattern lab build step before this build.
+  -h, --help        display help for command
 ```
 
 #### Development mode to serve and watch files with Vite.

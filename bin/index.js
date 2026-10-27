@@ -32,7 +32,6 @@ program
 program
   .command('build')
   .description('Build all assets using Vite.')
-  .option('-a, --prefix-files <glob>', 'CSS glob pattern [file|dir|glob]* to autoprefix css files.')
   .option('-p, --patternlab', 'Run the pattern lab build step before this build.')
   .passThroughOptions()
   .allowUnknownOption()

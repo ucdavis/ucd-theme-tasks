@@ -30,12 +30,12 @@ test('--version prints the package version', () => {
   assert.equal(result.stdout.trim(), `ucd-theme-tasks ${packageInfo().version}`)
 })
 
-// Stub vite/postcss binaries that record their arguments instead of running.
+// Stub the vite binary to record its arguments instead of running.
 const withStubBins = (t) => {
   const dir = mkdtempSync(join(tmpdir(), 'ucd-theme-tasks-bin-'))
   t.after(() => rmSync(dir, { recursive: true, force: true }))
 
-  for (const bin of ['vite', 'postcss']) {
+  for (const bin of ['vite']) {
     const file = join(dir, bin)
     writeFileSync(file, `#!/bin/sh\nprintf '%s\\n' "$@" > "${join(dir, `${bin}.args`)}"\n`)
     chmodSync(file, 0o755)
