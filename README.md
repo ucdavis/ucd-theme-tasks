@@ -2,7 +2,11 @@
 CLI tool for base automation when compiling a UCD frontend.
 
 This package contains all the CLI tasks needed by UCD frontend projects and
-themes. It is heavily dependent on [Vite](https://vitejs.dev/).
+themes. It is heavily dependent on [Vite](https://vite.dev/).
+
+## Requirements
+- Node.js >= 22.17.0
+- Vite 8 (peer dependency, installed automatically by npm)
 
 ## Extra Documentation
 [https://github.com/ucdavis/ucd-theme-tasks/tree/master/docs](https://github.com/ucdavis/ucd-theme-tasks/tree/master/docs)
@@ -18,12 +22,12 @@ $ npm install ucd-theme-tasks --save-dev
 $ npx ucd-theme-tasks init
 ```
 
-### Upgrading from v3
+### Upgrading
 [https://github.com/ucdavis/ucd-theme-tasks/blob/master/docs/upgrade.md](https://github.com/ucdavis/ucd-theme-tasks/blob/master/docs/upgrade.md)
 
 ### Assumed File Structure
-The default file structure assumes that this will be used in a tradition server
-rendered website such as a CMS like Drupal or Wordpress.
+The default file structure assumes that this will be used in a traditional server
+rendered website such as a CMS like Drupal or WordPress.
 
 ```
 |-- dist/ (js and sass compiles here)
@@ -38,7 +42,7 @@ rendered website such as a CMS like Drupal or Wordpress.
 If doing a Single Page App (SPA) with a Javascript framework like Vue.js or
 React then the `vite.config.mjs` can have its `root` changed to whatever
 suits it best. For reference in configuring a SPA see one of Vite's online
-demos https://vitejs.dev/guide/#trying-vite-online.
+demos https://vite.dev/guide/#trying-vite-online.
 
 ## CLI Commands
 
@@ -88,6 +92,9 @@ Options:
 ```
 
 #### Build production assets and files with Vite.
+Any unrecognized options for `build` and `dev` are passed through to the Vite
+CLI (e.g. `npx ucd-theme-tasks build --mode staging`).
+
 ```
 Usage: build [options]
 
@@ -168,10 +175,10 @@ Options:
 
 ## Validation and Linting
 Lint all scss/js files using `npx ucd-theme-tasks lint`. Optionally pass the
-`--fix` flag to attempt to automatically fix as many errors a possible.
+`--fix` flag to attempt to automatically fix as many errors as possible.
 
 ### JavaScript Linting
-Linting of JavaScript is done via [EsLint](https://eslint.org/) and
+Linting of JavaScript is done via [ESLint](https://eslint.org/) and
 [Prettier](https://prettier.io/).
 
 `eslint.config.mjs` and `prettier.config.mjs` configuration files will be
@@ -179,7 +186,7 @@ copied to the root of your project automatically when running the
 `ucd-theme-tasks init` command.
 
 ### Sass/Scss Linting
-Linting of Sass/Scss files is done via [StyleLint](https://stylelint.io/).
+Linting of Sass/Scss files is done via [Stylelint](https://stylelint.io/).
 
 A `.stylelintrc.yml` configuration file will be copied to the root of your
 project automatically when running the `ucd-theme-tasks init` command.
@@ -187,19 +194,18 @@ project automatically when running the `ucd-theme-tasks init` command.
 ## Configuration
 
 ### Vite
-[Vite](https://vitejs.dev/) is used to compile all code and can be
+[Vite](https://vite.dev/) is used to compile all code and can be
 configured with the `vite.config.mjs` file.
-https://vitejs.dev/config/
+https://vite.dev/config/
 
 ### Default Tasks
 `tasks-config.default.mjs` contains all of the default configuration for
 controlling the tasks. This file can be referenced for all possible config
 options. Docs can be found at [https://github.com/ucdavis/ucd-theme-tasks/blob/master/docs/config.md](https://github.com/ucdavis/ucd-theme-tasks/blob/master/docs/config.md)
 
-> **Version 4** removed many of the old configuration options since Vite handles
-them. Most of the configuration is now about path locations for syncing files
-across projects.
+Most of the configuration is about path locations for syncing files across
+projects; compiling is configured through Vite.
 
 ## Pattern Lab
 If you are using this package within [Pattern Lab](https://patternlab.io/) then
-it can build and watch patterns using `ucd-theme-tasks patternLab`.
+it can build and watch patterns using `ucd-theme-tasks patternlab`.
