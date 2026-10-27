@@ -176,12 +176,3 @@ that ESM is being used.
 ```html
 <script src="/dist/main.js" type="module"></script>
 ```
-
-
-
-
-
-## SiteFarm subthemes
-If using a SiteFarm subtheme, more direct upgrading documentation can be found
-in this Google Doc.
-https://docs.google.com/document/d/1GTfeZRB5y1g37oy2z0LJNxUxQeWXyYrPOTcvt_GDPow/edit?usp=sharing
