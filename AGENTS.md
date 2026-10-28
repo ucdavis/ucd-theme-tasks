@@ -112,10 +112,6 @@ directories, which lint deliberately ignores.
 
 ## History / version context
 
-v3 and earlier were Gulp-based, v4 was Snowpack, v5 is Vite. v6 (in progress)
-requires Vite 8 and Node 22.17, drops the bundled Sass libraries
-(breakpoint-sass, normalize-scss, sass-burger), and replaces `fs-extra`/`del`
-with native `fs/promises`. `docs/upgrade.md` covers migrations;
-`docs/config.md` documents current `themeSync` options plus the removed legacy
-options. A local `dev/` directory, if present, is a gitignored gulp-era
-leftover and not part of the repo or the published package.
+v3 and earlier were Gulp-based, v4 was Snowpack, v5+ is Vite.
+`docs/upgrade.md` covers per-version migrations; `docs/config.md` documents
+current `themeSync` options plus the removed legacy options.
